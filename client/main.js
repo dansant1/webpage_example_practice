@@ -66,6 +66,7 @@ Template.AdminMakeDeposit.events({
 Template.AdminInicio.onCreated( () => {
   let template = Template.instance()
   template.autorun( () => {
+    template.subscribe('withdraws')
     if (FlowRouter.getQueryParam("c") == 'true' ) {
       console.log('hola');
       Meteor.call('confirmar')
@@ -77,6 +78,32 @@ Template.AdminInicio.onCreated( () => {
 })
 
 Template.AdminInicio.helpers({
+  totalWithDrew() {
+    let total = 0;
+    Withdraws.find({pagado: true}).forEach( (w) => {
+      total += parseFloat(w.cantidad)
+    })
+
+    return total
+  },
+  PendingWithDrawTotal() {
+    let total = 0;
+    Withdraws.find({pagado: false}).forEach( (w) => {
+      total += parseFloat(w.cantidad)
+    })
+
+    return total
+  },
+  lastWithdraw() {
+    let number = Withdraws.find().fetch().length
+
+    if (number > 0) {
+      return Withdraws.find().fetch()[number - 1].cantidad;
+    } else {
+        return 0
+    }
+
+  },
   totalPM() {
     let total = 0;
     Deposits.find({procesador: 1}).forEach((d) => {
@@ -215,8 +242,7 @@ Template.AdminSettings.events({
     let datos = {
       name: t.find("[name='name']").value,
       pm: t.find("[name='pm']").value,
-      payeer: t.find("[name='payeer']").value,
-      advcash: t.find("[name='advcash']").value
+
     }
 
     Meteor.call('actualizarInfo', datos, (err) => {
@@ -243,5 +269,52 @@ Template.AdminSettings.events({
       alert('Put the same password')
     }
 
+  }
+})
+
+Template.AdminWithDraw.events({
+  'click [name="retirar"]'(e, t) {
+    let cantidad = t.find('[name="cantidad"]').value
+    if ( cantidad !== "") {
+      Meteor.call('makeWithdraw', cantidad, (err, r) => {
+        if (err) {
+          t.find('[name="cantidad"]').value = ""
+          alert(err)
+        } else {
+          t.find('[name="cantidad"]').value = ""
+          alert(r)
+        }
+      })
+    } else {
+      alert('Complete fields');
+    }
+  }
+})
+
+Template.AdminWithDrawList.onCreated( () => {
+  let template = Template.instance();
+
+  template.autorun( () => {
+    template.subscribe('withdraws')
+  })
+})
+
+Template.AdminWithDrawList.helpers({
+  withdraws() {
+    return Withdraws.find({})
+  },
+  fecha() {
+    var today = this.createdAt;
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd;
+    }
+    if(mm<10){
+        mm='0'+mm;
+    }
+    return dd+'/'+mm+'/'+yyyy;
   }
 })

@@ -210,3 +210,7 @@ input::-webkit-input-placeholder {
 .tab-content{padding: 5px}
 
 .card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
+
+.card-block {
+  padding: 20px
+}

@@ -7,7 +7,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/signup', {
   name: 'Signup',
-  action() {
+  action(params, queryParams) {
     BlazeLayout.render('Signup')
   }
 })

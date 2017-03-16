@@ -14,7 +14,7 @@ Meteor.methods({
         userId: this.userId,
         confirmado: false,
         createdAt: new Date(),
-        active: true
+        active: false
       })
     } else {
       return;
@@ -24,7 +24,18 @@ Meteor.methods({
     if (this.userId) {
       Deposits.update({userId: this.userId, confirmado: false}, {
         $set: {
-          confirmado: true
+          confirmado: true,
+          active: true
+        }
+      })
+      let total = 0;
+      Deposits.find({userId: this.userId, confirmado: true, active: true}).forEach( (m) => {
+        total += parseFloat(m.amount);
+      })
+
+      Meteor.users.update({_id: this.userId}, {
+        $inc: {
+          'profile.amounts': total
         }
       })
     } else {
@@ -44,13 +55,55 @@ Meteor.methods({
          $set: {
            'profile.name': datos.name,
            'profile.pm': datos.pm,
-           'profile.payeer': datos.payeer,
-           'profile.advcash': datos.advcash
+
          }
        })
     } else {
       return;
     }
+  },
+  makeWithdraw(numero) {
+
+    // let fondos = Deposits.find({userId: this.userId, confirmado: true, active: true});
+    // let amount = 0;
+    // fondos.forEach( (f) => {
+    //   amount += parseFloat(f.amount);
+    // })
+    //
+    // console.log(amount);
+
+    //if (amount >= numero) {
+
+      if (Meteor.users.findOne({_id: this.userId}).profile.amounts >= numero ) {
+        Withdraws.insert({
+          userId: this.userId,
+          createdAt: new Date(),
+          cantidad: numero,
+          pagado: false
+        })
+
+        let total = Meteor.users.findOne({_id: this.userId}).profile.amounts - numero;
+
+        Meteor.users.update({_id: this.userId}, {
+          $set: {
+            'profile.amounts': total
+          }
+        })
+
+        return 'Pending of Confirm';
+      } else {
+        return "Doesn't has sufficient money in the account"
+      }
+
+
+
+
+
+    // } else {
+    //   return "Doesn't has sufficient money in the account"
+    // }
+
+
   },
   changePassword2(password) {
     if (this.userId) {
@@ -66,6 +119,17 @@ Meteor.methods({
 Meteor.publish('depositos', function () {
   if (this.userId) {
      return Deposits.find({userId: this.userId, confirmado: true})
+  } else {
+    this.stop()
+    return;
+  }
+})
+
+
+
+Meteor.publish('withdraws', function () {
+  if (this.userId) {
+     return Withdraws.find({userId: this.userId})
   } else {
     this.stop()
     return;
