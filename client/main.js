@@ -2,26 +2,54 @@ Template.Signup.events({
   'submit form'(e, t) {
     e.preventDefault()
     if (t.find("[name='password']").value === t.find("[name='confirm']").value) {
-      Accounts.createUser({
-        email: t.find("[name='email']").value,
-        password: t.find("[name='password']").value,
-        profile: {
-          name:t.find("[name='name']").value
-        }
-      }, (err) => {
-        if (err) {
-          alert(err)
-        } else {
-          Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
-            if (err) {
-              alert(err)
-            } else {
-              FlowRouter.go('/admin')
-            }
-          })
+      if (FlowRouter.getQueryParam("href")) {
+        let id = Accounts.createUser({
+          username: t.find("[name='username']").value,
+          email: t.find("[name='email']").value,
+          password: t.find("[name='password']").value,
+          profile: {
+            name:t.find("[name='name']").value
+          }
+        }, (err) => {
+          if (err) {
+            alert(err)
+          } else {
 
-        }
-      })
+            Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
+              if (err) {
+                alert(err)
+              } else {
+                Meteor.call('referir', FlowRouter.getQueryParam("href"))
+                FlowRouter.go('/admin')
+              }
+            })
+
+          }
+        })
+      } else {
+        Accounts.createUser({
+          username: t.find("[name='username']").value,
+          email: t.find("[name='email']").value,
+          password: t.find("[name='password']").value,
+          profile: {
+            name:t.find("[name='name']").value
+          }
+        }, (err) => {
+          if (err) {
+            alert(err)
+          } else {
+            Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
+              if (err) {
+                alert(err)
+              } else {
+                FlowRouter.go('/admin')
+              }
+            })
+
+          }
+        })
+      }
+
     } else {
       alert('Confirm Your Password')
     }
@@ -65,19 +93,115 @@ Template.AdminMakeDeposit.events({
 
 Template.AdminInicio.onCreated( () => {
   let template = Template.instance()
+  template.searchQuery = new ReactiveVar();
+  template.searching   = new ReactiveVar( false );
   template.autorun( () => {
-    template.subscribe('withdraws')
+    if (Roles.userIsInRole(Meteor.userId(), ['manager'])) {
+      template.subscribe('users', template.searchQuery.get(), () => {
+          setTimeout( () => {
+            template.searching.set( false );
+          }, 400 );
+      });
+      template.subscribe('d')
+      template.subscribe('w')
+    } else {
+      template.subscribe('depositos')
+      template.subscribe('withdraws')
+    }
+
     if (FlowRouter.getQueryParam("c") == 'true' ) {
-      console.log('hola');
+
       Meteor.call('confirmar')
     } else {
       Meteor.call('cancelado')
     }
-    template.subscribe('depositos')
+
   })
 })
 
+Template.AdminInicio.events({
+  'click [name="pagado"]'() {
+    Meteor.call('confirmarRetiro', this._id, (err) => {
+      if (err) {
+        alert(err)
+      }
+    })
+  },
+  'click [name="no-pagado"]'() {
+    Meteor.call('noconfirmarRetiro', this._id, (err) => {
+      if (err) {
+        alert(err)
+      }
+    })
+  },
+  'keyup [name="search"]' ( event, template ) {
+   let value = event.target.value.trim();
+
+   if ( value !== '' && event.keyCode === 13 ) {
+     template.searchQuery.set( value );
+     template.searching.set( true );
+   }
+
+   if ( value === '' ) {
+     template.searchQuery.set( value );
+   }
+ }
+})
+
 Template.AdminInicio.helpers({
+  searching() {
+    return Template.instance().searching.get();
+  },
+  query() {
+    return Template.instance().searchQuery.get();
+  },
+  usuarios() {
+    let users = Meteor.users.find();
+    if ( users ) {
+      return users;
+    }
+  },
+  fecha() {
+    let rightNow = this.createdAt;
+    let res = rightNow.toISOString().substring(0, 10);
+    return res;
+  },
+  amount() {
+    if (this.profile.amounts) {
+        return this.profile.amounts.toFixed(2)
+    } else {
+      return 0
+    }
+
+  },
+  depositosPorUsuario() {
+    return Deposits.find({userId: this._id})
+  },
+  usuario() {
+    return Meteor.users.findOne({_id: this.userId}).profile.name
+  },
+  nombre() {
+    return Meteor.users.findOne({_id: this._id}).profile.name
+  },
+  interes() {
+    return this.intereses.toFixed(2)
+  },
+  pm() {
+    if (this.profile.pm) {
+      return this.profile.pm;
+    } else {
+      return "No tiene";
+    }
+  },
+  users() {
+    return Meteor.users.find();
+  },
+  deposits() {
+    return Deposits.find()
+  },
+  withdraws() {
+    return Withdraws.find()
+  },
   totalWithDrew() {
     let total = 0;
     Withdraws.find({pagado: true}).forEach( (w) => {
@@ -159,7 +283,13 @@ Template.AdminDepositList.onCreated( () => {
 })
 
 Template.AdminDepositList.helpers({
-  plan1() {
+  interes() {
+    return this.intereses.toFixed(2)
+  },
+  total() {
+    return parseFloat(this.amount ) + parseFloat(this.intereses.toFixed(2))
+  },
+   plan1() {
     return Deposits.find({plan: 1})
   },
   plan2() {
@@ -306,7 +436,7 @@ Template.AdminWithDrawList.helpers({
   fecha() {
     var today = this.createdAt;
     var dd = today.getDate();
-    var mm = today.getMonth()+1; 
+    var mm = today.getMonth()+1;
 
     var yyyy = today.getFullYear();
     if(dd<10){
@@ -316,5 +446,95 @@ Template.AdminWithDrawList.helpers({
         mm='0'+mm;
     }
     return dd+'/'+mm+'/'+yyyy;
+  }
+})
+
+Template.Home.onCreated(() => {
+  let template = Template.instance()
+
+  template.autorun( () => {
+    template.subscribe('d2')
+    template.subscribe('w2')
+    template.subscribe('u2')
+  })
+})
+
+Template.Home.helpers({
+  ref() {
+    let ref = FlowRouter.getQueryParam('href')
+    if (ref) {
+      return '?href=' + ref
+    } else {
+      return ''
+    }
+  },
+  Totalaccounts() {
+    return Meteor.users.find().fetch().length - 1;
+  },
+  TotalActiveAccounts() {
+    return Meteor.users.find({'profile.active': true}).fetch().length
+  },
+  TotalDeposit() {
+    let t = 0;
+
+    Deposits.find({confirmado: true}).forEach( (d) => {
+      t += parseFloat(d.amount)
+    })
+
+    return t;
+  },
+  totalWithDrawn() {
+    let total = 0
+    Withdraws.find().forEach( (w) => {
+      total += parseFloat(w.cantidad)
+      console.log(total);
+    })
+
+    return total
+  }
+})
+
+Template.Home.events({
+  'submit form'(e, t) {
+    e.preventDefault()
+    let email = t.find('[name="email"]').value;
+    let password = t.find('[name="password"]').value;
+    if (email !== "" && password !== "") {
+      Meteor.loginWithPassword(email, password, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          FlowRouter.go('/admin')
+        }
+      })
+    }
+  }
+})
+
+Template.support.events({
+  'submit form'(e, t) {
+    e.preventDefault()
+    let email = t.find("[name='email']").value = ""
+    let nombre = t.find("[name='name']").value = ""
+    let comment = t.find("[name='comments']").value = ""
+
+    alert("We'll respond you in 24 hours" )
+  }
+})
+
+Template.AdminReferals.onCreated( () => {
+  let template = Template.instance()
+
+  template.autorun( () => {
+    template.subscribe('referidos')
+  })
+})
+
+Template.AdminReferals.helpers({
+  email() {
+    return Meteor.user().username
+  },
+  referidos() {
+    return Meteor.users.find({'profile.referId': Meteor.userId()})
   }
 })

@@ -1,5 +1,5 @@
 body {
-  background: #3498db;
+  background: #34495e;
 }
 
 /* Profile container */
@@ -199,6 +199,10 @@ input::-webkit-input-placeholder {
 	text-align: center;
 }
 
+*:focus {
+  outline: none;
+}
+
 .nav-tabs { border-bottom: 2px solid #DDD; }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
 .nav-tabs > li > a { border: none; color: #666; }
@@ -213,4 +217,131 @@ input::-webkit-input-placeholder {
 
 .card-block {
   padding: 20px
+}
+
+.page-header {
+  margin-top: 5px;
+}
+
+.contenedor {
+  width: 90%;
+  background: white;
+  margin: 0px auto;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.cuadro {
+  display: inline-block;
+  width: 30%;
+  margin: 5px auto;
+}
+
+.todo {
+  width: 90%;
+  margin: 10px auto;
+  border-radius: 3px;
+  min-height: 100px;
+}
+
+.menu {
+  width: 100%;
+  height: 50px;
+  border-radius: 3px;
+  background: #34495e;
+  border: 1px solid #34495e;
+}
+
+.menu ul {
+  display: inline-block;
+}
+
+.menu ul li {
+  display: inline-block;
+  margin: 10px 30px;
+  color: white
+}
+
+.footer ul {
+
+}
+
+.footer ul li {
+  display: inline-block;
+  margin: 10px 30px;
+  color: white
+}
+
+.menu ul li a {
+  color: white
+}
+
+.cuadro h2 {
+  margin: 0
+}
+
+.imagen {
+  width: 100%;
+}
+
+.imagen img {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  height: 350px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.imagen a {
+  position: relative;
+  top: -320px;
+  display: block;
+  margin: 15px;
+  border-radius: 3px;
+  width: 200px;
+  padding: 15px;
+  float: right;
+  height: 60px;
+  background: #34495e;
+  color: white;
+}
+
+.footer {
+
+  width: 90%;
+  margin: 10px auto;
+  height: 60px;
+  border-radius: 3px;
+  background: white;
+  padding: 10px;
+}
+
+.top {
+  bottom: 70px;
+}
+
+.azul {
+  background-color: #34495e;
+}
+
+.footer a {
+  color: white
+}
+
+.footer ul li a {
+  color: #34495e;
+}
+
+.cuadros {
+  display: inline-block !important;
+  width: 40%;
+  border: 1px solid black
+}
+
+.cuadro2 {
+  display: inline-block !important;
+  width: 300px;
+  margin: 10px;
+  border: 1px solid black
 }

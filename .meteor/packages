@@ -25,3 +25,5 @@ accounts-password
 accounts-base
 fortawesome:fontawesome
 peppelg:bootstrap-3-modal
+percolate:synced-cron
+alanning:roles

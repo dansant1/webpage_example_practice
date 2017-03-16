@@ -1,7 +1,36 @@
 FlowRouter.route('/', {
   name: 'Home',
   action() {
-    BlazeLayout.render('Home')
+    BlazeLayout.render('Home', { contenido: 'inicio'})
+  }
+})
+
+
+FlowRouter.route('/faq', {
+  name: 'faq',
+  action() {
+    BlazeLayout.render('Home', { contenido: 'faq'})
+  }
+})
+
+FlowRouter.route('/rateus', {
+  name: 'RateUs',
+  action() {
+    BlazeLayout.render('Home', { contenido: 'rate'})
+  }
+})
+
+FlowRouter.route('/support', {
+  name: 'support',
+  action() {
+    BlazeLayout.render('Home', { contenido: 'support'})
+  }
+})
+
+FlowRouter.route('/terms', {
+  name: 'Terms',
+  action() {
+    BlazeLayout.render('Home', { contenido: 'terms'})
   }
 })
 
@@ -18,6 +47,7 @@ FlowRouter.route('/login', {
     BlazeLayout.render('Login')
   }
 })
+
 
 FlowRouter.route('/admin', {
   name: 'Admin.Inicio',
