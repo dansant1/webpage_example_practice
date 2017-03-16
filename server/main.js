@@ -128,7 +128,7 @@ Meteor.methods({
     let texto = "Hello " + nombre + ", Thank you for registration on our site. Your login information: Login: " + email + " Password: " + password + " 20dejunio You can login here: https://dvinvest.grupoddv.com Contact us immediately if you did not authorize this registration. Thank you."
     Meteor.defer( function () {
       Email.send({
-        to: Meteor.users.findOne({_id: this.userId}).emails[0].address,
+        to: email,
         from: 'contacto@grupoddv.com',
         text: texto
       })
