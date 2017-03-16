@@ -19,6 +19,7 @@ Template.Signup.events({
               if (err) {
                 alert(err)
               } else {
+                Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
                 Meteor.call('referir', FlowRouter.getQueryParam("href"))
                 FlowRouter.go('/admin')
               }
@@ -42,6 +43,7 @@ Template.Signup.events({
               if (err) {
                 alert(err)
               } else {
+                Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
                 FlowRouter.go('/admin')
               }
             })

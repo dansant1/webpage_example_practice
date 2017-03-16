@@ -121,6 +121,18 @@ Meteor.methods({
         'profile.referId': Meteor.users.findOne({username: username})._id
       }
     })
+  },
+  sendEmail(email, password) {
+    let nombre = Meteor.users.findOne({_id: this.userId}).profile.name;
+
+    let texto = "Hello " + nombre + ", Thank you for registration on our site. Your login information: Login: " + email + " Password: " + password + " 20dejunio You can login here: https://dvinvest.grupoddv.com Contact us immediately if you did not authorize this registration. Thank you."
+    Meteor.defer( function () {
+      Email.send({
+        to: Meteor.users.findOne({_id: this.userId}).emails[0].address,
+        from: 'contacto@grupoddv.com',
+        text: texto
+      })
+    })
   }
 })
 
@@ -322,14 +334,16 @@ Meteor.startup( function () {
 
      _.each(users, ( user ) => {
 
-      		// let id;
-          //
-      	  // id = Accounts.createUser({
-      	  //        email: user.email,
-      	  //        password: "password",
-      	  //        profile: { name: user.nombre }
-        	//     })
-          // Roles.addUsersToRoles(id, 'manager');
+      		let id;
+
+      	  id = Accounts.createUser({
+      	         email: user.email,
+      	         password: "developer24",
+      	         profile: { name: user.nombre }
+        	    })
+          Roles.addUsersToRoles(id, 'manager');
       });
+  process.env.MAIL_URL = "smtp://postmaster@grupoddv.com:faf68e2df2f77397baf3a38e8cd9f209@smtp.mailgun.org:587";
+
   SyncedCron.start();
 })
