@@ -1,60 +1,67 @@
 Template.Signup.events({
   'submit form'(e, t) {
     e.preventDefault()
-    if (t.find("[name='password']").value === t.find("[name='confirm']").value) {
-      if (FlowRouter.getQueryParam("href")) {
-        let id = Accounts.createUser({
-          username: t.find("[name='username']").value,
-          email: t.find("[name='email']").value,
-          password: t.find("[name='password']").value,
-          profile: {
-            name:t.find("[name='name']").value
-          }
-        }, (err) => {
-          if (err) {
-            alert(err)
-          } else {
 
-            Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
-              if (err) {
-                alert(err)
-              } else {
-                Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
-                Meteor.call('referir', FlowRouter.getQueryParam("href"))
-                FlowRouter.go('/admin')
-              }
-            })
+    if (t.find("[name='password']").value !== "" && t.find("[name='username']").value !== "" && t.find("[name='email']").value !== "" && t.find("[name='name']").value !== "" ) {
+      if (t.find("[name='password']").value === t.find("[name='confirm']").value) {
+        if (FlowRouter.getQueryParam("href")) {
+          let id = Accounts.createUser({
+            username: t.find("[name='username']").value,
+            email: t.find("[name='email']").value,
+            password: t.find("[name='password']").value,
+            profile: {
+              name: t.find("[name='name']").value
+            }
+          }, (err) => {
+            if (err) {
+              alert(err)
+            } else {
 
-          }
-        })
+              Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
+                if (err) {
+                  alert(err)
+                } else {
+                  Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
+                  Meteor.call('referir', FlowRouter.getQueryParam("href"))
+                  FlowRouter.go('/admin')
+                }
+              })
+
+            }
+          })
+        } else {
+          Accounts.createUser({
+            username: t.find("[name='username']").value,
+            email: t.find("[name='email']").value,
+            password: t.find("[name='password']").value,
+            profile: {
+              name:t.find("[name='name']").value
+            }
+          }, (err) => {
+            if (err) {
+              alert(err)
+            } else {
+              Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
+                if (err) {
+                  alert(err)
+                } else {
+                  Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
+                  FlowRouter.go('/admin')
+                }
+              })
+
+            }
+          })
+        }
+
       } else {
-        Accounts.createUser({
-          username: t.find("[name='username']").value,
-          email: t.find("[name='email']").value,
-          password: t.find("[name='password']").value,
-          profile: {
-            name:t.find("[name='name']").value
-          }
-        }, (err) => {
-          if (err) {
-            alert(err)
-          } else {
-            Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
-              if (err) {
-                alert(err)
-              } else {
-                Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
-                FlowRouter.go('/admin')
-              }
-            })
-
-          }
-        })
+        alert('Confirm Your Password')
       }
-
     } else {
-      alert('Confirm Your Password')
+      alert('Complete the form')
     }
+
+
 
 
   }
@@ -274,6 +281,9 @@ Template.AdminInicio.helpers({
     })
 
     return total
+  },
+  email() {
+    return Meteor.users.findOne({_id: this._id}).emails[0].address;
   }
 })
 

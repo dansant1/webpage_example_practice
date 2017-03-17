@@ -125,11 +125,12 @@ Meteor.methods({
   sendEmail(email, password) {
     let nombre = Meteor.users.findOne({_id: this.userId}).profile.name;
 
-    let texto = "Hello " + nombre + ", Thank you for registration on our site. Your login information: Login: " + email + " Password: " + password + " 20dejunio You can login here: https://dvinvest.grupoddv.com Contact us immediately if you did not authorize this registration. Thank you."
+    let texto = "Hello " + nombre + ", Thank you for registration on our site. Your login information: Login: " + email + " Password: " + password + "You can login here: https://dvinvest.grupoddv.com Contact us immediately if you did not authorize this registration. Thank you."
     Meteor.defer( function () {
       Email.send({
         to: email,
         from: 'contacto@grupoddv.com',
+        subject: "Welcome to DVInvest",
         text: texto
       })
     })
@@ -330,19 +331,20 @@ SyncedCron.add({
 });
 
 Meteor.startup( function () {
-  let users = [{nombre: "Admin", email: "manager@dvinvest.com"}]
-
-     _.each(users, ( user ) => {
-
-      		let id;
-
-      	  id = Accounts.createUser({
-      	         email: user.email,
-      	         password: "developer24",
-      	         profile: { name: user.nombre }
-        	    })
-          Roles.addUsersToRoles(id, 'manager');
-      });
+  // let users = [{nombre: "Admin", email: "manager@dvinvest.com"}]
+  //
+  //    _.each(users, ( user ) => {
+  //
+  //     		let id;
+  //
+  //     	  id = Accounts.createUser({
+  //     	         email: user.email,
+  //     	         password: "developer24",
+  //     	         profile: { name: user.nombre }
+  //       	    })
+  //         Roles.addUsersToRoles(id, 'manager');
+  //     });
+  console.log('Listo!');
   process.env.MAIL_URL = "smtp://postmaster@grupoddv.com:faf68e2df2f77397baf3a38e8cd9f209@smtp.mailgun.org:587";
 
   SyncedCron.start();

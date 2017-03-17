@@ -298,7 +298,9 @@ These funds are managed by a team of DVInvest investment experts.
 
 <template name="rate">
   <div style="width: 500px; border: 1px solid black; min-height: 100px; margin: 10px auto; display: inline-block">
-      <p>Coming Soon...</p>
+      <p>
+        <div align="center"><a href="http://bestemoneys.com" target="_blank"><font size="2">BesteMoneys.com</font></a><br /><a href="http://bestemoneys.com/investment-hyip_dvinvest-grupoddv-com.html" target="_blank"><img src="http://bestemoneys.com/5_dvinvest-grupoddv-com.png" alt="Please vote for us at Bestemoneys.com" width="160" height="260" border="0" /></a></div>
+      </p>
   </div>
 
 </template>
@@ -534,7 +536,7 @@ These funds are managed by a team of DVInvest investment experts.
           {{else}}
           {{#each usuarios}}
           <li class="list-group-item clearfix">
-            <span class="pull-left">{{this.profile.name}} - PM Account: {{pm}}</span>
+            <span class="pull-left">{{this.profile.name}} -  {{this.username}} - {{email}} - PM Account: {{pm}}</span>
             <span class="pull-right"><strong>$ {{amount}}</strong></span>
           </li>
           {{else}}
@@ -824,11 +826,11 @@ These funds are managed by a team of DVInvest investment experts.
         <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
         <input type="hidden" name="PAYMENT_UNITS" value="USD">
         <input type="hidden" name="STATUS_URL"
-            value="http://localhost:3000/">
+            value="http://dvinvest.grupoddv.com/">
         <input type="hidden" name="PAYMENT_URL"
-            value="http://localhost:3000/admin/?c=true">
+            value="http://dvinvest.grupoddv.com/admin/?c=true">
         <input type="hidden" name="NOPAYMENT_URL"
-            value="http://localhost:3000/admin/deposit">
+            value="http://dvinvest.grupoddv.com/admin/deposit">
         <input type="hidden" name="BAGGAGE_FIELDS"
             value="ORDER_NUM CUST_NUM">
         <input type="hidden" name="ORDER_NUM" value="9801121">
