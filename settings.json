@@ -3,8 +3,8 @@
 	{
 			"env":
 				{
-        			"ROOT_URL": "http://dvinvest.grupoddv.com",
-					"MONGO_URL": "mongodb://hyip:developer24@ds133340.mlab.com:33340/hyip1"
+        			"ROOT_URL": "http://epminvest.grupoddv.com",
+					"MONGO_URL": "mongodb://admin:admin@ds137340.mlab.com:37340/epm"
 				}
 	}
 }

@@ -1,5 +1,5 @@
 body {
-  background: #34495e;
+  background: #e74c3c;
 }
 
 /* Profile container */
@@ -87,7 +87,7 @@ body {
 
 .profile-usermenu ul li a:hover {
   background-color: #fafcfd;
-  color: #3498db;
+  color: #e74c3c;
 }
 
 .btn {
@@ -95,8 +95,8 @@ body {
 }
 
 .btn-primary {
-  background-color: #3498db;
-  border-color: #3498db;
+  background-color: #e74c3c;
+  border-color: #e74c3c;
 }
 
 .btn-primary:hover {
@@ -126,7 +126,7 @@ body {
 }
 
 .profile-usermenu ul li.active a {
-  color: #3498db;
+  color: #e74c3c;
   background-color: #f6f9fb;
   border-left: 2px solid #3498db;
   margin-left: -2px;
@@ -248,8 +248,8 @@ input::-webkit-input-placeholder {
   width: 100%;
   height: 50px;
   border-radius: 3px;
-  background: #34495e;
-  border: 1px solid #34495e;
+  background: #e74c3c;
+  border: 1px solid #e74c3c;
 }
 
 .menu ul {
@@ -303,7 +303,7 @@ input::-webkit-input-placeholder {
   padding: 15px;
   float: right;
   height: 60px;
-  background: #34495e;
+  background: #e74c3c;
   color: white;
 }
 
@@ -322,7 +322,7 @@ input::-webkit-input-placeholder {
 }
 
 .azul {
-  background-color: #34495e;
+  background-color: #e74c3c;
 }
 
 .footer a {
@@ -330,7 +330,7 @@ input::-webkit-input-placeholder {
 }
 
 .footer ul li a {
-  color: #34495e;
+  color: #e74c3c;
 }
 
 .cuadros {

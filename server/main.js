@@ -125,12 +125,12 @@ Meteor.methods({
   sendEmail(email, password) {
     let nombre = Meteor.users.findOne({_id: this.userId}).profile.name;
 
-    let texto = "Hello " + nombre + ", Thank you for registration on our site. Your login information: Login: " + email + " Password: " + password + "You can login here: https://dvinvest.grupoddv.com Contact us immediately if you did not authorize this registration. Thank you."
+    let texto = "Hello " + nombre + ", Thank you for registration on our site. Your login information: Login: " + email + " Password: " + password + " You can login here: https://epminvest.grupoddv.com Contact us immediately if you did not authorize this registration. Thank you."
     Meteor.defer( function () {
       Email.send({
         to: email,
-        from: 'contacto@grupoddv.com',
-        subject: "Welcome to DVInvest",
+        from: 'contact@grupoddv.com',
+        subject: "Welcome to EPM Invest",
         text: texto
       })
     })
@@ -236,7 +236,7 @@ SyncedCron.add({
   name: 'Intereses',
   schedule: function(parser) {
     // parser is a later.parse object
-    return parser.text('every 24 hours');
+    return parser.text('every 1 hour');
     //return parser.text('every 2 seconds');
   },
   job: function() {
@@ -267,7 +267,7 @@ SyncedCron.add({
       })
     })
 
-    Deposits.find({ plan: 1,  dias: { $gt: 0}  }).forEach( (p) => {
+    Deposits.find({ plan: 1,  dias: { $gt: 1}  }).forEach( (p) => {
       Deposits.update({ _id: p._id }, {
         $set: {
           active: false
@@ -275,7 +275,7 @@ SyncedCron.add({
       })
     })
 
-    Deposits.find({ plan: 2,  dias: { $gt: 9}  }).forEach( (p) => {
+    Deposits.find({ plan: 2,  dias: { $gt: 3}  }).forEach( (p) => {
       Deposits.update({ _id: p._id }, {
         $set: {
           active: false
@@ -283,7 +283,15 @@ SyncedCron.add({
       })
     })
 
-    Deposits.find({ plan: 3,  dias: { $gt: 19}  }).forEach( (p) => {
+    Deposits.find({ plan: 3,  dias: { $gt: 7}  }).forEach( (p) => {
+      Deposits.update({ _id: p._id }, {
+        $set: {
+          active: false
+        }
+      })
+    })
+
+    Deposits.find({ plan: 4,  dias: { $gt: 15}  }).forEach( (p) => {
       Deposits.update({ _id: p._id }, {
         $set: {
           active: false
@@ -297,7 +305,7 @@ SyncedCron.add({
     Deposits.find({active: true}).forEach( (d) => {
 
       if (d.plan === 1) {
-        intereses = d.amount / 100 * 3
+        intereses = d.amount / 100 * 159
         Deposits.update({ _id: d._id, active: true }, {
           $inc: {
             intereses: intereses,
@@ -308,7 +316,7 @@ SyncedCron.add({
 
 
       } else if (d.plan === 2) {
-        intereses = d.amount / 100 * 35
+        intereses = d.amount / 100 * 194
         Deposits.update({ _id: d._id, active: true }, {
           $inc: {
             intereses: intereses,
@@ -317,7 +325,15 @@ SyncedCron.add({
         })
 
       } else if (d.plan === 3) {
-        intereses = d.amount / 100 * 18
+        intereses = d.amount / 100 * 259
+        Deposits.update({ _id: d._id, active: true }, {
+          $inc: {
+            intereses: intereses,
+            dias: 1
+          }
+        })
+      } else if (d.plan === 4) {
+        intereses = d.amount / 100 * 328
         Deposits.update({ _id: d._id, active: true }, {
           $inc: {
             intereses: intereses,
@@ -325,6 +341,7 @@ SyncedCron.add({
           }
         })
       }
+
     })
 
   }
@@ -344,7 +361,7 @@ Meteor.startup( function () {
   //       	    })
   //         Roles.addUsersToRoles(id, 'manager');
   //     });
-  console.log('Listo!');
+  // console.log('Listo!');
   process.env.MAIL_URL = "smtp://postmaster@grupoddv.com:faf68e2df2f77397baf3a38e8cd9f209@smtp.mailgun.org:587";
 
   SyncedCron.start();

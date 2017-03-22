@@ -91,6 +91,7 @@ Template.Login.events({
 Template.AdminLayout.events({
   'click .logout'() {
     Meteor.logout()
+    FlowRouter.go('/')
   }
 })
 
@@ -310,6 +311,9 @@ Template.AdminDepositList.helpers({
   plan3() {
     return Deposits.find({plan: 3})
   },
+  plan4() {
+    return Deposits.find({plan: 4})
+  },
   fecha() {
     let rightNow = this.createdAt;
     let res = rightNow.toISOString().substring(0, 10);
@@ -350,9 +354,12 @@ Template.AdminMakeDeposit.events({
       plan = 1;
     } else if ($('.p2').is(':checked')) {
       plan = 2;
-    } else {
+    } else if ($('.p3').is(':checked')) {
       plan = 3
+    } else {
+      plan = 4
     }
+
     let datos = {
       procesador: 1,
       plan: plan,
