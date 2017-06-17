@@ -556,7 +556,7 @@ These funds are managed by a team of EPM Investments experts.
               {{#each deposits}}
               <li class="list-group-item clearfix">
                 <span class="pull-left">{{usuario}} - Monto: $ {{this.amount}} - Plan: {{this.plan}}</span>
-                <span class="pull-right"><strong> Intereses: $ {{interes}}</strong></span>
+                <span class="pull-right"><strong> Intereses: $ {{interes1}}</strong></span>
               </li>
               {{/each}}
             </ul>
@@ -583,7 +583,7 @@ These funds are managed by a team of EPM Investments experts.
                   <div class="panel-body">
                     <ul class="list-group">
                       {{#each depositosPorUsuario}}
-                      <li class="list-group-item"> {{fecha}} - $ {{this.amount}} - Intereses: $ {{interes}}</li>
+                      <li class="list-group-item"> {{fecha}} - $ {{this.amount}} - Intereses: $ {{interes1}}</li>
                       {{else}}
                       <li class="list-group-item">Sin Depositos Realizados</li>
                       {{/each}}
@@ -858,7 +858,7 @@ These funds are managed by a team of EPM Investments experts.
       {{#each plan1}}
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>{{fecha}} - Amount $ {{amount}}</strong> </span>
-        <span class="pull-right"><strong>interests: ${{interes}} - total: ${{total}}</strong></span>
+        <span class="pull-right"><strong>interests: ${{interes1}} </strong></span>
       </li>
       {{/each}}
     </ul>
@@ -869,7 +869,7 @@ These funds are managed by a team of EPM Investments experts.
       {{#each plan2}}
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>{{fecha}} - Amount $ {{amount}}</strong> </span>
-        <span class="pull-right"><strong>interests: ${{interes}} - total: ${{total}}</strong></span>
+        <span class="pull-right"><strong>interests: ${{interes2}} </strong></span>
       </li>
       {{/each}}
     </ul>
@@ -880,7 +880,7 @@ These funds are managed by a team of EPM Investments experts.
       {{#each plan3}}
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>{{fecha}} - Amount $ {{amount}}</strong> </span>
-        <span class="pull-right"><strong>interests: ${{interes}} - total: ${{total}}</strong></span>
+        <span class="pull-right"><strong>interests: ${{interes3}} </strong></span>
       </li>
       {{/each}}
     </ul>
@@ -904,6 +904,7 @@ These funds are managed by a team of EPM Investments experts.
   <h1>Make Withdraw</h1>
   <div class="row">
     <div class="col-md-6">
+      <h1>Account Balance: ${{balance}}</h1>
       <input type="number" name="cantidad" class="form-control" placeholder="Quantity">
       <br>
       <button type="button" name="retirar" class="btn btn-primary">Withdraw</button>

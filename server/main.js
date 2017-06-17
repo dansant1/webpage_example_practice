@@ -86,26 +86,58 @@ Meteor.methods({
   },
   makeWithdraw(numero) {
 
-      if (Meteor.users.findOne({_id: this.userId}).profile.amounts >= numero ) {
-        Withdraws.insert({
-          userId: this.userId,
-          createdAt: new Date(),
-          cantidad: numero,
-          pagado: false
+        numero = parseFloat(numero)
+        
+        let retiros = 0
+        Withdraws.find({userId: this.userId, pagado: true}).forEach( w => {
+          retiros += parseFloat(w.cantidad)
         })
 
-        let total = Meteor.users.findOne({_id: this.userId}).profile.amounts - numero;
+        retiros = parseFloat(retiros)
+        
+        let total1 = 0;
 
-        Meteor.users.update({_id: this.userId}, {
-          $set: {
-            'profile.amounts': total
+        Deposits.find({userId: this.userId, confirmado: true}).forEach( p => {
+          
+          if (p.plan === 1) {
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
+          } else if (p.plan === 2) {
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
+          } else if (p.plan === 3) {
+            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
           }
         })
 
-        return 'Pending of Confirm';
-      } else {
-        return "Doesn't has sufficient money in the account"
-      }
+
+        total1.toFixed(2)
+
+        console.log(retiros)
+
+        console.log('TOTAL: ', total1 - retiros)
+
+        if ( numero <= (total1 - retiros) ) {
+          Withdraws.insert({
+            userId: this.userId,
+            createdAt: new Date(),
+            cantidad: numero,
+            pagado: false
+          })
+
+          let total = Meteor.users.findOne({_id: this.userId}).profile.amounts - numero;
+
+          Meteor.users.update({_id: this.userId}, {
+            $set: {
+              'profile.amounts': total
+            }
+          })
+
+          return 'Pending of Confirm';
+        } else {
+          return "You don't have enought balance for this operation"
+        }
+
+        
+      
   },
   changePassword2(password) {
     if (this.userId) {
@@ -150,6 +182,7 @@ Meteor.publish('depositos', function () {
 
 Meteor.publish('referidos', function () {
   if (this.userId) {
+
      return Meteor.users.find({'profile.referId': this.userId})
   } else {
     this.stop()
@@ -163,7 +196,7 @@ Meteor.publish('d', function () {
      return Deposits.find({confirmado: true})
   } else {
     this.stop()
-    return;
+    return
   }
 })
 
@@ -235,9 +268,8 @@ Meteor.publish('users', function (search) {
 SyncedCron.add({
   name: 'Intereses',
   schedule: function(parser) {
-    // parser is a later.parse object
-    return parser.text('every 1 hour');
-    //return parser.text('every 2 seconds');
+    // return parser.text('every 1 hour');
+    return parser.text('every 1 seconds');
   },
   job: function() {
 
@@ -267,45 +299,14 @@ SyncedCron.add({
       })
     })
 
-    Deposits.find({ plan: 1,  dias: { $gt: 1}  }).forEach( (p) => {
-      Deposits.update({ _id: p._id }, {
-        $set: {
-          active: false
-        }
-      })
-    })
-
-    Deposits.find({ plan: 2,  dias: { $gt: 3}  }).forEach( (p) => {
-      Deposits.update({ _id: p._id }, {
-        $set: {
-          active: false
-        }
-      })
-    })
-
-    Deposits.find({ plan: 3,  dias: { $gt: 7}  }).forEach( (p) => {
-      Deposits.update({ _id: p._id }, {
-        $set: {
-          active: false
-        }
-      })
-    })
-
-    Deposits.find({ plan: 4,  dias: { $gt: 15}  }).forEach( (p) => {
-      Deposits.update({ _id: p._id }, {
-        $set: {
-          active: false
-        }
-      })
-    })
-
-
-
     let intereses = 0;
+    console.log('INICIO')
     Deposits.find({active: true}).forEach( (d) => {
 
       if (d.plan === 1) {
-        intereses = d.amount / 100 * 159
+        intereses = (d.amount / 100 * 12) 
+        console.log('INTERESES: ', intereses)
+        
         Deposits.update({ _id: d._id, active: true }, {
           $inc: {
             intereses: intereses,
@@ -316,7 +317,9 @@ SyncedCron.add({
 
 
       } else if (d.plan === 2) {
-        intereses = d.amount / 100 * 194
+        intereses = (d.amount / 100 * 7) 
+        console.log('INTERESES: ', intereses)
+        
         Deposits.update({ _id: d._id, active: true }, {
           $inc: {
             intereses: intereses,
@@ -325,43 +328,75 @@ SyncedCron.add({
         })
 
       } else if (d.plan === 3) {
-        intereses = d.amount / 100 * 259
+        intereses = (d.amount / 100 * 6) 
+        console.log('INTERESES: ', intereses)
+        
         Deposits.update({ _id: d._id, active: true }, {
           $inc: {
             intereses: intereses,
             dias: 1
           }
         })
-      } else if (d.plan === 4) {
-        intereses = d.amount / 100 * 328
-        Deposits.update({ _id: d._id, active: true }, {
-          $inc: {
-            intereses: intereses,
-            dias: 1
-          }
-        })
-      }
+      } 
 
     })
+
+        console.log('FIN')
+
+    Deposits.find({ plan: 1,  dias: { $gt: 10}  }).forEach( (p) => {
+      Deposits.update({ _id: p._id }, {
+        $set: {
+          active: false
+        }
+      })
+    })
+
+    Deposits.find({ plan: 2,  dias: { $gt: 22}  }).forEach( (p) => {
+      Deposits.update({ _id: p._id }, {
+        $set: {
+          active: false
+        }
+      })
+    })
+
+    Deposits.find({ plan: 3,  dias: { $gt: 36}  }).forEach( (p) => {
+      Deposits.update({ _id: p._id }, {
+        $set: {
+          active: false
+        }
+      })
+    })
+
+    /*Deposits.find({ plan: 4,  dias: { $gt: 22}  }).forEach( (p) => {
+      Deposits.update({ _id: p._id }, {
+        $set: {
+          active: false
+        }
+      })
+    })*/
+
+
+
+    
 
   }
 });
 
 Meteor.startup( function () {
-  // let users = [{nombre: "Admin", email: "manager@dvinvest.com"}]
-  //
-  //    _.each(users, ( user ) => {
-  //
-  //     		let id;
-  //
-  //     	  id = Accounts.createUser({
-  //     	         email: user.email,
-  //     	         password: "developer24",
-  //     	         profile: { name: user.nombre }
-  //       	    })
-  //         Roles.addUsersToRoles(id, 'manager');
-  //     });
-  // console.log('Listo!');
+  /*let users = [{nombre: "Admin", email: "manager@dvinvest.com"}]
+  
+     _.each(users, ( user ) => {
+  
+     		let id;
+  
+      	  id = Accounts.createUser({
+       	         email: user.email,
+      	         password: "developer24",
+    	         profile: { name: user.nombre }
+      	    })
+          Roles.addUsersToRoles(id, 'manager');
+     });
+   console.log('Listo!');*/
   process.env.MAIL_URL = "smtp://postmaster@grupoddv.com:faf68e2df2f77397baf3a38e8cd9f209@smtp.mailgun.org:587";
 
   SyncedCron.start();

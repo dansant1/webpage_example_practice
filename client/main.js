@@ -193,8 +193,17 @@ Template.AdminInicio.helpers({
   nombre() {
     return Meteor.users.findOne({_id: this._id}).profile.name
   },
-  interes() {
-    return this.intereses.toFixed(2)
+  interes1() {
+
+    if (this.plan === 1) {
+      return (this.intereses - (this.amount * 0.12) ).toFixed(2)
+    } else if (this.plan === 2) {
+      return (this.intereses.toFixed(2) - (this.amount * 0.07) ).toFixed(2)
+    } else if (this.plan === 3) {
+      return ( this.intereses.toFixed(2) - (this.amount * 0.06) ).toFixed(2)
+    }
+   
+    
   },
   pm() {
     if (this.profile.pm) {
@@ -214,11 +223,20 @@ Template.AdminInicio.helpers({
   },
   totalWithDrew() {
     let total = 0;
-    Withdraws.find({pagado: true}).forEach( (w) => {
-      total += parseFloat(w.cantidad)
+
+    Deposits.find().forEach( p => {
+      
+      if (p.plan === 1) {
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
+      } else if (p.plan === 2) {
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
+      } else if (p.plan === 3) {
+        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
+      }
     })
 
-    return total
+
+    return total.toFixed(2)
   },
   PendingWithDrawTotal() {
     let total = 0;
@@ -296,8 +314,17 @@ Template.AdminDepositList.onCreated( () => {
 })
 
 Template.AdminDepositList.helpers({
-  interes() {
-    return this.intereses.toFixed(2)
+  interes1() {
+   
+    return (this.intereses - (this.amount * 0.12) ).toFixed(2)
+  },
+  interes2() {
+    return (this.intereses.toFixed(2) - (this.amount * 0.07) ).toFixed(2)
+
+  },
+  interes3() {
+    return ( this.intereses.toFixed(2) - (this.amount * 0.06) ).toFixed(2)
+
   },
   total() {
     return parseFloat(this.amount ) + parseFloat(this.intereses.toFixed(2))
@@ -421,8 +448,39 @@ Template.AdminSettings.events({
   }
 })
 
+Template.AdminWithDraw.onCreated( () => {
+  let template = Template.instance();
+
+  template.autorun( () => {
+    template.subscribe('depositos')
+  })
+})
+
+Template.AdminWithDraw.helpers({
+  balance() {
+    let total = 0;
+
+    Deposits.find().forEach( p => {
+      
+      if (p.plan === 1) {
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
+      } else if (p.plan === 2) {
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
+      } else if (p.plan === 3) {
+        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
+      }
+    })
+
+
+    return total.toFixed(2)
+  }
+})
+
 Template.AdminWithDraw.events({
   'click [name="retirar"]'(e, t) {
+
+    
+
     let cantidad = t.find('[name="cantidad"]').value
     if ( cantidad !== "") {
       Meteor.call('makeWithdraw', cantidad, (err, r) => {
