@@ -550,7 +550,11 @@ Template.Home.onCreated(() => {
   })
 })
 
-Template.Home.helpers({
+Template.inicio.helpers({
+  days() {
+    console.log('hola')
+    return "1"
+  },
   ref() {
     let ref = FlowRouter.getQueryParam('href')
     if (ref) {
@@ -560,6 +564,47 @@ Template.Home.helpers({
     }
   },
   Totalaccounts() {
+    console.log(Meteor.users.find().fetch().length)
+    return Meteor.users.find().fetch().length - 1;
+  },
+  TotalActiveAccounts() {
+    return Meteor.users.find({'profile.active': true}).fetch().length
+  },
+  TotalDeposit() {
+    let t = 0;
+
+    Deposits.find({confirmado: true}).forEach( (d) => {
+      t += parseFloat(d.amount)
+    })
+
+    return t;
+  },
+  totalWithDrawn() {
+    let total = 0
+    Withdraws.find().forEach( (w) => {
+      total += parseFloat(w.cantidad)
+      console.log(total);
+    })
+
+    return total
+  }
+})
+
+Template.Home.helpers({
+  days() {
+    console.log('hola')
+    return "1"
+  },
+  ref() {
+    let ref = FlowRouter.getQueryParam('href')
+    if (ref) {
+      return '?href=' + ref
+    } else {
+      return ''
+    }
+  },
+  Totalaccounts() {
+    console.log(Meteor.users.find().fetch().length)
     return Meteor.users.find().fetch().length - 1;
   },
   TotalActiveAccounts() {

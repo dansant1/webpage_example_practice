@@ -37,10 +37,10 @@
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="">About Us</a>
+            <a href="#about">About Us</a>
           </li>
           <li>
-            <a href="">FAQ</a>
+            <a href="#faq">FAQ</a>
           </li>
           <li>
             <a href="/terms">TERMS</a>
@@ -49,7 +49,7 @@
             <a href="/rateus">Rate Us</a>
           </li>
           <li>
-            <a href="/support">Support </a>
+            <a href="/#work">How it Works </a>
           </li>
         </ul>
       </nav>
@@ -106,7 +106,7 @@
         <i class="fa fa-calendar" aria-hidden="true"></i>
       </p>
       <p>
-        <span>1</span>
+        <span>{{days}}</span>
       </p>
       <p>Running Days</p>
     </div>
@@ -115,7 +115,8 @@
         <i class="fa fa-users" aria-hidden="true"></i>
       </p>
       <p>
-        <span>100</span>
+        
+        <span>{{Totalaccounts}}</span>
       </p>
       <p>Happy Investors</p>
     </div>
@@ -124,7 +125,7 @@
         <i class="fa fa-university" aria-hidden="true"></i>
       </p>
       <p>
-        <span>$ 2,405.00</span>
+        <span>$ {{TotalDeposit}}</span>
       </p>
       <p>Total Deposits</p>
     </div>
@@ -133,7 +134,7 @@
         <i class="fa fa-money" aria-hidden="true"></i>
       </p>
       <p>
-        <span>$ 1,905.00</span>
+        <span>$ {{totalWithDrawn}}</span>
       </p>
       <p>Total Withdrawals</p>
     </div>
@@ -161,7 +162,7 @@
   </div>
 
   <div class="container">
-    <div class="row">
+    <div class="row" id="about">
       <div class="col-md-6 s" style="text-align: center;">
           <img src="/about.jpg" alt="About" class="about__image">
       </div>
@@ -207,7 +208,7 @@
   <br>
   
 
-  <div class="container">
+  <div class="container" id="faq">
     <div class="row">
       <h2 class="red center">Frequently Asked Questions</h2>
       <br><br>
