@@ -5,7 +5,6 @@ FlowRouter.route('/', {
   }
 })
 
-
 FlowRouter.route('/faq', {
   name: 'faq',
   action() {

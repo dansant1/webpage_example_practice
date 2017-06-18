@@ -1,132 +1,73 @@
 <head>
-  <title>EPM Investments</title>
+  <title>FINACE X TRADE</title>
 </head>
 
 
 <template name="Home">
-  <div class="contenedor">
-    <div class="cuadro">
-      <h2 style="color: #e74c3c">EPM Investments</h2>
-    </div>
-    <div class="cuadro">
-      <h2 style="color: white">cm</h2>
-    </div>
-    <div class="cuadro">
-      <h2><a href="/login" style="font-size: 14px; color: #e74c3c">Login</a></h2>
-      <h2><a href="/signup{{ref}}" style="font-size: 14px; color: #e74c3c">Signup</a></h2>
-    </div>
-    <div class="todo">
-      <div class="menu">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/signup{{ref}}">Register Account</a></li>
-          <li><a href="/faq">F.A.Q.</a></li>
-          <li><a href="/rateus">Rate Us</a></li>
-          <li><a href="/support">Support</a></li>
-        </ul>
-      </div>
 
-      <div class="imagen">
-        <img src="/home.jpg">
-        <a href="/signup{{ref}}">Register Account</a>
-      </div>
-      <div style="width: 100%; margin: 5px auto; background: #e74c3c; height: 130px">
-        <ul style="display: flex">
-          <li style="display: inline-block; width: 125px; margin: 10px; color: white">Running Days: 0</li>
-          <li style="display: inline-block; width: 125px; margin: 10px; color: white">Total Accounts: {{Totalaccounts}}</li>
-
-        </ul>
-        <ul style="display: flex">
-          <li style="display: inline-block; width: 125px; margin: 10px; color: white">Active Accounts: {{TotalActiveAccounts}}</li>
-          <li style="display: inline-block; width: 125px; margin: 10px; color: white">Total Deposit: $ {{TotalDeposit}}</li>
-          <li style="display: inline-block; width: 125px; margin: 10px; color: white">Total Withdrawn: $ {{totalWithDrawn}}</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-  <div style="width: 90%; text-align: center; position: relative; top: -50px; margin: 0px auto; background-color: white; min-height: 200px; display: flex">
-    <br>
-    <div style="width: 200px; border: 1px solid black; min-height: 100px; margin: 10px auto; display: inline-block">
-      <h4>Account Login</h4>
-      <form>
-        <br>
-        <input type="email" name="email" placeholder="Email">
-        <br><br>
-        <input type="password" name="password" placeholder="Password">
-        <br><br>
-        <input type="submit" class="btn btn-primary" name="login" value="Login">
-        <br><br>
-      </form>
-      <div style="width: 100%; border-top: 1px solid black; height: 100px">
-        <h4>Payment Processor</h4>
-        <img src="/pm.gif">
-      </div>
-    </div>
-    {{> Template.dynamic template=contenido}}
-    <div style="width: 200px; border: 1px solid black; min-height: 100px; margin: 10px auto; display: inline-block">
-      <h4>WHY CHOOSE US</h4>
-      <ul>
-        <li style="text-align: left">Fast Payouts</li>
-        <li style="text-align: left">Safe investment interface</li>
-        <li style="text-align: left">Highly experienced professionals</li>
-        <li style="text-align: left">Friendly 24/7 Live Support</li>
-        <li style="text-align: left">Ultimate Security</li>
+    <div class="top__menu">
+      <ul class="item__menu">
+        <li>
+          <p><i class="fa fa-envelope-o" aria-hidden="true"></i> support@financex.trade</p>
+        </li>
+        <li>
+          <p><i class="fa fa-map-marker" aria-hidden="true"></i> 121 London Road, Romfords, United Kingdom</p>
+        </li>
       </ul>
-      <h4>Facebook</h4>
-      <p>Comming Soon...</p>
     </div>
 
-  </div>
-  <div class="footer">
-    <ul>
-      <li><a style="color: #34495e;" href="/">Home</a></li>
-      <li><a style="color: #34495e;" href="/signup{{ref}}">Register Account</a></li>
-      <li><a style="color: #34495e;" href="/faq">F.A.Q.</a></li>
-      <li><a style="color: #34495e;" href="/terms">Terms</a></li>
+    <div class="line">
+      <div class="col left">
+        <h1><span class="circle_red"></span>FINANCEXTRADE</h1>
+      </div>
+      <div class="col">
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i> 121 London Road, Romfords, United Kingdom</p>
+        <span class="left__thin">Corporate Office Location</span>
+      </div>
+      <div class="col">
+        <p><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - 8.00 - 18.00</p>
+        <span class="left__thin">Office Time</span>
+      </div>
+    </div>
 
+    <div class="float__menu">
+      <nav class="main__menu">
+        <ul>
+          <li>
+            <a href="">Home</a>
+          </li>
+          <li>
+            <a href="">About Us</a>
+          </li>
+          <li>
+            <a href="">FAQ</a>
+          </li>
+          <li>
+            <a href="">Rules</a>
+          </li>
+          <li>
+            <a href="">Rate Us</a>
+          </li>
+          <li>
+            <a href="">Support </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="signup_block">
+        <a href="">Register</a>
+      </div>
+    </div>
 
-    </ul>
-  </div>
+    {{> Template.dynamic template=contenido}}
+  
 
-    <a style="display: block; width: 80%; margin: 10px auto; text-align: center; color: white">Copyright © 2017 EPM Investments Inc.</a>
-
+ 
 
 </template>
 
 <template name="inicio">
-  <div style="width: 500px; border: 1px solid black; min-height: 100px; margin: 10px auto; display: inline-block">
-    <table class="table" style="border-bottom: 1px solid #ddd; font-size: 19px">
-      <tbody>
-        <tr>
-          <td>159% After 2 Hours</td>
-          <td>194% After 4 Hours</td>
-        </tr>
-        <tr>
-          <td>259% After 8 Hours</td>
-          <td>328% After 16 Hour</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="width: 90%; margin: 10px auto; border: 1px solid #ddd; min-height: 50px; padding: 10px">
-      <h4>Welcome to EPM Investments</h4>
-      <p>
-        EPM Investments was founded by group of entrepreneurs and foreign exchange dealers. We have been off line for the past 6 years and now technology has made it imperative for us to expand our program all over the globe. Don't hesitate and join EPM Investments now!
-      </p>
-    </div>
-    <div style="width: 90%; margin: 10px auto; border: 1px solid #ddd; min-height: 50px; padding: 10px">
-      <h4>Your Key to Success:</h4>
-      <p>
-        Our diverse investment portfolio is not the only way to earn with us, we also provide affiliate program to our members, it pays 10% of your referrals deposit amount straight to your account balance. You don't have to be active investor to earn it, just invite your friends, cousins or family members to our program and we will award you with 10% referrals commission. All you need to do is to fill registration form to become our loyal member and share your referrals link to other people, log in to find all necessary details.
-      </p>
-    </div>
-    <div style="width: 90%; margin: 10px auto; border: 1px solid #ddd; min-height: 50px; padding: 10px">
-      <h4>Why EPM Investments? </h4>
-      <p>
-        Fast customer service and support is one of our main reasons why we are successful investment program, Master-pay.cf provides fast withdrawals and 24/7 live support to its clients. One our kind operators will always be there to help and consult you any time and day. Please note that withdrawals are processed within few hours, but can take up to 12h for security reason.
-      </p>
-    </div>
+  <div class="big__image">
+    <img src="/slide1.jpg" alt="Better Investments">
   </div>
 </template>
 

@@ -1,3 +1,13 @@
+Template.Home.onRendered( () => {
+  $( window ).scroll(function() {
+    if ($(window).scrollTop() > 110) {
+      $( ".float__menu" ).addClass("top")
+    } else {
+    $( ".float__menu" ).removeClass("top")
+    }
+  });
+}) 
+
 Template.Signup.events({
   'submit form'(e, t) {
     e.preventDefault()
