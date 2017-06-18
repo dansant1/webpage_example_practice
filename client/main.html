@@ -2,10 +2,8 @@
   <title>FINACEXTRADE</title>
 </head>
 
-
-<template name="Home">
-
-    <div class="top__menu">
+<template name="menu">
+   <div class="top__menu">
       <ul class="item__menu">
         <li>
           <p><i class="fa fa-envelope-o" aria-hidden="true"></i> support@financex.trade</p>
@@ -49,18 +47,40 @@
             <a href="/rateus">Rate Us</a>
           </li>
           <li>
-            <a href="/login">LOGIN </a>
+            {{#if currentUser}}
+              <a href="/admin">Dashboard </a>
+            {{else}}
+              <a href="/login">LOGIN </a>
+            {{/if}}
+            
           </li>
         </ul>
       </nav>
       <div class="signup_block">
-        <a href="/signup{{ref}}">Register</a>
+          {{#if currentUser}}
+            <a href="#" class="logout">Logout</a>
+          {{else}}
+            <a href="/signup{{ref}}">Register</a>
+          {{/if}}
+          
       </div>
     </div>
 
+</template>
+
+<template name="Home">
+
+   {{>menu}}
+
     {{> Template.dynamic template=contenido}}
   
-    <div class="footer">
+    {{>footer}}
+ 
+
+</template>
+
+<template name="footer">
+  <div class="footer">
       <div class="container">
         <div class="row">
           <div class="col-md-6" style="color: #d9d9d9">
@@ -86,8 +106,6 @@
         
       </div>
     </div>
- 
-
 </template>
 
 <template name="inicio">
@@ -781,43 +799,28 @@ These funds are managed by a team of EPM Investments experts.
 </template>
 
 <template name="AdminLayout">
+  {{>menu}}
   <div class="container">
     {{#if currentUser}}
 
-    <div class="row profile">
+    <div class="row">
 		<div class="col-md-3">
 			<div class="profile-sidebar">
-				<!-- SIDEBAR USERPIC -->
-				<div class="profile-userpic">
-					<img src="/img.png" class="img-responsive" alt="">
-				</div>
-				<!-- END SIDEBAR USERPIC -->
-				<!-- SIDEBAR USER TITLE -->
-				<div class="profile-usertitle">
-					<div class="profile-usertitle-name">
-						{{currentUser.profile.name}}
-					</div>
-					<div class="profile-usertitle-job">
-						<span class="logout">LOGOUT</span>
-					</div>
-				</div>
-				<!-- END SIDEBAR USER TITLE -->
-				<!-- SIDEBAR BUTTONS -->
+        <br>
         {{#if isInRole 'manager'}}
 
         {{else}}
-        <div class="profile-userbuttons">
-          <a href="/admin/deposit" class="btn btn-success btn-lg" style="width: 150px;">New Deposit</a>
-        </div>
-        <div class="profile-userbuttons">
-          <a href="/admin/withdraw" class="btn btn-primary btn-lg" style="width: 150px;">Withdraw Money</a>
-        </div>
+        
+          <a href="/admin/deposit" class="button __red">New Deposit</a>
+       
+         
+          <a href="/admin/withdraw" class="button __black">Withdraw Money</a>
+      
         {{/if}}
 
-				<!-- END SIDEBAR BUTTONS -->
-				<!-- SIDEBAR MENU -->
-				<div class="profile-usermenu">
-					<ul class="nav">
+			
+			
+					<ul class="nav w">
             {{#if isInRole 'manager'}}
             <li class="active">
               <a href="/admin">
@@ -832,17 +835,17 @@ These funds are managed by a team of EPM Investments experts.
             </li>
             <li>
               <a href="/admin/deposit/list">
-              <i class="glyphicon glyphicon-user"></i>
+              <i class="fa fa-money" aria-hidden="true"></i>
               Deposit History </a>
             </li>
             <li>
               <a href="/admin/withdraw/list">
-              <i class="glyphicon glyphicon-ok"></i>
+              <i class="fa fa-handshake-o" aria-hidden="true"></i>
               Withdraw History </a>
             </li>
             <li>
               <a href="/admin/referal">
-              <i class="glyphicon glyphicon-ok"></i>
+              <i class="fa fa-users" aria-hidden="true"></i>
               Referal List </a>
             </li>
 
@@ -853,7 +856,7 @@ These funds are managed by a team of EPM Investments experts.
               Settings Account </a>
             </li>
 					</ul>
-				</div>
+			
 
 			</div>
 		</div>
@@ -867,6 +870,8 @@ These funds are managed by a team of EPM Investments experts.
     {{>Login}}
    {{/if}}
   </div>
+
+  {{>footer}}
 </template>
 
 <template name="AdminInicio">

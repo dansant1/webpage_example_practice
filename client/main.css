@@ -396,6 +396,56 @@ a:hover, a:visited, a:link, a:active {
 
 .wrapper {
   width: 50%;
-  margin: 20px auto;
-  
+  margin: 20px auto; 
+}
+
+.nav.w {
+  background: #EA1632;
+  margin-top: 18px;
+}
+
+.nav.w li a {
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 20px 15px;
+}
+
+.nav.w li a:hover {
+  color: #CB011B
+}
+
+.nav.w li:hover {
+  background: #CB011B;
+}
+
+.button {
+  display: block;
+  border-radius: 25px;
+  height: 40px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  width: 165px;
+  margin: 10px auto;
+}
+
+.__red {
+  background: #EA1632;
+}
+
+.__red:hover {
+  background: #CB011B;
+}
+
+.__black:hover {
+  background: #1C1C21;
+}
+
+.__black {
+  background: #222229;
+}
+
+.button:hover, .button:focus {
+  color: white;
 }

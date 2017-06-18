@@ -24,7 +24,7 @@ Template.Home.onRendered( () => {
 }) 
 
 Template.Signup.events({
-  'submit form'(e, t) {
+  'click .login-button'(e, t) {
     e.preventDefault()
 
     if (t.find("[name='password']").value !== "" && t.find("[name='username']").value !== "" && t.find("[name='email']").value !== "" && t.find("[name='name']").value !== "" ) {
@@ -92,8 +92,14 @@ Template.Signup.events({
   }
 })
 
+Template.menu.events({
+  'click .logout'() {
+    Meteor.logout()
+  }
+})
+
 Template.Login.events({
-  'submit form'(e, t) {
+  'click .login-button'(e, t) {
     e.preventDefault()
 
     if (t.find("[name='email']").value !== "" && t.find("[name='password']").value !== "") {
