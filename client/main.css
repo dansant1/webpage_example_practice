@@ -436,10 +436,12 @@ a:hover, a:visited, a:link, a:active {
 
 .__red:hover {
   background: #CB011B;
+  transition: background 0.3s ease-in
 }
 
 .__black:hover {
   background: #1C1C21;
+  transition: background 0.3s ease-in
 }
 
 .__black {
@@ -447,5 +449,15 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .button:hover, .button:focus {
+  color: white;
+}
+
+.box__red {
+  display: inline-block;
+  background: #EA1632;
+  width: 200px;
+  height: 125px;
+  margin: 10px;
+  padding: 10px;
   color: white;
 }

@@ -856,7 +856,7 @@ These funds are managed by a team of EPM Investments experts.
               Settings Account </a>
             </li>
 					</ul>
-			
+          <br>
 
 			</div>
 		</div>
@@ -901,7 +901,7 @@ These funds are managed by a team of EPM Investments experts.
             <span class="pull-right"><strong>$ {{amount}}</strong></span>
           </li>
           {{else}}
-            <h4>Sin usuarios</h4>
+            <h4>No users</h4>
           {{/each}}
           {{/if}}
         </ul>
@@ -1003,10 +1003,18 @@ These funds are managed by a team of EPM Investments experts.
 
       </ul>
       <br>
-      <h3>Active Deposits</h3>
-      <p><strong>$ {{activeDeposit}}</strong></p>
-      <h3>Earned Total</h3>
-      <p><strong>$ {{totalWithDrew}}</strong></p>
+      
+      <div class="box__red">
+        <h3>Active Deposits</h3>
+        <p><strong>$ {{activeDeposit}}</strong></p>
+
+      </div>
+      
+      <div class="box__red">
+        <h3>Earned Total</h3>
+        <p><strong>$ {{totalWithDrew}}</strong></p>
+      </div>
+      
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>Deposits</h3>
@@ -1057,55 +1065,45 @@ These funds are managed by a team of EPM Investments experts.
     <li class="active"><a data-toggle="tab" href="#home">Plan 1</a></li>
     <li><a data-toggle="tab" href="#menu1">Plan 2</a></li>
     <li><a data-toggle="tab" href="#menu2">Plan 3</a></li>
-    <li><a data-toggle="tab" href="#menu2">Plan 4</a></li>
+   
   </ul>
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
-    <h3>159% After 2 Hours</h3>
+    <h3>12% After 10 Hours</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>$ 5.00</strong></span>
-        <span class="pull-right"><strong>159% - 2 hours</strong></span>
+        <span class="pull-left"><strong>$ 1.00</strong></span>
+        <span class="pull-right"><strong>12% per hour</strong></span>
       </li>
 
     </ul>
   </div>
   <div id="menu1" class="tab-pane fade">
-    <h3>194% After 4 Hours</h3>
+    <h3>7% After 22 Hours</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>$ 10.00</strong></span>
-        <span class="pull-right"><strong>194%</strong></span>
+        <span class="pull-left"><strong>$ 5.00</strong></span>
+        <span class="pull-right"><strong>7% per hour</strong></span>
       </li>
 
     </ul>
   </div>
   <div id="menu2" class="tab-pane fade">
-    <h3>259% After 8 Hours</h3>
+    <h3>6% After 36 Hours</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>$ 15.00</strong></span>
-        <span class="pull-right"><strong>259%</strong></span>
+        <span class="pull-left"><strong>$ 10.00</strong></span>
+        <span class="pull-right"><strong>6% per hour</strong></span>
       </li>
 
     </ul>
   </div>
 
-  <div id="menu3" class="tab-pane fade">
-    <h3>328% After 16 Hour</h3>
-    <ul class="list-group">
-
-      <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>$ 20.00</strong></span>
-        <span class="pull-right"><strong>328%</strong></span>
-      </li>
-
-    </ul>
-  </div>
+  
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -1114,12 +1112,12 @@ These funds are managed by a team of EPM Investments experts.
       <label class="radio-inline"><input class="p1" type="radio" checked name="optradio">PLAN 1</label>
       <label class="radio-inline"><input class="p2" type="radio" name="optradio">PLAN 2</label>
       <label class="radio-inline"><input class="p3" type="radio" name="optradio">PLAN 3</label>
-      <label class="radio-inline"><input class="p4" type="radio" name="optradio">PLAN 4</label>
+     
       <br><br>
 
     <div class="form-group">
       <h3 for="amount">Amount to Spend ($)</h3>
-      <input type="number" class="form-control" min="10" id="amount" name="amount" value="10.00">
+      <input type="number" class="form-control" min="1" id="amount" name="amount" value="1.00">
     </div>
 
     <form action="https://perfectmoney.is/api/step1.asp" method="POST">
@@ -1210,12 +1208,12 @@ These funds are managed by a team of EPM Investments experts.
     <li class="active"><a data-toggle="tab" href="#home">Plan 1</a></li>
     <li><a data-toggle="tab" href="#menu1">Plan 2</a></li>
     <li><a data-toggle="tab" href="#menu2">Plan 3</a></li>
-    <li><a data-toggle="tab" href="#menu3">Plan 4</a></li>
+   
   </ul>
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
-    <h3>PLAN 1 - 159% After 2 Hours</h3>
+    <h3>PLAN 1 - 12% per 10 Hours</h3>
     <ul class="list-group">
       {{#each plan1}}
       <li class="list-group-item clearfix">
@@ -1226,7 +1224,7 @@ These funds are managed by a team of EPM Investments experts.
     </ul>
   </div>
   <div id="menu1" class="tab-pane fade">
-    <h3>PLAN 2 - 194% After 4 hours</h3>
+    <h3>PLAN 2 - 7% per 22 hours</h3>
     <ul class="list-group">
       {{#each plan2}}
       <li class="list-group-item clearfix">
@@ -1237,7 +1235,7 @@ These funds are managed by a team of EPM Investments experts.
     </ul>
   </div>
   <div id="menu2" class="tab-pane fade">
-    <h3>PLAN 3 -  259% after 8 hours</h3>
+    <h3>PLAN 3 -  6% per 36 hours</h3>
     <ul class="list-group">
       {{#each plan3}}
       <li class="list-group-item clearfix">
@@ -1248,17 +1246,7 @@ These funds are managed by a team of EPM Investments experts.
     </ul>
   </div>
 
-  <div id="menu3" class="tab-pane fade">
-    <h3>PLAN 4 -  328% after 16 hours</h3>
-    <ul class="list-group">
-      {{#each plan4}}
-      <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>{{fecha}} - Amount $ {{amount}}</strong> </span>
-        <span class="pull-right"><strong>interests: ${{interes}} - total: ${{total}}</strong></span>
-      </li>
-      {{/each}}
-    </ul>
-  </div>
+ 
 </div>
 </template>
 
@@ -1289,7 +1277,7 @@ These funds are managed by a team of EPM Investments experts.
 <template name="AdminReferals">
   <h1>Referals - Get 10% of his first deposit</h1>
   <h4>Your referal link</h4>
-  <input type="text" disabled value="https://epminvest.grupoddv.com/?href={{email}}" class="form-control">
+  <input type="text" disabled value="https://www.financex.trade/?href={{email}}" class="form-control">
   <h4>Referals List</h4>
   {{#each referidos}}
   <li class="list-group-item clearfix">
@@ -1322,7 +1310,7 @@ These funds are managed by a team of EPM Investments experts.
         <label for="confirm">Confirm New Password</label>
         <input type="password" class="form-control" name="confirm" id="confirm">
       </div>
-      <button type="button" class="btn btn-primary change-password">Change Password</button>
+      <button type="button" class="btn btn-danger change-password">Change Password</button>
       <br>
     </div>
   </div>
@@ -1345,7 +1333,7 @@ These funds are managed by a team of EPM Investments experts.
       <div class="row">
         <div class="col-md-6">
 
-          <button type="button" class="btn btn-primary save">Save</button>
+          <button type="button" class="btn btn-danger save">Save</button>
           <br>
         </div>
       </div>
