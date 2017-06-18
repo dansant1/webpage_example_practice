@@ -90,6 +90,7 @@ body, html {
 }
 
 .float__menu {
+  z-index: 1001;
   width: 80%;
   position: relative;
   margin: 5px auto;
@@ -112,7 +113,8 @@ body, html {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 70%;
+  width: 80%;
+  text-transform: uppercase;
   margin: 5px auto;
   padding: 10px;
   height: 50px;
@@ -120,6 +122,7 @@ body, html {
 
 .signup_block {
   width: 20%;
+  text-transform: uppercase;
   background: #222222;
 }
 
@@ -130,7 +133,56 @@ body, html {
   box-sizing: border-box;
   padding: 15px;
   color: white;
-  font-weight: bold
+  font-weight: bold;
+}
+
+.wrap__image {
+  position: absolute;
+  top: 166px;
+  right: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.35);
+  z-index: 1;
+  height: 400px;
+}
+
+.data {
+  text-align: center;
+  position: relative;
+  top: -105px;
+  z-index: 2;
+}
+
+.sub {
+    margin: 40px auto;
+    color: white;
+    width: 60%;
+    font-size: 20px;
+}
+
+.data a {
+  display: block;
+  width: 300px;
+  height: 50px;
+  font-weight: bold;
+  padding: 16px;
+  border-radius: 30px;
+  margin: 10px auto;
+  text-align: center;
+  color: white;
+  background: #ea1632;
+  transition: background 0.2s ease-in;
+}
+
+.data a:hover {
+  background: #CB011B
+}
+
+.seamless {
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: white;
+  font-size: 34px;
 }
 
 .main__menu ul {
@@ -155,12 +207,40 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .big__image {
+  background-image: url(slide1.jpg);
   width: 100%;
+  margin-bottom: 0px;
+  margin-top: -35px;
+  padding: 200px 0px;
+  height: 400px;
+  background-size: cover;
+  background-position: 0px;
+  background-repeat: no-repeat;
 }
 
-.big__image img {
-  display: block;
+.principals {
   width: 100%;
-  height: 400px;
-  margin-top: -37.5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 175px;
+  background: #ea1632;
+  box-sizing: border-box;
+  color: white;
+  padding: 20px;
+}
+
+.principals p i {
+  font-size: 35px;
+  color: white;
+}
+
+.principals p {
+  text-align: center;
+  margin: 15px 35px;
+}
+
+.principals p span {
+  font-weight: bold
 }
