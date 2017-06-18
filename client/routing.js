@@ -36,14 +36,14 @@ FlowRouter.route('/terms', {
 FlowRouter.route('/signup', {
   name: 'Signup',
   action(params, queryParams) {
-    BlazeLayout.render('Signup')
+    BlazeLayout.render('Home', { contenido: 'Signup'})
   }
 })
 
 FlowRouter.route('/login', {
   name: 'Login',
   action() {
-    BlazeLayout.render('Login')
+    BlazeLayout.render('Home', { contenido: 'Login'})
   }
 })
 

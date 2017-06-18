@@ -1,3 +1,14 @@
+function treatAsUTC(date) {
+    var result = new Date(date);
+    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+    return result;
+}
+
+function daysBetween(startDate, endDate) {
+    var millisecondsPerDay = 24 * 60 * 60 * 1000;
+    return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+}
+
 Template.Home.onRendered( () => {
   $( window ).scroll(function() {
     if ($(window).scrollTop() > 110) {
@@ -552,7 +563,7 @@ Template.Home.onCreated(() => {
 
 Template.inicio.helpers({
   days() {
-    console.log('hola')
+    let date = daysBetween(new Date("18-06-2017"), new Date())
     return "1"
   },
   ref() {
@@ -565,7 +576,7 @@ Template.inicio.helpers({
   },
   Totalaccounts() {
     console.log(Meteor.users.find().fetch().length)
-    return Meteor.users.find().fetch().length - 1;
+    return Meteor.users.find().fetch().length;
   },
   TotalActiveAccounts() {
     return Meteor.users.find({'profile.active': true}).fetch().length
