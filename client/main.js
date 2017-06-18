@@ -2,8 +2,12 @@ Template.Home.onRendered( () => {
   $( window ).scroll(function() {
     if ($(window).scrollTop() > 110) {
       $( ".float__menu" ).addClass("top")
+      $( ".wrap__image" ).addClass("reduce")
+      
     } else {
-    $( ".float__menu" ).removeClass("top")
+      $( ".float__menu" ).removeClass("top")
+      $( ".wrap__image" ).removeClass("reduce")
+      
     }
   });
 }) 
