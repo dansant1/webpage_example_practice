@@ -799,8 +799,10 @@ These funds are managed by a team of EPM Investments experts.
 </template>
 
 <template name="AdminLayout">
+  {{#if  Template.subscriptionsReady}}
   {{>menu}}
   <div class="container">
+  
     {{#if currentUser}}
 
     <div class="row">
@@ -869,9 +871,14 @@ These funds are managed by a team of EPM Investments experts.
    {{else}}
     {{>Login}}
    {{/if}}
+
+   
   </div>
 
   {{>footer}}
+  {{else}}
+    <h2 class="red center">Loading...</h2>
+   {{/if}}
 </template>
 
 <template name="AdminInicio">
@@ -1127,11 +1134,11 @@ These funds are managed by a team of EPM Investments experts.
         <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
         <input type="hidden" name="PAYMENT_UNITS" value="USD">
         <input type="hidden" name="STATUS_URL"
-            value="https://epminvest.grupoddv.com/">
+            value="https://www.financex.trade/">
         <input type="hidden" name="PAYMENT_URL"
-            value="https://epminvest.grupoddv.com/admin/?c=true">
+            value="https://www.financex.trade/admin/?c=true">
         <input type="hidden" name="NOPAYMENT_URL"
-            value="https://epminvest.grupoddv.com/admin/deposit">
+            value="https://www.financex.trade/admin/deposit">
         <input type="hidden" name="BAGGAGE_FIELDS"
             value="ORDER_NUM CUST_NUM">
         <input type="hidden" name="ORDER_NUM" value="9801121">
@@ -1139,6 +1146,24 @@ These funds are managed by a team of EPM Investments experts.
         <input type="submit" class="btn btn-danger ppm" name="PAYMENT_METHOD" value="Pay with PerfectMoney">
       </p>
     </form>
+
+    <form method="post" action="https://payeer.com/merchant/">
+      <input type="hidden" name="FinancexTrade LTD." value="366349551">
+      <input type="hidden" name="m_orderid" value="1">
+      <input type="hidden" name="m_amount" value="{{amount}}">
+      <input type="hidden" name="m_curr" value="USD">
+      <input type="hidden" name="m_desc" value="dGVzdA==">
+      <input type="hidden" name="m_sign"
+      value="9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F
+      00A08">
+     
+      <input type="hidden" name="form[ps]" value="2609">
+      <input type="hidden" name="form[curr[2609]]" value="USD">
+      
+     
+      <input type="submit" name="m_process" class="btn btn-primary ppm" value="Pay with Payeer" />
+    </form>
+    <br><br>
   </div>
 </div>
 </template>
@@ -1257,7 +1282,7 @@ These funds are managed by a team of EPM Investments experts.
       <h1>Account Balance: ${{balance}}</h1>
       <input type="number" name="cantidad" class="form-control" placeholder="Quantity">
       <br>
-      <button type="button" name="retirar" class="btn btn-primary">Withdraw</button>
+      <button type="button" name="retirar" class="btn btn-danger">Withdraw</button>
     </div>
   </div>
 </template>
