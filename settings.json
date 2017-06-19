@@ -3,7 +3,7 @@
 	{
 			"env":
 				{
-        			"ROOT_URL": "http://epminvest.grupoddv.com",
+        			"ROOT_URL": "http://www.financex.trade",
 					"MONGO_URL": "mongodb://admin:admin@ds137340.mlab.com:37340/epm"
 				}
 	}
