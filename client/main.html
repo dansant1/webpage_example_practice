@@ -1,5 +1,5 @@
 <head>
-  <title>FINACEXTRADE</title>
+  <title>FINANCEXTRADE</title>
 </head>
 
 <template name="menu">
@@ -888,7 +888,7 @@ These funds are managed by a team of EPM Investments experts.
       <li class="active"><a data-toggle="tab" href="#home">Users</a></li>
       <li><a data-toggle="tab" href="#menu1">Deposits</a></li>
       <li><a data-toggle="tab" href="#menu2">Withdraws</a></li>
-      <li><a data-toggle="tab" href="#menu3">Bitcoins</a></li>
+      
     </ul>
     <div class="tab-content">
       <div id="home" class="tab-pane fade in active">
@@ -991,24 +991,7 @@ These funds are managed by a team of EPM Investments experts.
         </ul>
       </div>
 
-      <div id="menu3" class="tab-pane fade">
-        <h3>Bitcoin Deposits</h3>
-        <ul class="list-group">
-          {{#each bitcoinDeposits}}
-          <li class="list-group-item clearfix">
-            <span class="pull-left">{{usuario}} - Monto: $ {{this.amount}}</span>
-            <span class="pull-right">
-            {{#if this.confirmado}}
-            Confirmado
-            {{else}}
-            <button type="button" name="confirmar-bitcoin" class="btn btn-primary confirmar-bitcoin">Pagar</button>
-            {{/if}}
-
-            </span>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
+     
     </div>
   {{else}}
   <h1>Overview</h1>
@@ -1157,7 +1140,7 @@ These funds are managed by a team of EPM Investments experts.
     </div>
 
     <form action="https://perfectmoney.is/api/step1.asp" method="POST">
-      <p>
+   
         <input type="hidden" name="PAYEE_ACCOUNT" value="U14320153">
         <input type="hidden" name="PAYEE_NAME" value="FINANCEXTRADE LTD.">
         <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
@@ -1173,7 +1156,7 @@ These funds are managed by a team of EPM Investments experts.
         <input type="hidden" name="ORDER_NUM" value="9801121">
         <input type="hidden" name="CUST_NUM" value="2067609">
         <input type="submit" class="btn btn-danger ppm" name="PAYMENT_METHOD" value="Pay with PerfectMoney">
-      </p>
+      
     </form>
     <br>
     <form method="POST" action="https://payeer.com/merchant/?m_shop=366349551&m_orderid=1&m_amount={{amount}}&m_curr=USD&m_desc=UGF5IHRvIEZYVFJBREU=&m_sign={{sign}}&lang=en">
@@ -1192,8 +1175,21 @@ These funds are managed by a team of EPM Investments experts.
       <input type="submit" name="m_process" class="btn btn-primary payeer" value="Pay with Payeer" />
     </form>
     <br>
-    <input type="submit" name="bitcoin_process" class="btn btn-warning bitcoin" value="Pay with Bitcoins">
-  
+    <form action="https://www.coinpayments.net/index.php" method="post">
+      <input type="hidden" name="cmd" value="_pay">
+      <input type="hidden" name="reset" value="1">
+      <input type="hidden" name="merchant" value="4ef726ca64bbad5302031834838ba7b4">
+      <input type="hidden" name="item_name" value="Payment to FinancexTrade">
+      <input type="hidden" name="currency" value="USD">
+      <input type="hidden" name="amountf" value="{{amount}}">
+      <input type="hidden" name="quantity" value="1">
+      <input type="hidden" name="allow_quantity" value="1">
+      <input type="hidden" name="want_shipping" value="0">
+      <input type="hidden" name="success_url" value="https://www.financex.trade/admin/?c=true">
+      <input type="hidden" name="cancel_url" value="https://www.financex.trade/admin/">
+      <input type="hidden" name="allow_extra" value="1">
+      <input type="submit" class="btn btn-warning bitcoin" value="Pay with Bitcoin">
+    </form>
     <br><br>
   </div>
 </div>

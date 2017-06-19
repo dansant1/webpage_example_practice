@@ -839,10 +839,6 @@ Template.AdminMakeDeposit.events({
   },
   'click .bitcoin'(e, t) {
 
-    Modal.show('PayBitcoin')
-
-    let wallet = "12NTs1RWBq3HbAvEw7A62dmZhey7TBRjP6";
-
     let plan;
 
     if ($('.p1').is(':checked')) {
@@ -858,8 +854,7 @@ Template.AdminMakeDeposit.events({
     let datos = {
       procesador: 3,
       plan: plan,
-      amount: t.amount.get(),
-      bitcoin: true
+      amount: t.amount.get()
     }
 
     if (datos.amount > 0 ) {
@@ -871,6 +866,7 @@ Template.AdminMakeDeposit.events({
     } else {
       alert('Amount denied')
     }
+    
   }
 
 })
@@ -922,12 +918,13 @@ Template.AdminWithDraw.onCreated( () => {
 
   template.autorun( () => {
     template.subscribe('depositos')
+    template.subscribe('withdraws')
   })
 })
 
 Template.AdminWithDraw.helpers({
   balance() {
-    let total = 0;
+    /*let total = 0;
 
     Deposits.find().forEach( p => {
       
@@ -941,7 +938,32 @@ Template.AdminWithDraw.helpers({
     })
 
 
-    return total.toFixed(2)
+    return total.toFixed(2)*/
+
+    let retiros = 0
+        Withdraws.find({pagado: true}).forEach( w => {
+          retiros += parseFloat(w.cantidad)
+        })
+
+        retiros = parseFloat(retiros)
+        
+        let total1 = 0;
+
+        Deposits.find({confirmado: true}).forEach( p => {
+          
+          if (p.plan === 1) {
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
+          } else if (p.plan === 2) {
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
+          } else if (p.plan === 3) {
+            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
+          }
+        })
+
+
+        total1.toFixed(2)
+
+        return total1 - retiros
   }
 })
 

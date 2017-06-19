@@ -20,7 +20,9 @@ Meteor.methods({
     })
   },
   deposit(datos) {
+
     if (this.userId) {
+
       let depositId = Deposits.insert({
         procesador: datos.procesador,
         amount: datos.amount,
@@ -30,29 +32,13 @@ Meteor.methods({
         createdAt: new Date(),
         active: false,
         intereses: 0,
-        dias: 0,
-        bitcoin: datos.bitcoin
+        dias: 0
       })
-
-      if (datos.bitcoin) {
-
-        Bitcoins.insert({
-          procesador: datos.procesador,
-          amount: datos.amount,
-          plan: datos.plan,
-          userId: this.userId,
-          confirmado: false,
-          createdAt: new Date(),
-          active: false,
-          intereses: 0,
-          dias: 0,
-        })
-
-      }
 
     } else {
       return;
     }
+
   },
   confirmarBitcoin(_id) {
       Bitcoins.update({_id}, {
@@ -152,9 +138,6 @@ Meteor.methods({
 
         total1.toFixed(2)
 
-        console.log(retiros)
-
-        console.log('TOTAL: ', total1 - retiros)
 
         if ( numero <= (total1 - retiros) ) {
           Withdraws.insert({
