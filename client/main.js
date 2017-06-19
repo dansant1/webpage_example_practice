@@ -477,6 +477,7 @@ Template.AdminInicio.onCreated( () => {
       });
       template.subscribe('d')
       template.subscribe('w')
+      template.subscribe('b')
     } else {
       template.subscribe('depositos')
       template.subscribe('withdraws')
@@ -500,6 +501,10 @@ Template.AdminInicio.events({
       }
     })
   },
+  'click .confirmar-bitcoin'() {
+  
+    Meteor.call('confirmarBitcoin', this._id)
+  },
   'click [name="no-pagado"]'() {
     Meteor.call('noconfirmarRetiro', this._id, (err) => {
       if (err) {
@@ -522,6 +527,10 @@ Template.AdminInicio.events({
 })
 
 Template.AdminInicio.helpers({
+  isBitcoin() {
+    console.log(this.bitcoin)
+    return this.bitcoin
+  },
   searching() {
     return Template.instance().searching.get();
   },
@@ -584,6 +593,9 @@ Template.AdminInicio.helpers({
   withdraws() {
     return Withdraws.find()
   },
+  bitcoinDeposits() {
+    return Bitcoins.find()
+  },
   totalWithDrew() {
     let total = 0;
 
@@ -635,7 +647,7 @@ Template.AdminInicio.helpers({
 
     return total;
   },
-  totalADVCash() {
+  totalBitcoin() {
     let total = 0;
     Deposits.find({procesador: 3}).forEach((d) => {
       total = total + parseFloat(d.amount)
@@ -781,7 +793,8 @@ Template.AdminMakeDeposit.events({
     let datos = {
       procesador: 1,
       plan: plan,
-      amount: t.amount.get()
+      amount: t.amount.get(),
+      bitcoin: false
     }
 
     if (datos.amount > 0 ) {
@@ -810,7 +823,43 @@ Template.AdminMakeDeposit.events({
     let datos = {
       procesador: 2,
       plan: plan,
-      amount: t.amount.get()
+      amount: t.amount.get(),
+      bitcoin: false
+    }
+
+    if (datos.amount > 0 ) {
+      Meteor.call('deposit', datos, (err) => {
+        if (err) {
+          alert(err)
+        }
+      })
+    } else {
+      alert('Amount denied')
+    }
+  },
+  'click .bitcoin'(e, t) {
+
+    Modal.show('PayBitcoin')
+
+    let wallet = "12NTs1RWBq3HbAvEw7A62dmZhey7TBRjP6";
+
+    let plan;
+
+    if ($('.p1').is(':checked')) {
+      plan = 1;
+    } else if ($('.p2').is(':checked')) {
+      plan = 2;
+    } else if ($('.p3').is(':checked')) {
+      plan = 3
+    } else {
+      plan = 4
+    }
+
+    let datos = {
+      procesador: 3,
+      plan: plan,
+      amount: t.amount.get(),
+      bitcoin: true
     }
 
     if (datos.amount > 0 ) {

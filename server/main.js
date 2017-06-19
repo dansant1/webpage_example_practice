@@ -21,7 +21,7 @@ Meteor.methods({
   },
   deposit(datos) {
     if (this.userId) {
-      Deposits.insert({
+      let depositId = Deposits.insert({
         procesador: datos.procesador,
         amount: datos.amount,
         plan: datos.plan,
@@ -30,11 +30,56 @@ Meteor.methods({
         createdAt: new Date(),
         active: false,
         intereses: 0,
-        dias: 0
+        dias: 0,
+        bitcoin: datos.bitcoin
       })
+
+      if (datos.bitcoin) {
+
+        Bitcoins.insert({
+          procesador: datos.procesador,
+          amount: datos.amount,
+          plan: datos.plan,
+          userId: this.userId,
+          confirmado: false,
+          createdAt: new Date(),
+          active: false,
+          intereses: 0,
+          dias: 0,
+        })
+
+      }
+
     } else {
       return;
     }
+  },
+  confirmarBitcoin(_id) {
+      Bitcoins.update({_id}, {
+        $set: {
+          confirmado: true
+        }
+      })
+
+      let datos = Bitcoins.findOne({_id})
+
+      Deposits.insert({
+        procesador: datos.procesador,
+          amount: datos.amount,
+          plan: datos.plan,
+          userId: this.userId,
+          confirmado: true,
+          createdAt: new Date(),
+          active: true,
+          intereses: 0,
+          dias: 0
+      })
+
+      Meteor.users.update({_id: this.userId}, {
+        $set: {
+          'profile.active': true
+        }
+      })
   },
   confirmar() {
     if (this.userId) {
@@ -65,11 +110,7 @@ Meteor.methods({
     }
   },
   cancelado() {
-      if (this.userId) {
-        Deposits.remove({userId: this.userId, confirmado: false})
-      } else {
-        return;
-      }
+      Deposits.remove({userId: this.userId, confirmado: false})   
   },
   actualizarInfo(datos) {
     if (this.userId) {
@@ -159,12 +200,12 @@ Meteor.methods({
 
     let texto = "Hello " + nombre + ", Thank you for registration on our site. Your login information: Login: " + email + " Password: " + password + " You can login here: https://epminvest.grupoddv.com Contact us immediately if you did not authorize this registration. Thank you."
     Meteor.defer( function () {
-      Email.send({
+     /* Email.send({
         to: email,
         from: 'contact@grupoddv.com',
         subject: "Welcome to EPM Invest",
         text: texto
-      })
+      })*/
     })
   }
 })
@@ -209,6 +250,15 @@ Meteor.publish('d2', function () {
 Meteor.publish('w', function () {
   if (Roles.userIsInRole(this.userId, ['manager'])) {
      return Withdraws.find({})
+  } else {
+    this.stop()
+    return;
+  }
+})
+
+Meteor.publish('b', function () {
+  if (Roles.userIsInRole(this.userId, ['manager'])) {
+     return Bitcoins.find({})
   } else {
     this.stop()
     return;
@@ -268,8 +318,8 @@ Meteor.publish('users', function (search) {
 SyncedCron.add({
   name: 'Intereses',
   schedule: function(parser) {
-    // return parser.text('every 1 hour');
-    return parser.text('every 1 seconds');
+    return parser.text('every 1 hour');
+    //return parser.text('every 1 seconds');
   },
   job: function() {
 
