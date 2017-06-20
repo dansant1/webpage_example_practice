@@ -127,11 +127,11 @@ Meteor.methods({
         Deposits.find({userId: this.userId, confirmado: true}).forEach( p => {
           
           if (p.plan === 1) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.33) ).toFixed(2))
           } else if (p.plan === 2) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.38) ).toFixed(2))
           } else if (p.plan === 3) {
-            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
+            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.42) ).toFixed(2))
           }
         })
 
@@ -337,7 +337,7 @@ SyncedCron.add({
     Deposits.find({active: true}).forEach( (d) => {
 
       if (d.plan === 1) {
-        intereses = (d.amount / 100 * 12) 
+        intereses = (d.amount / 100 * 0.33) 
         console.log('INTERESES: ', intereses)
         
         Deposits.update({ _id: d._id, active: true }, {
@@ -350,7 +350,7 @@ SyncedCron.add({
 
 
       } else if (d.plan === 2) {
-        intereses = (d.amount / 100 * 7) 
+        intereses = (d.amount / 100 * 0.38) 
         console.log('INTERESES: ', intereses)
         
         Deposits.update({ _id: d._id, active: true }, {
@@ -361,7 +361,7 @@ SyncedCron.add({
         })
 
       } else if (d.plan === 3) {
-        intereses = (d.amount / 100 * 6) 
+        intereses = (d.amount / 100 * 0.42) 
         console.log('INTERESES: ', intereses)
         
         Deposits.update({ _id: d._id, active: true }, {
@@ -376,7 +376,7 @@ SyncedCron.add({
 
         console.log('FIN')
 
-    Deposits.find({ plan: 1,  dias: { $gt: 10}  }).forEach( (p) => {
+    Deposits.find({ plan: 1,  dias: { $gt: 720}  }).forEach( (p) => {
       Deposits.update({ _id: p._id }, {
         $set: {
           active: false
@@ -384,7 +384,7 @@ SyncedCron.add({
       })
     })
 
-    Deposits.find({ plan: 2,  dias: { $gt: 22}  }).forEach( (p) => {
+    Deposits.find({ plan: 2,  dias: { $gt: 720}  }).forEach( (p) => {
       Deposits.update({ _id: p._id }, {
         $set: {
           active: false
@@ -392,26 +392,14 @@ SyncedCron.add({
       })
     })
 
-    Deposits.find({ plan: 3,  dias: { $gt: 36}  }).forEach( (p) => {
+    Deposits.find({ plan: 3,  dias: { $gt: 720}  }).forEach( (p) => {
       Deposits.update({ _id: p._id }, {
         $set: {
           active: false
         }
       })
     })
-
-    /*Deposits.find({ plan: 4,  dias: { $gt: 22}  }).forEach( (p) => {
-      Deposits.update({ _id: p._id }, {
-        $set: {
-          active: false
-        }
-      })
-    })*/
-
-
-
     
-
   }
 });
 

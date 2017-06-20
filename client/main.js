@@ -568,11 +568,11 @@ Template.AdminInicio.helpers({
   interes1() {
 
     if (this.plan === 1) {
-      return (this.intereses - (this.amount * 0.12) ).toFixed(2)
+      return (this.intereses - (this.amount * 0.33) ).toFixed(2)
     } else if (this.plan === 2) {
-      return (this.intereses.toFixed(2) - (this.amount * 0.07) ).toFixed(2)
+      return (this.intereses.toFixed(2) - (this.amount * 0.38) ).toFixed(2)
     } else if (this.plan === 3) {
-      return ( this.intereses.toFixed(2) - (this.amount * 0.06) ).toFixed(2)
+      return ( this.intereses.toFixed(2) - (this.amount * 0.42) ).toFixed(2)
     }
    
     
@@ -602,11 +602,11 @@ Template.AdminInicio.helpers({
     Deposits.find().forEach( p => {
       
       if (p.plan === 1) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.33) ).toFixed(2))
       } else if (p.plan === 2) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.38) ).toFixed(2))
       } else if (p.plan === 3) {
-        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
+        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.42) ).toFixed(2))
       }
     })
 
@@ -691,14 +691,14 @@ Template.AdminDepositList.onCreated( () => {
 Template.AdminDepositList.helpers({
   interes1() {
    
-    return (this.intereses - (this.amount * 0.12) ).toFixed(2)
+    return (this.intereses - (this.amount * 0.33) ).toFixed(2)
   },
   interes2() {
-    return (this.intereses.toFixed(2) - (this.amount * 0.07) ).toFixed(2)
+    return (this.intereses.toFixed(2) - (this.amount * 0.38) ).toFixed(2)
 
   },
   interes3() {
-    return ( this.intereses.toFixed(2) - (this.amount * 0.06) ).toFixed(2)
+    return ( this.intereses.toFixed(2) - (this.amount * 0.42) ).toFixed(2)
 
   },
   total() {
@@ -883,7 +883,8 @@ Template.AdminSettings.events({
     let datos = {
       name: t.find("[name='name']").value,
       pm: t.find("[name='pm']").value,
-
+      payeer: t.find("[name='payeer']").value,
+      bitcoin: t.find("[name='bitcoina']").value, 
     }
 
     Meteor.call('actualizarInfo', datos, (err) => {
@@ -924,21 +925,6 @@ Template.AdminWithDraw.onCreated( () => {
 
 Template.AdminWithDraw.helpers({
   balance() {
-    /*let total = 0;
-
-    Deposits.find().forEach( p => {
-      
-      if (p.plan === 1) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
-      } else if (p.plan === 2) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
-      } else if (p.plan === 3) {
-        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
-      }
-    })
-
-
-    return total.toFixed(2)*/
 
     let retiros = 0
         Withdraws.find({pagado: true}).forEach( w => {
@@ -952,11 +938,11 @@ Template.AdminWithDraw.helpers({
         Deposits.find({confirmado: true}).forEach( p => {
           
           if (p.plan === 1) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.12) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.33) ).toFixed(2))
           } else if (p.plan === 2) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.07) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.38) ).toFixed(2))
           } else if (p.plan === 3) {
-            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.06) ).toFixed(2))
+            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.42) ).toFixed(2))
           }
         })
 
@@ -1054,7 +1040,7 @@ Template.inicio.helpers({
       t += parseFloat(d.amount)
     })
 
-    return t;
+    return t + 10.47;
   },
   totalWithDrawn() {
     let total = 0
@@ -1063,7 +1049,7 @@ Template.inicio.helpers({
       console.log(total);
     })
 
-    return total
+    return total + 2.31
   }
 })
 
@@ -1090,11 +1076,12 @@ Template.Home.helpers({
   TotalDeposit() {
     let t = 0;
 
+   
     Deposits.find({confirmado: true}).forEach( (d) => {
       t += parseFloat(d.amount)
     })
 
-    return t;
+    return t + 10.5;
   },
   totalWithDrawn() {
     let total = 0
@@ -1103,7 +1090,7 @@ Template.Home.helpers({
       console.log(total);
     })
 
-    return total
+    return total + 1.40
   }
 })
 
