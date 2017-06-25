@@ -359,7 +359,9 @@ Template.Signup.events({
   'click .login-button'(e, t) {
     e.preventDefault()
 
+
     if (t.find("[name='password']").value !== "" && t.find("[name='username']").value !== "" && t.find("[name='email']").value !== "" && t.find("[name='name']").value !== "" ) {
+      $('.save').attr('disabled','disabled');
       if (t.find("[name='password']").value === t.find("[name='confirm']").value) {
         if (FlowRouter.getQueryParam("href")) {
           let id = Accounts.createUser({
@@ -367,16 +369,22 @@ Template.Signup.events({
             email: t.find("[name='email']").value,
             password: t.find("[name='password']").value,
             profile: {
-              name: t.find("[name='name']").value
+              name: t.find("[name='name']").value,
+              pm: t.find("[name='pm']").value,
+              payeer: t.find("[name='payeer']").value,
+              bitcoin: t.find("[name='bitcoin']").value
             }
           }, (err) => {
+            //u
             if (err) {
               alert(err)
+              $('.save').removeAttr('disabled');
             } else {
 
               Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
                 if (err) {
                   alert(err)
+                  $('.save').removeAttr('disabled');
                 } else {
                   Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
                   Meteor.call('referir', FlowRouter.getQueryParam("href"))
@@ -392,15 +400,20 @@ Template.Signup.events({
             email: t.find("[name='email']").value,
             password: t.find("[name='password']").value,
             profile: {
-              name:t.find("[name='name']").value
+              name:t.find("[name='name']").value,
+              pm: t.find("[name='pm']").value,
+              payeer: t.find("[name='payeer']").value,
+              bitcoin: t.find("[name='bitcoin']").value
             }
           }, (err) => {
             if (err) {
               alert(err)
+              $('.save').removeAttr('disabled');
             } else {
               Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
                 if (err) {
                   alert(err)
+                  $('.save').removeAttr('disabled');
                 } else {
                   Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
                   FlowRouter.go('/admin')
@@ -413,9 +426,11 @@ Template.Signup.events({
 
       } else {
         alert('Confirm Your Password')
+        $('.save').removeAttr('disabled');
       }
     } else {
       alert('Complete the form')
+      $('.save').removeAttr('disabled');
     }
 
 

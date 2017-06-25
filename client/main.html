@@ -719,7 +719,7 @@ These funds are managed by a team of EPM Investments experts.
 </template>
 
 <template name="Signup">
-
+<!--signup-->
    <div class="container">
       <h3 class="red center">Great Decision!</h3>
 			<div class="wrapper">
@@ -770,8 +770,35 @@ These funds are managed by a team of EPM Investments experts.
               </div>
             
   <br>
+
+   <label for="pm" class="cols-sm-2 control-label">Your Perfect Money ID</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="pm" id="pm"  placeholder="Optional"/>
+                </div>
+              </div>
+  <br>
+
+   <label for="payeer" class="cols-sm-2 control-label">Your Payeer ID</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="payeer" id="payeer"  placeholder="Optional"/>
+                </div>
+              </div>
+  <br>
+
+   <label for="bitcoin" class="cols-sm-2 control-label">Your Bitcoin Address</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="bitcoin" id="bitcoin"  placeholder="Optional"/>
+                </div>
+              </div>
+  <br>
             
-              <button type="submit" class="btn btn-primary btn-lg btn-block login-button" style="background: #EA1632; border: none; border-radius: 25px;">Register</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block login-button save" style="background: #EA1632; border: none; border-radius: 25px;">Register</button>
            
            
       </div>
@@ -1155,7 +1182,7 @@ These funds are managed by a team of EPM Investments experts.
 
     <form action="https://perfectmoney.is/api/step1.asp" method="POST">
    
-        <input type="hidden" name="PAYEE_ACCOUNT" value="U14320153">
+        <input type="hidden" name="PAYEE_ACCOUNT" value="U14983503">
         <input type="hidden" name="PAYEE_NAME" value="FINANCEXTRADE LTD.">
         <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
         <input type="hidden" name="PAYMENT_UNITS" value="USD">
@@ -1167,7 +1194,7 @@ These funds are managed by a team of EPM Investments experts.
             value="https://www.financex.trade/admin/deposit">
         <input type="hidden" name="BAGGAGE_FIELDS"
             value="ORDER_NUM CUST_NUM">
-        <input type="hidden" name="ORDER_NUM" value="9801121">
+        <input type="hidden" name="ORDER_NUM" value="0000125">
         <input type="hidden" name="CUST_NUM" value="2067609">
         <input type="submit" class="btn btn-danger ppm" name="PAYMENT_METHOD" value="Pay with PerfectMoney">
       
@@ -1421,12 +1448,12 @@ These funds are managed by a team of EPM Investments experts.
 
           <div class="form-group">
             <label for="pm">PAYEER</label>
-            <input type="text" class="form-control" name="payeer" id="pm" value="{{currentUser.profile.pm}}">
+            <input type="text" class="form-control" name="payeer" id="pm" value="{{currentUser.profile.payeer}}">
           </div>
 
           <div class="form-group">
             <label for="pm">BITCOIN ADDRESS</label>
-            <input type="text" class="form-control" name="bitcoina" id="pm" value="{{currentUser.profile.pm}}">
+            <input type="text" class="form-control" name="bitcoina" id="pm" value="{{currentUser.profile.bitcoin}}">
           </div>
         </div>
 

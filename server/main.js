@@ -1,8 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 
-Meteor.startup(() => {
-  // code to run on server at startup
-});
 
 Meteor.methods({
   confirmarRetiro(retiroId) {
@@ -104,7 +101,8 @@ Meteor.methods({
          $set: {
            'profile.name': datos.name,
            'profile.pm': datos.pm,
-
+           'profile.payeer': datos.payeer,
+           'profile.bitcoin': datos.bitcoin
          }
        })
     } else {
@@ -171,7 +169,7 @@ Meteor.methods({
     }
   },
   referir(username) {
-    console.log(username);
+   
     Meteor.users.update({_id: this.userId}, {
       $set: {
         'profile.referId': Meteor.users.findOne({username: username})._id
