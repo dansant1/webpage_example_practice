@@ -583,11 +583,11 @@ Template.AdminInicio.helpers({
   interes1() {
 
     if (this.plan === 1) {
-      return (this.intereses - (this.amount * 0.33) ).toFixed(2)
+      return (this.intereses - (this.amount * 0.00000033) ).toFixed(2)
     } else if (this.plan === 2) {
-      return (this.intereses.toFixed(2) - (this.amount * 0.38) ).toFixed(2)
+      return (this.intereses.toFixed(2) - (this.amount * 0.00000038) ).toFixed(2)
     } else if (this.plan === 3) {
-      return ( this.intereses.toFixed(2) - (this.amount * 0.42) ).toFixed(2)
+      return ( this.intereses.toFixed(2) - (this.amount * 0.00000042) ).toFixed(2)
     }
    
     
@@ -617,11 +617,11 @@ Template.AdminInicio.helpers({
     Deposits.find().forEach( p => {
       
       if (p.plan === 1) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.33) ).toFixed(2))
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000033) ).toFixed(2))
       } else if (p.plan === 2) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.38) ).toFixed(2))
+        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000038) ).toFixed(2))
       } else if (p.plan === 3) {
-        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.42) ).toFixed(2))
+        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.00000042) ).toFixed(2))
       }
     })
 
@@ -705,15 +705,33 @@ Template.AdminDepositList.onCreated( () => {
 
 Template.AdminDepositList.helpers({
   interes1() {
-   
-    return (this.intereses - (this.amount * 0.33) ).toFixed(2)
+    let interes = (this.intereses - (this.amount * 0.00000033) ).toFixed(2)
+
+    if ( interes <= 0) {
+      return 0
+    } 
+
+    return interes 
   },
   interes2() {
-    return (this.intereses.toFixed(2) - (this.amount * 0.38) ).toFixed(2)
+    let interes = (this.intereses.toFixed(2) - (this.amount * 0.00000038) ).toFixed(2)
+    if ( interes <= 0) {
+      return 0
+    } 
+
+    return interes 
+    
 
   },
   interes3() {
-    return ( this.intereses.toFixed(2) - (this.amount * 0.42) ).toFixed(2)
+    let interes =  ( this.intereses.toFixed(2) - (this.amount * 0.00000042) ).toFixed(2)
+
+    if ( interes <= 0) {
+      return 0
+    } 
+
+    return interes 
+    
 
   },
   total() {
@@ -740,12 +758,12 @@ Template.AdminDepositList.helpers({
 
 Template.AdminMakeDeposit.onCreated( () => {
   let template = Template.instance()
-  template.amount = new ReactiveVar(10)
+  template.amount = new ReactiveVar(0.01)
 })
 
 Template.AdminMakeDeposit.helpers({
   amount() {
-    console.log(Template.instance().amount.get());
+    
     return Template.instance().amount.get()
   },
   sign() {
@@ -873,11 +891,33 @@ Template.AdminMakeDeposit.events({
     }
 
     if (datos.amount > 0 ) {
-      Meteor.call('deposit', datos, (err) => {
-        if (err) {
-          alert(err)
-        }
-      })
+
+      if (datos.plan === 1 && datos.amount > 0.01 && datos.amount < 0.99) {
+        Meteor.call('deposit', datos, (err) => {
+          if (err) {
+            alert(err)
+          }
+        })
+        return
+      } else if ( datos.plan === 2 && datos.amount >= 1 && datos.amount <= 4.99 ) {
+        Meteor.call('deposit', datos, (err) => {
+          if (err) {
+            alert(err)
+          }
+        })
+        return
+      } else if ( datos.plan === 3 && datos.amount >= 5 && datos.amount <= 20 ) {
+        Meteor.call('deposit', datos, (err) => {
+          if (err) {
+            alert(err)
+          }
+        })
+        return 
+      } else {
+        alert('You MUST add the correct amount')
+      }
+
+      
     } else {
       alert('Amount denied')
     }
@@ -953,11 +993,11 @@ Template.AdminWithDraw.helpers({
         Deposits.find({confirmado: true}).forEach( p => {
           
           if (p.plan === 1) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.33) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000033) ).toFixed(2))
           } else if (p.plan === 2) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.38) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000038) ).toFixed(2))
           } else if (p.plan === 3) {
-            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.42) ).toFixed(2))
+            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.00000042) ).toFixed(2))
           }
         })
 

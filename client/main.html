@@ -1130,34 +1130,34 @@ These funds are managed by a team of EPM Investments experts.
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
-    <h3>8% DAILY</h3>
+    <h3>22% Monthly</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>$ 1.00</strong></span>
-        <span class="pull-right"><strong>12% per hour</strong></span>
+        <span class="pull-left"><strong>BTC 0.01 - 0.99</strong></span>
+        <span class="pull-right"><strong>Monthly yield 22%</strong></span>
       </li>
 
     </ul>
   </div>
   <div id="menu1" class="tab-pane fade">
-    <h3>9% DAILY</h3>
+    <h3>27% Monthly</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>$ 5.00</strong></span>
-        <span class="pull-right"><strong>7% per hour</strong></span>
+        <span class="pull-left"><strong>BTC 1.00 - 4.9</strong></span>
+        <span class="pull-right"><strong>Monthly yield 27%</strong></span>
       </li>
 
     </ul>
   </div>
   <div id="menu2" class="tab-pane fade">
-    <h3>10% DAILY</h3>
+    <h3>33% Monthly</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
-        <span class="pull-left"><strong>$ 10.00</strong></span>
-        <span class="pull-right"><strong>6% per hour</strong></span>
+        <span class="pull-left"><strong>BTC 5.00 - 20.00</strong></span>
+        <span class="pull-right"><strong>Monthly yield 33%</strong></span>
       </li>
 
     </ul>
@@ -1176,11 +1176,11 @@ These funds are managed by a team of EPM Investments experts.
       <br><br>
 
     <div class="form-group">
-      <h3 for="amount">Amount to Spend ($)</h3>
-      <input type="number" class="form-control" min="1" id="amount" name="amount" value="1.00">
+      <h3 for="amount">Amount to Spend in BTC</h3>
+      <input type="number" class="form-control" min="1" id="amount" name="amount" value="0.01">
     </div>
 
-    <form action="https://perfectmoney.is/api/step1.asp" method="POST">
+    <!--<form action="https://perfectmoney.is/api/step1.asp" method="POST">
    
         <input type="hidden" name="PAYEE_ACCOUNT" value="U14983503">
         <input type="hidden" name="PAYEE_NAME" value="FINANCEXTRADE LTD.">
@@ -1214,14 +1214,14 @@ These funds are managed by a team of EPM Investments experts.
       
      
       <input type="submit" name="m_process" class="btn btn-primary payeer" value="Pay with Payeer" />
-    </form>
+    </form> -->
     <br>
     <form action="https://www.coinpayments.net/index.php" method="post">
       <input type="hidden" name="cmd" value="_pay">
       <input type="hidden" name="reset" value="1">
       <input type="hidden" name="merchant" value="4ef726ca64bbad5302031834838ba7b4">
       <input type="hidden" name="item_name" value="Payment to FinancexTrade">
-      <input type="hidden" name="currency" value="USD">
+      <input type="hidden" name="currency" value="BTC">
       <input type="hidden" name="amountf" value="{{amount}}">
       <input type="hidden" name="quantity" value="1">
       <input type="hidden" name="allow_quantity" value="0">
