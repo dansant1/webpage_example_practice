@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');
+/*@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');*/
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
 
 body, html {
   padding: 0;
   margin: 0;
-  font-family: 'Muli', sans-serif;
+  /*font-family: 'Muli', sans-serif;*/
+  font-family: 'Inconsolata', monospace;
 }
 
 a {
@@ -56,6 +58,7 @@ a {
 }
 
 .col {
+  text-align: center;
   color: #222222;
   margin: 15px auto;
 }
@@ -66,7 +69,7 @@ a {
 
 .col h1 {
   margin: 5px;
-  float: left;
+  
   font-size: 18px;
   font-weight: bold;
   position: relative;
@@ -142,7 +145,7 @@ a {
 
 .wrap__image {
   position: absolute;
-  top: 166px;
+  top: 173px;
   right: 0;
   left: 0;
   background-color: rgba(0,0,0,0.35);
@@ -224,15 +227,23 @@ a:hover, a:visited, a:link, a:active {
 
 .principals {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  
   justify-content: center;
   height: 175px;
   background: #ea1632;
   box-sizing: border-box;
   color: white;
   padding: 20px;
+}
+
+@media (max-width: 450px) {
+  .principals {
+    height: 600px;
+  }
+
+  .top__menu {
+    display: none;
+  }
 }
 
 .principals p i {
@@ -261,9 +272,9 @@ a:hover, a:visited, a:link, a:active {
 
 .plans .column {
   border: 2px solid #ea1632;
-  margin: 20px;
+  margin: 20px auto;
   height: 290px;
-  width: 25%;
+  width: 90%;
 }
 
 .plans p, .plans span {
@@ -292,7 +303,7 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .reduce {
-  top: 96px
+  top: 103px
 }
 
 .plans .column > p {

@@ -386,6 +386,10 @@ Template.Signup.events({
                   alert(err)
                   $('.save').removeAttr('disabled');
                 } else {
+                  analytics.identify( Meteor.userId(), {
+                    email: Meteor.user().emails[0].address,
+                    name: Meteor.user().profile.name
+                  });
                   Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
                   Meteor.call('referir', FlowRouter.getQueryParam("href"))
                   FlowRouter.go('/admin')
@@ -410,15 +414,24 @@ Template.Signup.events({
               alert(err)
               $('.save').removeAttr('disabled');
             } else {
+               
+
               Meteor.loginWithPassword( t.find("[name='email']").value , t.find("[name='password']").value, (err) => {
                 if (err) {
                   alert(err)
                   $('.save').removeAttr('disabled');
+                 
                 } else {
+                  analytics.identify( Meteor.userId(), {
+                    email: Meteor.user().emails[0].address,
+                    name: Meteor.user().profile.name
+                  });
                   Meteor.call('sendEmail', t.find("[name='email']").value, t.find("[name='password']").value)
                   FlowRouter.go('/admin')
                 }
               })
+
+
 
             }
           })
@@ -442,6 +455,9 @@ Template.Signup.events({
 Template.menu.events({
   'click .logout'() {
     Meteor.logout()
+    analytics.track( 'Logout', {
+      title: 'Usuario se deslogeo'
+    });
   }
 })
 
@@ -454,6 +470,10 @@ Template.Login.events({
         if (err) {
           alert(err)
         } else {
+          analytics.identify( Meteor.userId(), {
+                    email: Meteor.user().emails[0].address,
+                    name: Meteor.user().profile.name
+                  });
           FlowRouter.go('/admin')
         }
       })
@@ -470,6 +490,16 @@ Template.AdminLayout.events({
   'click .logout'() {
     Meteor.logout()
     FlowRouter.go('/')
+  },
+  'click .dep'() {
+    analytics.track( 'Deposito', {
+      title: 'Usuario ingreso a la pagina de deposito'
+    });
+  },
+  'click .with'() {
+    analytics.track( 'Retiro - Withdraw', {
+      title: 'Usuario ingreso a la pagina de retiro - withdraw'
+    });
   }
 })
 
@@ -500,7 +530,13 @@ Template.AdminInicio.onCreated( () => {
 
     if (FlowRouter.getQueryParam("c") == 'true' ) {
 
-      Meteor.call('confirmar')
+      Meteor.call('confirmar', (err) => {
+        if (!err) {
+           analytics.track( 'Deposito', {
+              title: 'Usuario finalizo el deposito '
+            });
+        }
+      })
     } else {
       Meteor.call('cancelado')
     }
@@ -583,11 +619,11 @@ Template.AdminInicio.helpers({
   interes1() {
 
     if (this.plan === 1) {
-      return (this.intereses - (this.amount * 0.00000033) ).toFixed(2)
+      return (this.intereses - (this.amount * 0.00000033) ).toFixed(5)
     } else if (this.plan === 2) {
-      return (this.intereses.toFixed(2) - (this.amount * 0.00000038) ).toFixed(2)
+      return (this.intereses.toFixed(2) - (this.amount * 0.00000038) ).toFixed(5)
     } else if (this.plan === 3) {
-      return ( this.intereses.toFixed(2) - (this.amount * 0.00000042) ).toFixed(2)
+      return ( this.intereses.toFixed(2) - (this.amount * 0.00000042) ).toFixed(5)
     }
    
     
@@ -617,16 +653,24 @@ Template.AdminInicio.helpers({
     Deposits.find().forEach( p => {
       
       if (p.plan === 1) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000033) ).toFixed(2))
+        total += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
       } else if (p.plan === 2) {
-        total += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000038) ).toFixed(2))
+        total += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
       } else if (p.plan === 3) {
-        total += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.00000042) ).toFixed(2))
+        total += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
       }
     })
 
 
-    return total.toFixed(2)
+    return total
+  },
+  WithDrew() {
+    let total = 0;
+    Withdraws.find({pagado: false}).forEach( (w) => {
+      total += parseFloat(w.cantidad)
+    })
+
+    return total.toFixed(5)
   },
   PendingWithDrawTotal() {
     let total = 0;
@@ -705,7 +749,7 @@ Template.AdminDepositList.onCreated( () => {
 
 Template.AdminDepositList.helpers({
   interes1() {
-    let interes = (this.intereses - (this.amount * 0.00000033) ).toFixed(2)
+    let interes = (this.intereses - (this.amount * 0.00000033) ).toFixed(5)
 
     if ( interes <= 0) {
       return 0
@@ -714,7 +758,7 @@ Template.AdminDepositList.helpers({
     return interes 
   },
   interes2() {
-    let interes = (this.intereses.toFixed(2) - (this.amount * 0.00000038) ).toFixed(2)
+    let interes = (this.intereses.toFixed(2) - (this.amount * 0.00000038) ).toFixed(5)
     if ( interes <= 0) {
       return 0
     } 
@@ -724,7 +768,7 @@ Template.AdminDepositList.helpers({
 
   },
   interes3() {
-    let interes =  ( this.intereses.toFixed(2) - (this.amount * 0.00000042) ).toFixed(2)
+    let interes =  ( this.intereses.toFixed(2) - (this.amount * 0.00000042) ).toFixed(5)
 
     if ( interes <= 0) {
       return 0
@@ -834,6 +878,10 @@ Template.AdminMakeDeposit.events({
       Meteor.call('deposit', datos, (err) => {
         if (err) {
           alert(err)
+        } else {
+           analytics.track( 'Deposito', {
+              title: 'Usuario inicio el proceso de deposito port ' + t.amount.get(),
+            });
         }
       })
     } else {
@@ -864,6 +912,11 @@ Template.AdminMakeDeposit.events({
       Meteor.call('deposit', datos, (err) => {
         if (err) {
           alert(err)
+        } else {
+           analytics.track( 'Deposito', {
+              title: 'Usuario inicio el proceso de deposito por ' + t.amount.get(),
+            
+            });
         }
       })
     } else {
@@ -890,32 +943,18 @@ Template.AdminMakeDeposit.events({
       amount: t.amount.get()
     }
 
-    if (datos.amount > 0 ) {
+    if (datos.amount >= 0.01 ) {
 
-      if (datos.plan === 1 && datos.amount > 0.01 && datos.amount < 0.99) {
-        Meteor.call('deposit', datos, (err) => {
+      Meteor.call('deposit', datos, (err) => {
           if (err) {
             alert(err)
+          } else {
+           analytics.track( 'Deposito', {
+              title: 'Usuario inicio el proceso de deposito por ' + t.amount.get(),
+              
+            });
           }
-        })
-        return
-      } else if ( datos.plan === 2 && datos.amount >= 1 && datos.amount <= 4.99 ) {
-        Meteor.call('deposit', datos, (err) => {
-          if (err) {
-            alert(err)
-          }
-        })
-        return
-      } else if ( datos.plan === 3 && datos.amount >= 5 && datos.amount <= 20 ) {
-        Meteor.call('deposit', datos, (err) => {
-          if (err) {
-            alert(err)
-          }
-        })
-        return 
-      } else {
-        alert('You MUST add the correct amount')
-      }
+      })
 
       
     } else {
@@ -946,6 +985,9 @@ Template.AdminSettings.events({
       if (err) {
         alert(err)
       } else {
+        analytics.track( 'Cuenta Actualizado', {
+          title: 'Usuario actualizo los datos de su cuenta'
+        });
         alert('Data Saved')
       }
     })
@@ -959,6 +1001,9 @@ Template.AdminSettings.events({
         if (err) {
           alert(err)
         } else {
+          analytics.track( 'Cuenta Actualizado - password', {
+            title: 'Usuario actualizo su contraseña'
+          });
           alert('Password Changed')
         }
       })
@@ -993,16 +1038,16 @@ Template.AdminWithDraw.helpers({
         Deposits.find({confirmado: true}).forEach( p => {
           
           if (p.plan === 1) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000033) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
           } else if (p.plan === 2) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.00000038) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
           } else if (p.plan === 3) {
-            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.00000042) ).toFixed(2))
+            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
           }
         })
 
 
-        total1.toFixed(2)
+        total1.toFixed(5)
 
         return total1 - retiros
   }
@@ -1020,6 +1065,9 @@ Template.AdminWithDraw.events({
           t.find('[name="cantidad"]').value = ""
           alert(err)
         } else {
+          analytics.track( 'Withdraw', {
+            title: 'Usuario solicito retiro de ' + cantidad + 'BTC'
+          });
           t.find('[name="cantidad"]').value = ""
           alert(r)
         }
@@ -1095,22 +1143,22 @@ Template.inicio.helpers({
       t += parseFloat(d.amount)
     })
 
-    return t + 10.47;
+    return t //+ 10.47;
   },
   totalWithDrawn() {
     let total = 0
-    Withdraws.find().forEach( (w) => {
+    Withdraws.find({pagado: true}).forEach( (w) => {
       total += parseFloat(w.cantidad)
       console.log(total);
     })
 
-    return total + 2.31
+    return total //+ 2.31
   }
 })
 
 Template.Home.helpers({
   days() {
-    console.log('hola')
+    
     return "1"
   },
   ref() {
@@ -1122,7 +1170,7 @@ Template.Home.helpers({
     }
   },
   Totalaccounts() {
-    console.log(Meteor.users.find().fetch().length)
+   
     return Meteor.users.find().fetch().length - 1;
   },
   TotalActiveAccounts() {

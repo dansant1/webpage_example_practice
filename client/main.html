@@ -1,5 +1,6 @@
 <head>
-  <title>FINANCEXTRADE</title>
+  <title>Royal BTC LTD.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <template name="menu">
@@ -14,19 +15,27 @@
       </ul>
     </div>
 
-    <div class="line">
-      <div class="col left">
-        <h1><span class="circle_red"></span>FINANCE<span style="color: #EA1632; font-weight: bold;">X</span>TRADE</h1>
+    <div class="row">
+      <div class="col-md-4">
+ <div class="col left">
+        <h1><span class="circle_red"></span>ROYAL <span style="color: #EA1632; font-weight: bold;">BTC</span></h1>
       </div>
-      <div class="col">
+      </div>
+      <div class="col-md-4">
+<div class="col">
         <p><i class="fa fa-map-marker" aria-hidden="true"></i> 121 London Road, Romfords, United Kingdom</p>
         <span class="left__thin">Corporate Office Location</span>
       </div>
-      <div class="col">
+      </div>
+      <div class="col-md-4">
+  <div class="col">
         <p><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - 8.00 - 18.00</p>
         <span class="left__thin">Office Time</span>
       </div>
+      </div>
     </div>
+
+   
 
     <div class="float__menu">
       <nav class="main__menu">
@@ -35,10 +44,10 @@
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="#about">About Us</a>
+            <a href="/#about">About Us</a>
           </li>
           <li>
-            <a href="#faq">FAQ</a>
+            <a href="/#faq">FAQ</a>
           </li>
           <li>
             <a href="/terms">TERMS</a>
@@ -133,7 +142,9 @@
   </div>
 
   <div class="principals">
-    <div class="column">
+    <div class="row">
+      <div class="col-md-3">
+ <div class="column">
       <p>
         <i class="fa fa-calendar" aria-hidden="true"></i>
       </p>
@@ -142,7 +153,9 @@
       </p>
       <p>Date Started</p>
     </div>
-    <div class="column">
+      </div>
+      <div class="col-md-3">
+ <div class="column">
       <p>
         <i class="fa fa-users" aria-hidden="true"></i>
       </p>
@@ -152,46 +165,73 @@
       </p>
       <p>Happy Investors</p>
     </div>
-    <div class="column">
+      </div>
+      <div class="col-md-3">
+ <div class="column">
       <p>
         <i class="fa fa-university" aria-hidden="true"></i>
       </p>
       <p>
-        <span>$ {{TotalDeposit}}</span>
+        <span> ฿ {{TotalDeposit}}</span>
       </p>
       <p>Total Deposits</p>
     </div>
-    <div class="column">
+      </div>
+
+      <div class="col-md-3">
+ <div class="column">
       <p>
         <i class="fa fa-money" aria-hidden="true"></i>
       </p>
       <p>
-        <span>$ {{totalWithDrawn}}</span>
+        <span> ฿ {{totalWithDrawn}}</span>
       </p>
       <p>Total Withdrawals</p>
     </div>
+      </div>
+    </div>
+   
+   
+   
+   
   </div>
   <h1 class="red center">Investment Plans</h1>
-  <div class="plans">
-    <div class="column">
-        <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">8% daily</p>
+ <div class="row">
+   <div class="col-md-4">
+     <div class="plans">
+        <div class="column">
+        <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">4% daily</p>
         <span>PER 30 DAYS</span>
-        <span>min $ 5.00</span>
+        <span>min  ฿ 0.01</span>
         <a href="/signup{{ref}}">SELECT PLAN</a>
     </div>
-    <div class="column">
-      <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">9% daily</p>
+     </div>
+   </div>
+   <div class="col-md-4">
+      <div class="plans">
+        <div class="column">
+      <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">4.5% daily</p>
       <span>PER 30 DAYS</span>
-      <span>min $ 100.00</span>
+      <span>min  ฿ 1.00</span>
       <a href="/signup{{ref}}">SELECT PLAN</a>
     </div>
-    <div class="column">
-      <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">10% daily</p>
+      </div>
+   </div>
+   <div class="col-md-4">
+<div class="plans">
+   <div class="column">
+      <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">5% daily</p>
       <span>PER 30 DAYS</span>
-      <span>min $ 1000.00</span>
+      <span>min  ฿ 5.00</span>
       <a href="/signup{{ref}}">SELECT PLAN</a>
     </div>
-  </div>
+</div>
+   </div>
+ </div>
+    
+   
+   
+ 
 
   <h3 style="width: 80%; margin: 10px auto; text-align: center">Referal Comission <span style="color: red">8%</span></h3>
   <br>
@@ -854,10 +894,10 @@ These funds are managed by a team of EPM Investments experts.
 
         {{else}}
         
-          <a href="/admin/deposit" class="button __red">New Deposit</a>
+          <a href="/admin/deposit" class="button __red dep">New Deposit</a>
        
          
-          <a href="/admin/withdraw" class="button __black">Withdraw Money</a>
+          <a href="/admin/withdraw" class="button __black with">Withdraw Money</a>
       
         {{/if}}
 
@@ -1047,32 +1087,32 @@ These funds are managed by a team of EPM Investments experts.
       <h3>Account Balance</h3>
       <ul class="list-group">
 
-        <li class="list-group-item clearfix">
+      <!--  <li class="list-group-item clearfix">
           <span class="pull-left">PERFECT MONEY</span>
-          <span class="pull-right"><strong>$ {{totalPM}}</strong></span>
+          <span class="pull-right"><strong>฿ {{totalPM}}</strong></span>
         </li>
 
         <li class="list-group-item clearfix">
           <span class="pull-left">PAYEER</span>
-          <span class="pull-right"><strong>$ {{totalPayeer}}</strong></span>
-        </li>
+          <span class="pull-right"><strong>฿ {{totalPayeer}}</strong></span>
+        </li> -->
 
         <li class="list-group-item clearfix">
           <span class="pull-left">BITCOIN</span>
-          <span class="pull-right"><strong>$ {{totalBitcoin}}</strong></span>
+          <span class="pull-right"><strong>฿ {{totalBitcoin}}</strong></span>
         </li>
       </ul>
       <br>
       
       <div class="box__red">
         <h3>Active Deposits</h3>
-        <p><strong>$ {{activeDeposit}}</strong></p>
+        <p><strong> ฿ {{activeDeposit}}</strong></p>
 
       </div>
       
       <div class="box__red">
         <h3>Earned Total</h3>
-        <p><strong>$ {{totalWithDrew}}</strong></p>
+        <p><strong> ฿ {{totalWithDrew}}</strong></p>
       </div>
       
     </div>
@@ -1082,15 +1122,15 @@ These funds are managed by a team of EPM Investments experts.
        <tbody>
          <tr>
            <td>TOTAL DEPOSIT</td>
-           <td><strong>$ {{total}}</strong></td>
+           <td><strong> ฿ {{total}}</strong></td>
          </tr>
          <tr>
            <td>ACTIVE DEPOSITS</td>
-           <td><strong>$ {{activeDeposit}}</strong></td>
+           <td><strong> ฿ {{activeDeposit}}</strong></td>
          </tr>
          <tr>
            <td>LAST DEPOSIT</td>
-           <td><strong>$ {{lastDeposit}}</strong></td>
+           <td><strong> ฿ {{lastDeposit}}</strong></td>
          </tr>
        </tbody>
      </table>
@@ -1101,15 +1141,15 @@ These funds are managed by a team of EPM Investments experts.
        <tbody>
          <tr>
            <td>WITHDREW TOTAL</td>
-           <td><strong>$ {{totalWithDrew}}</strong></td>
+           <td><strong> ฿ {{WithDrew}}</strong></td>
          </tr>
          <tr>
            <td>PENDING WITHDRAWAL</td>
-           <td><strong>$ {{PendingWithDrawTotal}}</strong></td>
+           <td><strong> ฿ {{PendingWithDrawTotal}}</strong></td>
          </tr>
          <tr>
            <td>LAST WITHDRAWAL</td>
-           <td><strong>$ {{lastWithdraw}}</strong></td>
+           <td><strong> ฿ {{lastWithdraw}}</strong></td>
          </tr>
        </tbody>
      </table>
@@ -1130,34 +1170,34 @@ These funds are managed by a team of EPM Investments experts.
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
-    <h3>22% Monthly</h3>
+    <h3>120% Monthly</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>BTC 0.01 - 0.99</strong></span>
-        <span class="pull-right"><strong>Monthly yield 22%</strong></span>
+        <span class="pull-right"><strong>Monthly yield 120%</strong></span>
       </li>
 
     </ul>
   </div>
   <div id="menu1" class="tab-pane fade">
-    <h3>27% Monthly</h3>
+    <h3>135% Monthly</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>BTC 1.00 - 4.9</strong></span>
-        <span class="pull-right"><strong>Monthly yield 27%</strong></span>
+        <span class="pull-right"><strong>Monthly yield 135%</strong></span>
       </li>
 
     </ul>
   </div>
   <div id="menu2" class="tab-pane fade">
-    <h3>33% Monthly</h3>
+    <h3>150% Monthly</h3>
     <ul class="list-group">
 
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>BTC 5.00 - 20.00</strong></span>
-        <span class="pull-right"><strong>Monthly yield 33%</strong></span>
+        <span class="pull-right"><strong>Monthly yield 150%</strong></span>
       </li>
 
     </ul>
@@ -1338,7 +1378,7 @@ These funds are managed by a team of EPM Investments experts.
       {{#each plan1}}
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>{{fecha}} - Amount $ {{amount}}</strong> </span>
-        <span class="pull-right"><strong>interests: ${{interes1}} </strong></span>
+        <span class="pull-right"><strong>interests: ฿{{interes1}} </strong></span>
       </li>
       {{/each}}
     </ul>
@@ -1349,7 +1389,7 @@ These funds are managed by a team of EPM Investments experts.
       {{#each plan2}}
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>{{fecha}} - Amount $ {{amount}}</strong> </span>
-        <span class="pull-right"><strong>interests: ${{interes2}} </strong></span>
+        <span class="pull-right"><strong>interests: ฿{{interes2}} </strong></span>
       </li>
       {{/each}}
     </ul>
@@ -1360,7 +1400,7 @@ These funds are managed by a team of EPM Investments experts.
       {{#each plan3}}
       <li class="list-group-item clearfix">
         <span class="pull-left"><strong>{{fecha}} - Amount $ {{amount}}</strong> </span>
-        <span class="pull-right"><strong>interests: ${{interes3}} </strong></span>
+        <span class="pull-right"><strong>interests: ฿{{interes3}} </strong></span>
       </li>
       {{/each}}
     </ul>
@@ -1374,7 +1414,7 @@ These funds are managed by a team of EPM Investments experts.
   <h1>Make Withdraw</h1>
   <div class="row">
     <div class="col-md-6">
-      <h1>Account Balance: ${{balance}}</h1>
+      <h1>Account Balance: ฿{{balance}}</h1>
       <input type="number" name="cantidad" class="form-control" placeholder="Quantity">
       <br>
       <button type="button" name="retirar" class="btn btn-danger">Withdraw</button>

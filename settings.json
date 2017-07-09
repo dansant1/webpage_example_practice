@@ -7,7 +7,17 @@
 					"MONGO_URL": "mongodb://admin:developer24@ds149567.mlab.com:49567/financex"
 				}
 	},
+	 "sikka": {
+         "captcha": {
+             "siteKey": "6LdIWCgUAAAAAPY2aUdlH-FxK4-scN3pPkPIuulr",
+             "secret":  "6LdIWCgUAAAAABQ911bUbszfHq8f75freZgLeBkb"
+         }
+    },
 	"public": {
+    	"analyticsSettings": {
+			"Google Analytics": { "trackingId": "UA-101497924-1"},
+      		"Mixpanel": { "token": "532cf88bea43c93f8152f358ccc06bfb", "people": true }
+    	},
 		"payeer": "BetterShopFxTrade236"
 	}
 }
