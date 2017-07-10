@@ -347,8 +347,8 @@ Meteor.publish('users', function (search) {
 SyncedCron.add({
   name: 'Intereses',
   schedule: function(parser) {
-   //return parser.text('every 1 hour');
-    return parser.text('every 1 seconds');
+    return parser.text('every 1 hour');
+    //return parser.text('every 1 seconds');
   },
   job: function() {
 

@@ -1308,6 +1308,9 @@ Template.AdminLayout.helpers({
 Template.terms.helpers({
   color() {
     return Theme.findOne().color
+  },
+  name() {
+    return Theme.findOne().name    
   }
 })
 
