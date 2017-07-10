@@ -1302,6 +1302,13 @@ Template.terms.helpers({
 Template.footer.helpers({
   color() {
     return Theme.findOne().color
+  },
+  name() {
+    return Theme.findOne().name
+    
+  },
+  adminemail() {
+    return Theme.findOne().email
   }
 })
 
@@ -1316,11 +1323,29 @@ Template.menu.helpers({
   color() {
     return Theme.findOne().color
   },
+  adminemail() {
+    return Theme.findOne().email
+  },
+  address() {
+    return Theme.findOne().address
+  },
+  time() {
+    return Theme.findOne().time
+  }
 })
 
 Template.inicio.helpers({
   color() {
     return Theme.findOne().color
+  },
+  title() {
+    return Theme.findOne().title
+  },
+  subtitle() {
+    return Theme.findOne().subtitle
+  },
+  texto() {
+    return Theme.findOne().texto
   },
   days() {
     let date = daysBetween(new Date("18-06-2017"), new Date())
