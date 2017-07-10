@@ -241,7 +241,7 @@
   <div class="container">
     <div class="row" id="about">
       <div class="col-md-6 s" style="text-align: center;">
-          <img src="/about.jpg" alt="About" class="about__image">
+          <img src="/slide1.jpg" alt="About" class="about__image">
       </div>
       <div class="col-md-6">
         <h2 class="red" style="color: {{color}}">About Us</h2>
@@ -249,7 +249,7 @@
           {{texto}} 
         </p>
         <p style="text-align: justify">
-          FINACEXTRADE LTD. spends a lot of time studying the phenomenon of cryptocurrency and looking for different ways to get Bitcoin and other virtual currencies. In addition, we are ready to share our knowledge and experience, use our skills for earnings and to promote the idea of switching to cryptocurrency in all sectors of the financial life of people. 
+          {{name}} LTD. spends a lot of time studying the phenomenon of cryptocurrency and looking for different ways to get Bitcoin and other virtual currencies. In addition, we are ready to share our knowledge and experience, use our skills for earnings and to promote the idea of switching to cryptocurrency in all sectors of the financial life of people. 
         </p>
       </div>  
     </div>
@@ -257,7 +257,7 @@
 
     <div class="row">
       <div class="col-md-6" style="text-align: center;">
-        <h2 class="red" style="color: {{color}}">Why FINANCEXTRADE</h2>
+        <h2 class="red" style="color: {{color}}">Why {{name}}</h2>
         <p>
           <h3>Fast Withdrawals</h3> 
           <p>
@@ -309,7 +309,7 @@
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse in">
-      <div class="panel-body">Please click here: <a href="/signup{{ref}}">Sign Up</a>, fill out the form and click Create Account.</div>
+      <div class="panel-body">Please click here: <a href="/signup{{ref}}" style="color: {{color}}">Sign Up</a>, fill out the form and click Create Account.</div>
     </div>
   </div>
   <div class="panel panel-default">
@@ -423,7 +423,7 @@
       </h4>
     </div>
     <div id="collapse03" class="panel-collapse collapse">
-      <div class="panel-body">The minimum investment amount is only $1 and the maximum amount per transaction is $50,000.</div>
+      <div class="panel-body">The minimum investment amount is only BTC 0.01 and the maximum amount per transaction is BTC 100.00.</div>
     </div>
   </div>
 
@@ -764,7 +764,7 @@ These funds are managed by a team of EPM Investments experts.
 <template name="Signup">
 <!--signup-->
    <div class="container">
-      <h3 class="red center">Great Decision!</h3>
+      <h3 class="red center" style="color: {{color}}">Great Decision!</h3>
 			<div class="wrapper">
         	  <label for="name" class="cols-sm-2 control-label">Your Full Name</label>
               <div class="cols-sm-10">
@@ -841,7 +841,7 @@ These funds are managed by a team of EPM Investments experts.
               </div>
   <br>
             
-              <button type="submit" class="btn btn-primary btn-lg btn-block login-button save" style="background: #EA1632; border: none; border-radius: 25px;">Register</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block login-button save" style="background: {{color}}; border: none; border-radius: 25px;">Register</button>
            
            
       </div>
@@ -874,7 +874,7 @@ These funds are managed by a team of EPM Investments experts.
 					
 
 						<br>
-							<button type="submit" style="background: #EA1632; border: none; border-radius: 25px;" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+							<button type="submit" style="background: {{color}}; border: none; border-radius: 25px;" class="btn btn-primary btn-lg btn-block login-button">Login</button>
 					
       </div>
 	

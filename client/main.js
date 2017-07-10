@@ -355,6 +355,18 @@ Template.Home.onRendered( () => {
   });
 }) 
 
+Template.Signup.helpers({
+  color() {
+    return Theme.findOne().color;
+  }
+})
+
+Template.Login.helpers({
+  color() {
+    return Theme.findOne().color;
+  }
+})
+
 Template.Signup.events({
   'click .login-button'(e, t) {
     e.preventDefault()
@@ -1337,6 +1349,9 @@ Template.menu.helpers({
 Template.inicio.helpers({
   color() {
     return Theme.findOne().color
+  },
+  name() {
+    return Theme.findOne().name
   },
   title() {
     return Theme.findOne().title
