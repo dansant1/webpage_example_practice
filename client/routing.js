@@ -55,6 +55,13 @@ FlowRouter.route('/admin', {
   }
 })
 
+FlowRouter.route('/admin/i/theme', {
+  name: 'Admin.Theme',
+  action() {
+    BlazeLayout.render('AdminLayout', { pagina: 'AdminTheme' })
+  }
+})
+
 FlowRouter.route('/admin/deposit', {
   name: 'Admin.makeDeposit',
   action() {

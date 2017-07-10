@@ -126,16 +126,16 @@ Meteor.methods({
         Deposits.find({userId: this.userId, confirmado: true}).forEach( p => {
           
           if (p.plan === 1) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.33) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.33) ).toFixed(5))
           } else if (p.plan === 2) {
-            total1 += parseFloat((p.intereses.toFixed(2) - (p.amount * 0.38) ).toFixed(2))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.38) ).toFixed(5))
           } else if (p.plan === 3) {
-            total1 += parseFloat(( p.intereses.toFixed(2) - (p.amount * 0.42) ).toFixed(2))
+            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.42) ).toFixed(5))
           }
         })
 
 
-        total1.toFixed(2)
+        total1.toFixed(5)
 
 
         if ( numero <= (total1 - retiros) ) {
@@ -161,6 +161,13 @@ Meteor.methods({
 
         
       
+  },
+  eliminarRetiro(_id) {
+    if ( this.userId ) {
+      Withdraws.remove({_id})
+    } else {
+      return;
+    }
   },
   changePassword2(password) {
     if (this.userId) {

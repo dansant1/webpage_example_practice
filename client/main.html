@@ -365,8 +365,8 @@
     </div>
     <div id="collapse6" class="panel-collapse collapse">
       <div class="panel-body">
-        <p>You can open a free PerfectMoney account here: www.perfectmoney.is</p>
-        <p>You can open a free Payeer account here: www.payeer.com</p>
+       <!-- <p>You can open a free PerfectMoney account here: www.perfectmoney.is</p>
+        <p>You can open a free Payeer account here: www.payeer.com</p> -->
         <p>You can open a free BitCoin account here: www.blockchain.info</p>
       </div>
     </div>
@@ -880,12 +880,12 @@ These funds are managed by a team of EPM Investments experts.
 </template>
 
 <template name="AdminLayout">
-  {{#if  Template.subscriptionsReady}}
+ 
   {{>menu}}
   <div class="container">
   
     {{#if currentUser}}
-
+    
     <div class="row">
 		<div class="col-md-3">
 			<div class="profile-sidebar">
@@ -909,6 +909,11 @@ These funds are managed by a team of EPM Investments experts.
               <a href="/admin">
               <i class="glyphicon glyphicon-home"></i>
               Manage </a>
+            </li>
+            <li class="active">
+              <a href="/admin/i/theme">
+              <i class="glyphicon glyphicon-home"></i>
+              Theme </a>
             </li>
             {{else}}
             <li class="active">
@@ -949,6 +954,7 @@ These funds are managed by a team of EPM Investments experts.
             </div>
 		</div>
 	 </div>
+   
    {{else}}
     {{>Login}}
    {{/if}}
@@ -957,9 +963,62 @@ These funds are managed by a team of EPM Investments experts.
   </div>
 
   {{>footer}}
-  {{else}}
-    <h2 class="red center">Loading...</h2>
-   {{/if}}
+
+</template>
+
+<template name="AdminTheme">
+  {{#if isInRole 'manager'}}
+     <h1>Theme</h1>
+       <div class="row">
+    <div class="col-md-10">
+      <div class="form-group">
+        <label for="usr">Name of Program</label>
+        <input type="text" class="form-control" name="name" id="usr" value="{{this.name}}">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Admin</label>
+        <input type="email" class="form-control" name="email" id="email" value="{{this.email}}">
+      </div>
+
+      <div class="form-group">
+        <label for="usr">Office Address</label>
+        <input type="text" class="form-control" name="name" id="usr" value="{{this.office_address}}">
+      </div>
+
+      <div class="form-group">
+        <label for="usr">Office Time</label>
+        <input type="text" class="form-control" name="name" id="usr" value="{{this.office_time}}">
+      </div>
+
+      <div class="form-group">
+        <label for="usr">Title</label>
+        <input type="text" class="form-control" name="name" id="usr" value="{{this.title}}">
+      </div>
+
+      <div class="form-group">
+        <label for="usr">Subtitle</label>
+        <input type="text" class="form-control" name="name" id="usr" value="{{this.subtitle}}">
+      </div>
+
+      <div class="form-group">
+        <label for="usr">Text of Presentation</label>
+        <input type="text" class="form-control" name="name" id="usr" value="{{this.text}}">
+      </div>
+
+      <div class="form-group">
+        <label for="usr">Color of Theme</label>
+        <input type="text" class="form-control" name="name" id="usr" value="{{this.color}}">
+      </div>
+      <button type="button" class="btn btn-danger change-password">Save</button>
+      <br>
+      <br>
+    </div>
+
+   
+  </div>
+  {{/if}}
+  
 </template>
 
 <template name="AdminInicio">
@@ -974,26 +1033,38 @@ These funds are managed by a team of EPM Investments experts.
     <div class="tab-content">
       <div id="home" class="tab-pane fade in active">
         <h3>Users</h3>
-        <div class="page-header clearfix">
+      
+         <div class="panel-group" id="accordion01">
+              {{#if searching}}
+                  <h4>Cargando...</h4>
+              {{else}}
+              {{#each usuarios}}
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion01" href="#collapse{{this._id}}01">{{nombre}}</a>
+                  </h4>
+                </div>
+                <div id="collapse{{this._id}}01" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <ul class="list-group">
+                      <li class="list-group-item"> Nombre - <strong>{{this.profile.name}}</strong> </li>
+                      <li class="list-group-item"> Username - <strong>{{this.username}}</strong> </li>
+                      <li class="list-group-item"> Email - <strong>{{email}}</strong> </li>
+                      <li class="list-group-item"> Deposito Total - <strong>{{amount}}</strong> </li>
+                      <li class="list-group-item"> Perfect Money - <strong>{{pm}}</strong> </li>
+                      <li class="list-group-item"> Payeer - <strong>{{payeerID}}</strong> </li>
+                      <li class="list-group-item"> Bitcoin Address - <strong>{{bitcoinAddress}}</strong> </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {{else}}
+                <h4>Sin usuarios</h4>
+              {{/each}}
 
-          <div class="pull-left">
-            <input type="text" name="search" class="form-control" width="250px" placeholder="Buscar usuarios...">
-          </div>
-        </div>
-        <ul class="list-group">
-          {{#if searching}}
-              <h4>Cargando...</h4>
-          {{else}}
-          {{#each usuarios}}
-          <li class="list-group-item clearfix">
-            <span class="pull-left">{{this.profile.name}} -  {{this.username}} - {{email}} - PM Account: {{pm}}</span>
-            <span class="pull-right"><strong>$ {{amount}}</strong></span>
-          </li>
-          {{else}}
-            <h4>No users</h4>
-          {{/each}}
-          {{/if}}
-        </ul>
+              {{/if}}
+            </div>
       </div>
       <div id="menu1" class="tab-pane fade">
         <h3>Deposits</h3>
@@ -1038,6 +1109,7 @@ These funds are managed by a team of EPM Investments experts.
                       {{else}}
                       <li class="list-group-item">Sin Depositos Realizados</li>
                       {{/each}}
+                      <li class="list-group-item"> Total - <strong>$ {{totalWithDrewAdmin}}</strong> </li>
                     </ul>
                   </div>
                 </div>
@@ -1055,21 +1127,80 @@ These funds are managed by a team of EPM Investments experts.
       </div>
       <div id="menu2" class="tab-pane fade">
         <h3>Withdraws</h3>
-        <ul class="list-group">
-          {{#each withdraws}}
-          <li class="list-group-item clearfix">
-            <span class="pull-left">{{usuario}} - Monto: $ {{this.cantidad}}</span>
-            <span class="pull-right">
-            {{#if this.pagado}}
-            <button type="button" name="no-pagado" class="btn btn-success">Pagado</button>
-            {{else}}
-            <button type="button" name="pagado" class="btn btn-primary">Pagar</button>
-            {{/if}}
 
-            </span>
-          </li>
-          {{/each}}
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#dep1">Retiros</a></li>
+          <li><a data-toggle="tab" href="#depusers1">Retiros por Usuario</a></li>
         </ul>
+        <div class="tab-content">
+          <div id="dep1" class="tab-pane fade in active">
+            <ul class="list-group">
+              {{#each withdraws}}
+                <li class="list-group-item clearfix">
+                  <span class="pull-left">{{usuario}} - Monto: $ {{this.cantidad}}</span>
+                  <span class="pull-right">
+                  {{#if this.pagado}}
+                  <button type="button" name="no-pagado" class="btn btn-success">Pagado</button>
+                  {{else}}
+                  <button type="button" name="pagado" class="btn btn-primary">Pagar</button>
+                  {{/if}}
+
+                  </span>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+          <div id="depusers1" class="tab-pane fade">
+        
+            <div class="panel-group" id="accordion1">
+              {{#if searching}}
+                  <h4>Cargando...</h4>
+              {{else}}
+              {{#each usuarios}}
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion1" href="#collapse{{this._id}}1">{{nombre}}</a>
+                  </h4>
+                </div>
+                <div id="collapse{{this._id}}1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <ul class="list-group clearfix">
+                      <br>
+                      <li class="list-group-item"> Balance total - $ {{balance}}</li>
+                      <br>  
+                      <h5>Solicitudes:</h5>                    
+                      {{#each RetirosPorUsuario}}
+                      <li class="list-group-item clearfix"> 
+                        <span class="pull-left">{{fecha}} - $ {{this.cantidad}}</span>
+                        <span class="pull-right">
+                          {{#if this.pagado}}
+                          <button type="button" name="no-pagado" class="btn btn-success">Pagado</button>
+                          {{else}}
+                          <button type="button" name="pagado" class="btn btn-primary">Pagar</button>
+                          <span class="remove_solicitud"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                          {{/if}}
+                        
+                        </span>  
+                      </li>
+                      {{else}}
+                      <li class="list-group-item">Sin Depositos Realizados</li>
+                      {{/each}}
+                      
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {{else}}
+                <h4>Sin usuarios</h4>
+              {{/each}}
+
+              {{/if}}
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
      
@@ -1114,6 +1245,11 @@ These funds are managed by a team of EPM Investments experts.
         <h3>Earned Total</h3>
         <p><strong> ฿ {{totalWithDrew}}</strong></p>
       </div>
+
+      <div class="box__red">
+        <h3>Available Money</h3>
+        <p><strong> ฿ {{balancePorUsuario}}</strong></p>
+      </div>
       
     </div>
     <div id="menu1" class="tab-pane fade">
@@ -1143,6 +1279,7 @@ These funds are managed by a team of EPM Investments experts.
            <td>WITHDREW TOTAL</td>
            <td><strong> ฿ {{WithDrew}}</strong></td>
          </tr>
+         
          <tr>
            <td>PENDING WITHDRAWAL</td>
            <td><strong> ฿ {{PendingWithDrawTotal}}</strong></td>
@@ -1413,11 +1550,11 @@ These funds are managed by a team of EPM Investments experts.
 <template name="AdminWithDraw">
   <h1>Make Withdraw</h1>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <h1>Account Balance: ฿{{balance}}</h1>
       <input type="number" name="cantidad" class="form-control" placeholder="Quantity">
       <br>
-      <button type="button" name="retirar" class="btn btn-danger">Withdraw</button>
+      <button type="button" name="retirar" class="btn btn-danger retir">Withdraw </button>
     </div>
   </div>
 </template>
@@ -1472,6 +1609,7 @@ These funds are managed by a team of EPM Investments experts.
       </div>
       <button type="button" class="btn btn-danger change-password">Change Password</button>
       <br>
+      <br>  
     </div>
   </div>
 
@@ -1504,6 +1642,7 @@ These funds are managed by a team of EPM Investments experts.
         <div class="col-md-6">
 
           <button type="button" class="btn btn-danger save">Save</button>
+          <br>
           <br>
         </div>
       </div>

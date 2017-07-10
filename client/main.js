@@ -574,12 +574,19 @@ Template.AdminInicio.events({
    if ( value === '' ) {
      template.searchQuery.set( value );
    }
- }
+  },
+  'click .remove_solicitud'() {
+    Meteor.call('eliminarRetiro', this._id, (err) => {
+      if (err) {
+        alert(err)
+      }
+    })
+  }
 })
 
 Template.AdminInicio.helpers({
   isBitcoin() {
-    console.log(this.bitcoin)
+    
     return this.bitcoin
   },
   searching() {
@@ -600,15 +607,73 @@ Template.AdminInicio.helpers({
     return res;
   },
   amount() {
-    if (this.profile.amounts) {
-        return this.profile.amounts.toFixed(2)
-    } else {
-      return 0
-    }
+
+    let total = 0;
+    Deposits.find({ userId: this._id}).forEach((d) => {
+      total = total + parseFloat(d.amount)
+    })
+
+    return total;
 
   },
   depositosPorUsuario() {
     return Deposits.find({userId: this._id})
+  },
+  RetirosPorUsuario() {
+    return Withdraws.find({userId: this._id})
+  },
+  balance() {
+
+    let retiros = 0
+        Withdraws.find({pagado: true, userId: this._id}).forEach( w => {
+          retiros += parseFloat(w.cantidad)
+        })
+
+        retiros = parseFloat(retiros)
+        
+        let total1 = 0;
+
+        Deposits.find({confirmado: true, userId: this._id}).forEach( p => {
+          
+          if (p.plan === 1) {
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
+          } else if (p.plan === 2) {
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
+          } else if (p.plan === 3) {
+            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
+          }
+        })
+
+
+        total1.toFixed(5)
+
+        return total1 - retiros
+  },
+  balancePorUsuario() {
+     let retiros = 0
+        Withdraws.find({pagado: true}).forEach( w => {
+          retiros += parseFloat(w.cantidad)
+        })
+
+        retiros = parseFloat(retiros)
+        
+        let total1 = 0;
+
+        Deposits.find({confirmado: true}).forEach( p => {
+          
+          if (p.plan === 1) {
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
+          } else if (p.plan === 2) {
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
+          } else if (p.plan === 3) {
+            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
+          }
+        })
+
+
+        total1.toFixed(5)
+
+        return total1 - retiros
   },
   usuario() {
     return Meteor.users.findOne({_id: this.userId}).profile.name
@@ -631,6 +696,20 @@ Template.AdminInicio.helpers({
   pm() {
     if (this.profile.pm) {
       return this.profile.pm;
+    } else {
+      return "No tiene";
+    }
+  },
+  payeerID() {
+    if (this.profile.payeer) {
+      return this.profile.payeer;
+    } else {
+      return "No tiene";
+    }
+  },
+  bitcoinAddress() {
+    if (this.profile.bitcoin) {
+      return this.profile.bitcoin;
     } else {
       return "No tiene";
     }
@@ -664,9 +743,26 @@ Template.AdminInicio.helpers({
 
     return total
   },
+  totalWithDrewAdmin() {
+    let total = 0;
+
+    Deposits.find({userId: this._id}).forEach( p => {
+      
+      if (p.plan === 1) {
+        total += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
+      } else if (p.plan === 2) {
+        total += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
+      } else if (p.plan === 3) {
+        total += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
+      }
+    })
+
+
+    return total
+  },
   WithDrew() {
     let total = 0;
-    Withdraws.find({pagado: false}).forEach( (w) => {
+    Withdraws.find({pagado: true}).forEach( (w) => {
       total += parseFloat(w.cantidad)
     })
 
@@ -1056,24 +1152,27 @@ Template.AdminWithDraw.helpers({
 Template.AdminWithDraw.events({
   'click [name="retirar"]'(e, t) {
 
-    
+     $('.retir').attr('disabled','disabled');
 
     let cantidad = t.find('[name="cantidad"]').value
     if ( cantidad !== "") {
       Meteor.call('makeWithdraw', cantidad, (err, r) => {
         if (err) {
           t.find('[name="cantidad"]').value = ""
+          $('.retir').removeAttr('disabled');
           alert(err)
         } else {
           analytics.track( 'Withdraw', {
             title: 'Usuario solicito retiro de ' + cantidad + 'BTC'
           });
           t.find('[name="cantidad"]').value = ""
+          $('.retir').removeAttr('disabled');
           alert(r)
         }
       })
     } else {
       alert('Complete fields');
+       $('.retir').removeAttr('disabled');
     }
   }
 })
