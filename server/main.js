@@ -2,6 +2,31 @@ import { Meteor } from 'meteor/meteor';
 
 
 Meteor.methods({
+  setTheme(datos) {
+      if (this.userId) {
+        datos.createdAt = new Date()
+        if (Theme.find().fetch().length > 0) {
+          Theme.update({} , {
+            $set: {
+                name: datos.name,
+                email: datos.email,
+                address: datos.address,
+                time: datos.time,
+                title: datos.title,
+                subtitle: datos.subtitle,
+                texto: datos.texto,
+                color: datos.color,
+                createdAt: datos.createdAt
+            }
+          })
+        } else {
+          Theme.insert(datos)
+        }
+
+      } else {
+        return;
+      }
+  },
   confirmarRetiro(retiroId) {
     Withdraws.update({_id: retiroId}, {
       $set: {
@@ -272,7 +297,22 @@ Meteor.publish('withdraws', function () {
 
 Meteor.publish('u2', function () {
 
+  if (Roles.userIsInRole(this.userId, ['manager'])) {
      return Meteor.users.find()
+  } else {
+    return Meteor.users.find({}, {
+      fields: {
+        "profile.name": 1,
+      }})
+  }
+
+     
+
+})
+
+Meteor.publish('theme', function () {
+
+     return Theme.find()
 
 })
 

@@ -1061,6 +1061,65 @@ Template.AdminMakeDeposit.events({
 
 })
 
+Template.AdminTheme.onCreated( () => {
+  let template = Template.instance()
+
+  template.autorun( () => {
+    template.subscribe('theme')
+  })
+
+})
+
+Template.AdminTheme.helpers({
+  name() {
+    return Theme.findOne().name;
+  },
+  email() {
+    return Theme.findOne().email;
+  },
+  office_address() {
+    return Theme.findOne().address;
+  },
+  office_time() {
+    return Theme.findOne().time;
+  },
+  title() {
+    return Theme.findOne().title;
+  },
+  subtitle() {
+    return Theme.findOne().subtitle;
+  },
+  text() {
+    return Theme.findOne().texto;
+  },
+  color() {
+    return Theme.findOne().color;
+  }
+})
+
+Template.AdminTheme.events({
+  'click .save'(e ,t) {
+    let datos = {
+      name: t.find("[name='name']").value,
+      email: t.find("[name='email']").value,
+      address: t.find("[name='address']").value,
+      time: t.find("[name='time']").value,
+      title: t.find("[name='title']").value,
+      subtitle: t.find("[name='subtitle']").value,
+      texto: t.find("[name='texto']").value,
+      color: t.find("[name='color']").value
+    }
+
+    Meteor.call("setTheme", datos, (err) => {
+      if (err) {
+        alert(err)
+      } else {
+        alert('Data Saved')
+      }
+    })
+  }
+})
+
 
 Template.AdminSettings.helpers({
   email() {
@@ -1212,10 +1271,57 @@ Template.Home.onCreated(() => {
     template.subscribe('d2')
     template.subscribe('w2')
     template.subscribe('u2')
+    template.subscribe('theme')
   })
 })
 
+
+
+Template.menu.onCreated(() => {
+  let template = Template.instance()
+
+  template.autorun( () => {
+    
+    template.subscribe('theme')
+  })
+})
+
+
+Template.AdminLayout.helpers({
+  color() {
+    return Theme.findOne().color
+  },
+})
+
+Template.terms.helpers({
+  color() {
+    return Theme.findOne().color
+  }
+})
+
+Template.footer.helpers({
+  color() {
+    return Theme.findOne().color
+  }
+})
+
+Template.AdminInicio.helpers({
+  color() {
+    return Theme.findOne().color
+  }
+})
+
+
+Template.menu.helpers({
+  color() {
+    return Theme.findOne().color
+  },
+})
+
 Template.inicio.helpers({
+  color() {
+    return Theme.findOne().color
+  },
   days() {
     let date = daysBetween(new Date("18-06-2017"), new Date())
     return "1"
@@ -1229,7 +1335,7 @@ Template.inicio.helpers({
     }
   },
   Totalaccounts() {
-    console.log(Meteor.users.find().fetch().length)
+    
     return Meteor.users.find().fetch().length;
   },
   TotalActiveAccounts() {

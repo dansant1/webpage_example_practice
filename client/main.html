@@ -7,10 +7,10 @@
    <div class="top__menu">
       <ul class="item__menu">
         <li>
-          <p><i class="fa fa-envelope-o" aria-hidden="true"></i> support@financex.trade</p>
+          <p><i style="color: {{color}}" class="fa fa-envelope-o" aria-hidden="true"></i> support@financex.trade</p>
         </li>
         <li>
-          <p><i class="fa fa-map-marker" aria-hidden="true"></i> 121 London Road, Romfords, United Kingdom</p>
+          <p><i style="color: {{color}}" class="fa fa-map-marker" aria-hidden="true"></i> 121 London Road, Romfords, United Kingdom</p>
         </li>
       </ul>
     </div>
@@ -18,18 +18,18 @@
     <div class="row">
       <div class="col-md-4">
  <div class="col left">
-        <h1><span class="circle_red"></span>ROYAL <span style="color: #EA1632; font-weight: bold;">BTC</span></h1>
+        <h1><span class="circle_red" style="background-color: {{color}}"></span>ROYAL <span style="color: {{color}}; font-weight: bold;">BTC</span></h1>
       </div>
       </div>
       <div class="col-md-4">
 <div class="col">
-        <p><i class="fa fa-map-marker" aria-hidden="true"></i> 121 London Road, Romfords, United Kingdom</p>
+        <p><i style="color: {{color}}" class="fa fa-map-marker" aria-hidden="true"></i> 121 London Road, Romfords, United Kingdom</p>
         <span class="left__thin">Corporate Office Location</span>
       </div>
       </div>
       <div class="col-md-4">
   <div class="col">
-        <p><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - 8.00 - 18.00</p>
+        <p><i style="color: {{color}}" class="fa fa-clock-o" aria-hidden="true"></i> Mon - 8.00 - 18.00</p>
         <span class="left__thin">Office Time</span>
       </div>
       </div>
@@ -37,8 +37,8 @@
 
    
 
-    <div class="float__menu">
-      <nav class="main__menu">
+    <div class="float__menu" style="background-color: {{color}}">
+      <nav class="main__menu" >
         <ul>
           <li>
             <a href="/">Home</a>
@@ -77,14 +77,17 @@
 
 </template>
 
-<template name="Home">
-
+<template name="Home">  
+  {{#if Template.subscriptionsReady}}
    {{>menu}}
 
     {{> Template.dynamic template=contenido}}
   
     {{>footer}}
- 
+
+  {{else}}
+    <h1 style="margin: 10px auto; text-align: center; width: 80%; margin-top: 40px;">Loading...</h1>
+  {{/if}}
 
 </template>
 
@@ -106,7 +109,7 @@
             <br><br>
             <h2>Invest with Us</h2>
             <br><br>
-            <a href="/signup{{ref}}" class="button_register">REGISTER</a>
+            <a href="/signup{{ref}}" class="button_register" style="background-color: {{color}}">REGISTER</a>
           </div>
         </div>
       </div>
@@ -137,11 +140,11 @@
     <div class="data">
       <p class="seamless">Welcome To FINANCEXTRADE </p>
       <p class="sub">We are experts managing your finances</p>
-      <a href="/signup{{ref}}">REGISTER</a>
+      <a href="/signup{{ref}}" style="background-color: {{color}}">REGISTER</a>
     </div>
   </div>
 
-  <div class="principals">
+  <div class="principals" style="background-color: {{color}}">
     <div class="row">
       <div class="col-md-3">
  <div class="column">
@@ -195,35 +198,35 @@
    
    
   </div>
-  <h1 class="red center">Investment Plans</h1>
+  <h1 class="red center" style="color: {{color}}">Investment Plans</h1>
  <div class="row">
    <div class="col-md-4">
-     <div class="plans">
-        <div class="column">
-        <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">4% daily</p>
-        <span>PER 30 DAYS</span>
-        <span>min  ฿ 0.01</span>
-        <a href="/signup{{ref}}">SELECT PLAN</a>
+     <div class="plans" style="border-color: {{color}}">
+        <div class="column" style="border-color: {{color}}">
+        <p style="height: 90px; color: {{color}}; font-weight: bold; font-size: 43px; border-color: {{color}}">4% daily</p>
+        <span style="border-color: {{color}}">PER 30 DAYS</span>
+        <span style="border-color: {{color}}">min  ฿ 0.01</span>
+        <a href="/signup{{ref}}" style="background-color: {{color}}">SELECT PLAN</a>
     </div>
      </div>
    </div>
    <div class="col-md-4">
-      <div class="plans">
-        <div class="column">
-      <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">4.5% daily</p>
-      <span>PER 30 DAYS</span>
-      <span>min  ฿ 1.00</span>
-      <a href="/signup{{ref}}">SELECT PLAN</a>
+      <div class="plans" style="border-color: {{color}}">
+        <div class="column" style="border-color: {{color}}">
+      <p style="height: 90px; color: {{color}}; font-weight: bold; font-size: 43px; border-color: {{color}}">4.5% daily</p>
+      <span style="border-color: {{color}}">PER 30 DAYS</span>
+      <span style="border-color: {{color}}">min  ฿ 1.00</span>
+      <a href="/signup{{ref}}" style="background-color: {{color}}">SELECT PLAN</a>
     </div>
       </div>
    </div>
    <div class="col-md-4">
-<div class="plans">
-   <div class="column">
-      <p style="height: 90px; color: #EA1632; font-weight: bold; font-size: 43px;">5% daily</p>
-      <span>PER 30 DAYS</span>
-      <span>min  ฿ 5.00</span>
-      <a href="/signup{{ref}}">SELECT PLAN</a>
+<div class="plans" style="border-color: {{color}}">
+   <div class="column" style="border-color: {{color}}">
+      <p style="height: 90px; color: {{color}}; font-weight: bold; font-size: 43px; border-color: {{color}}">5% daily</p>
+      <span style="border-color: {{color}}">PER 30 DAYS</span>
+      <span style="border-color: {{color}}">min  ฿ 5.00</span>
+      <a href="/signup{{ref}}" style="background-color: {{color}}">SELECT PLAN</a>
     </div>
 </div>
    </div>
@@ -233,7 +236,7 @@
    
  
 
-  <h3 style="width: 80%; margin: 10px auto; text-align: center">Referal Comission <span style="color: red">8%</span></h3>
+  <h3 style="width: 80%; margin: 10px auto; text-align: center">Referal Comission <span style="color: {{color}}">8%</span></h3>
   <br>
   <div class="container">
     <div class="row" id="about">
@@ -241,7 +244,7 @@
           <img src="/about.jpg" alt="About" class="about__image">
       </div>
       <div class="col-md-6">
-        <h2 class="red">About Us</h2>
+        <h2 class="red" style="color: {{color}}">About Us</h2>
         <p style="text-align: justify">
           FINACEXTRADE LTD. is a professional cryptocurrency investment company since 2017. We are based in UK and have in our employ investment professionals from many industries, ranging from advanced computer technology to engineering. 
         </p>
@@ -254,7 +257,7 @@
 
     <div class="row">
       <div class="col-md-6" style="text-align: center;">
-        <h2 class="red">Why FINANCEXTRADE</h2>
+        <h2 class="red" style="color: {{color}}">Why FINANCEXTRADE</h2>
         <p>
           <h3>Fast Withdrawals</h3> 
           <p>
@@ -284,7 +287,7 @@
 
   <div class="container" id="faq">
     <div class="row">
-      <h2 class="red center">Frequently Asked Questions</h2>
+      <h2 class="red center" style="color: {{color}}">Frequently Asked Questions</h2>
       <br><br>
 		<div class="col-md-12">
         <div class="card">
@@ -573,7 +576,7 @@
 	</div>
   </div>
 
-  <div class="partners">
+  <div class="partners" style="background-color: {{color}}">
     <img src="/partners.png" alt="Partners">
   </div>
 </template>
@@ -697,7 +700,7 @@ These funds are managed by a team of EPM Investments experts.
 
 <template name="terms">
   <div class="container">
-      <h2 class="red center">Rules & Agreements</h2>
+      <h2 class="red center" style="color: {{color}}">Rules & Agreements</h2>
       <div style="width: 90%; margin: 10px auto; border: 1px solid #ddd; min-height: 50px; padding: 10px">
         <br>
         <p>
@@ -894,7 +897,7 @@ These funds are managed by a team of EPM Investments experts.
 
         {{else}}
         
-          <a href="/admin/deposit" class="button __red dep">New Deposit</a>
+          <a href="/admin/deposit" class="button __red dep" style="background-color: {{color}}">New Deposit</a>
        
          
           <a href="/admin/withdraw" class="button __black with">Withdraw Money</a>
@@ -903,7 +906,7 @@ These funds are managed by a team of EPM Investments experts.
 
 			
 			
-					<ul class="nav w">
+					<ul class="nav w" style="background-color: {{color}}">
             {{#if isInRole 'manager'}}
             <li class="active">
               <a href="/admin">
@@ -973,44 +976,44 @@ These funds are managed by a team of EPM Investments experts.
     <div class="col-md-10">
       <div class="form-group">
         <label for="usr">Name of Program</label>
-        <input type="text" class="form-control" name="name" id="usr" value="{{this.name}}">
+        <input type="text" class="form-control" name="name" id="usr" value="{{name}}">
       </div>
 
       <div class="form-group">
         <label for="email">Email Admin</label>
-        <input type="email" class="form-control" name="email" id="email" value="{{this.email}}">
+        <input type="email" class="form-control" name="email" id="email" value="{{email}}">
       </div>
 
       <div class="form-group">
         <label for="usr">Office Address</label>
-        <input type="text" class="form-control" name="name" id="usr" value="{{this.office_address}}">
+        <input type="text" class="form-control" name="address" id="usr" value="{{office_address}}">
       </div>
 
       <div class="form-group">
         <label for="usr">Office Time</label>
-        <input type="text" class="form-control" name="name" id="usr" value="{{this.office_time}}">
+        <input type="text" class="form-control" name="time" id="usr" value="{{office_time}}">
       </div>
 
       <div class="form-group">
         <label for="usr">Title</label>
-        <input type="text" class="form-control" name="name" id="usr" value="{{this.title}}">
+        <input type="text" class="form-control" name="title" id="usr" value="{{title}}">
       </div>
 
       <div class="form-group">
         <label for="usr">Subtitle</label>
-        <input type="text" class="form-control" name="name" id="usr" value="{{this.subtitle}}">
+        <input type="text" class="form-control" name="subtitle" id="usr" value="{{subtitle}}">
       </div>
 
       <div class="form-group">
         <label for="usr">Text of Presentation</label>
-        <input type="text" class="form-control" name="name" id="usr" value="{{this.text}}">
+        <input type="text" class="form-control" name="texto" id="usr" value="{{text}}">
       </div>
 
       <div class="form-group">
         <label for="usr">Color of Theme</label>
-        <input type="text" class="form-control" name="name" id="usr" value="{{this.color}}">
+        <input type="text" class="form-control" name="color" id="usr" value="{{color}}">
       </div>
-      <button type="button" class="btn btn-danger change-password">Save</button>
+      <button type="button" class="btn btn-danger save">Save</button>
       <br>
       <br>
     </div>
@@ -1235,18 +1238,18 @@ These funds are managed by a team of EPM Investments experts.
       </ul>
       <br>
       
-      <div class="box__red">
+      <div class="box__red" style="background-color: {{color}}">
         <h3>Active Deposits</h3>
         <p><strong> ฿ {{activeDeposit}}</strong></p>
 
       </div>
       
-      <div class="box__red">
+      <div class="box__red" style="background-color: {{color}}">
         <h3>Earned Total</h3>
         <p><strong> ฿ {{totalWithDrew}}</strong></p>
       </div>
 
-      <div class="box__red">
+      <div class="box__red" style="background-color: {{color}}">
         <h3>Available Money</h3>
         <p><strong> ฿ {{balancePorUsuario}}</strong></p>
       </div>
