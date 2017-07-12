@@ -1,0 +1,35 @@
+<form action="https://perfectmoney.is/api/step1.asp" method="POST">
+   
+        <input type="hidden" name="PAYEE_ACCOUNT" value="U14983503">
+        <input type="hidden" name="PAYEE_NAME" value="FINANCEXTRADE LTD.">
+        <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
+        <input type="hidden" name="PAYMENT_UNITS" value="USD">
+        <input type="hidden" name="STATUS_URL"
+            value="https://www.financex.trade/">
+        <input type="hidden" name="PAYMENT_URL"
+            value="https://www.financex.trade/admin/?c=true">
+        <input type="hidden" name="NOPAYMENT_URL"
+            value="https://www.financex.trade/admin/deposit">
+        <input type="hidden" name="BAGGAGE_FIELDS"
+            value="ORDER_NUM CUST_NUM">
+        <input type="hidden" name="ORDER_NUM" value="0000125">
+        <input type="hidden" name="CUST_NUM" value="2067609">
+        <input type="submit" class="btn btn-danger ppm" name="PAYMENT_METHOD" value="Pay with PerfectMoney">
+      
+    </form>
+    <br>
+    <form method="POST" action="https://payeer.com/merchant/?m_shop=366349551&m_orderid=1&m_amount={{amount}}&m_curr=USD&m_desc=UGF5IHRvIEZYVFJBREU=&m_sign={{sign}}&lang=en">
+      <input type="hidden" name="FinancexTrade LTD." value="366349551">
+      <input type="hidden" name="m_orderid" value="1">
+      <input type="hidden" name="m_amount" value="{{amount}}">
+      <input type="hidden" name="m_curr" value="USD">
+      <input type="hidden" name="m_desc" value="UGF5IHRvIEZYVFJBREU=">
+      <input type="hidden" name="m_sign"
+      value="{{sign}}">
+     
+      <input type="hidden" name="form[ps]" value="2609">
+      <input type="hidden" name="form[curr[2609]]" value="USD">
+      
+     
+      <input type="submit" name="m_process" class="btn btn-primary payeer" value="Pay with Payeer" />
+    </form>

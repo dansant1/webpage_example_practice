@@ -151,19 +151,32 @@ Meteor.methods({
         Deposits.find({userId: this.userId, confirmado: true}).forEach( p => {
           
           if (p.plan === 1) {
-            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.33) ).toFixed(5))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
           } else if (p.plan === 2) {
-            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.38) ).toFixed(5))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
           } else if (p.plan === 3) {
-            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.42) ).toFixed(5))
+            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
           }
         })
 
 
         total1.toFixed(5)
 
+        //Referidos
+        let totals = 0;
+        Meteor.users.find({'profile.referId': Meteor.userId()}).forEach( (e) => {
+          Deposits.find({userId: e._id}).forEach( (d) => {
+            totals += parseFloat(d.amount)
+          })
+        }) 
 
-        if ( numero <= (total1 - retiros) ) {
+        let earn = totals/100*5
+
+        let disponible = earn + total1 - retiros
+        console.log('NUMERO: ', numero)
+        console.log('DISPONIBLE: ', disponible)
+
+        if ( numero <= ( earn + total1 - retiros ) ) {
           Withdraws.insert({
             userId: this.userId,
             createdAt: new Date(),
@@ -269,6 +282,20 @@ Meteor.publish('w', function () {
     return;
   }
 })
+
+Meteor.publish('depositosPorReferidos', function () {
+  if (this.userId) {
+     return Deposits.find({active: true}, {
+      fields: {
+        "amount": 1,
+        "userId": 1
+      }})
+  } else {
+    this.stop()
+    return;
+  }
+})
+
 
 Meteor.publish('b', function () {
   if (Roles.userIsInRole(this.userId, ['manager'])) {

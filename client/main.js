@@ -384,7 +384,8 @@ Template.Signup.events({
               name: t.find("[name='name']").value,
               pm: t.find("[name='pm']").value,
               payeer: t.find("[name='payeer']").value,
-              bitcoin: t.find("[name='bitcoin']").value
+              bitcoin: t.find("[name='bitcoin']").value,
+              //href: FlowRouter.getQueryParam("href")
             }
           }, (err) => {
             //u
@@ -659,7 +660,13 @@ Template.AdminInicio.helpers({
 
         total1.toFixed(5)
 
-        return total1 - retiros
+        let g = total1 - retiros
+
+        if (g <= 0) {
+          return 0
+        } else {
+          return g
+        }
   },
   balancePorUsuario() {
      let retiros = 0
@@ -685,7 +692,13 @@ Template.AdminInicio.helpers({
 
         total1.toFixed(5)
 
-        return total1 - retiros
+        let g = total1 - retiros
+
+        if (g <= 0) {
+          return 0
+        } else {
+          return g
+        }
   },
   usuario() {
     return Meteor.users.findOne({_id: this.userId}).profile.name
@@ -1187,10 +1200,61 @@ Template.AdminWithDraw.onCreated( () => {
   template.autorun( () => {
     template.subscribe('depositos')
     template.subscribe('withdraws')
+     template.subscribe('referidos')
+    template.subscribe('depositosPorReferidos')
   })
 })
 
 Template.AdminWithDraw.helpers({
+  totalEarn() {
+    let total = 0;
+    Meteor.users.find({'profile.referId': Meteor.userId()}).forEach( (e) => {
+      Deposits.find({userId: e._id}).forEach( (d) => {
+        total += parseFloat(d.amount)
+      })
+    }) 
+
+    let earn = total/100*5
+    return earn
+  },
+  total() {
+     let totals = 0;
+    Meteor.users.find({'profile.referId': Meteor.userId()}).forEach( (e) => {
+      Deposits.find({userId: e._id}).forEach( (d) => {
+        totals += parseFloat(d.amount)
+      })
+    }) 
+
+    let earn = totals/100*5
+
+    let retiros = 0
+        Withdraws.find({pagado: true}).forEach( w => {
+          retiros += parseFloat(w.cantidad)
+        })
+
+        retiros = parseFloat(retiros)
+        
+        let total1 = 0;
+
+        Deposits.find({confirmado: true}).forEach( p => {
+          
+          if (p.plan === 1) {
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
+          } else if (p.plan === 2) {
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
+          } else if (p.plan === 3) {
+            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
+          }
+        })
+
+
+        total1.toFixed(5)
+
+        let g = total1 - retiros
+
+        return g + earn
+    
+  },
   balance() {
 
     let retiros = 0
@@ -1216,7 +1280,13 @@ Template.AdminWithDraw.helpers({
 
         total1.toFixed(5)
 
-        return total1 - retiros
+        let g =  total1 - retiros
+  
+        if (g <= 0) {
+          return 0
+        } else {
+          return g
+        }
   }
 })
 
@@ -1346,6 +1416,14 @@ Template.menu.helpers({
   },
   time() {
     return Theme.findOne().time
+  },
+  ref() {
+    let ref = FlowRouter.getQueryParam('href')
+    if (ref) {
+      return '?href=' + ref
+    } else {
+      return ''
+    }
   }
 })
 
@@ -1478,6 +1556,8 @@ Template.AdminReferals.onCreated( () => {
 
   template.autorun( () => {
     template.subscribe('referidos')
+    template.subscribe('depositosPorReferidos')
+    
   })
 })
 
@@ -1487,5 +1567,46 @@ Template.AdminReferals.helpers({
   },
   referidos() {
     return Meteor.users.find({'profile.referId': Meteor.userId()})
+  },
+  depositos() {
+    let total = 0;
+
+    Deposits.find({userId: this._id}).forEach( (d) => {
+      total += parseFloat(d.amount)
+    })
+
+    return total
+
+  },
+  earn() {
+    let total = 0;
+
+    Deposits.find({userId: this._id}).forEach( (d) => {
+      total += parseFloat(d.amount)
+    })
+
+    let earn = total/100*5
+    return earn
+  },
+  total() {
+    let total = 0;
+    Meteor.users.find({'profile.referId': Meteor.userId()}).forEach( (e) => {
+      Deposits.find({userId: e._id}).forEach( (d) => {
+        total += parseFloat(d.amount)
+      })
+    }) 
+
+    return total
+  },
+  totalEarn() {
+     let total = 0;
+    Meteor.users.find({'profile.referId': Meteor.userId()}).forEach( (e) => {
+      Deposits.find({userId: e._id}).forEach( (d) => {
+        total += parseFloat(d.amount)
+      })
+    }) 
+
+    let earn = total/100*5
+    return earn
   }
 })

@@ -1360,47 +1360,13 @@ These funds are managed by a team of EPM Investments experts.
       <input type="number" class="form-control" min="1" id="amount" name="amount" value="0.01">
     </div>
 
-    <!--<form action="https://perfectmoney.is/api/step1.asp" method="POST">
    
-        <input type="hidden" name="PAYEE_ACCOUNT" value="U14983503">
-        <input type="hidden" name="PAYEE_NAME" value="FINANCEXTRADE LTD.">
-        <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
-        <input type="hidden" name="PAYMENT_UNITS" value="USD">
-        <input type="hidden" name="STATUS_URL"
-            value="https://www.financex.trade/">
-        <input type="hidden" name="PAYMENT_URL"
-            value="https://www.financex.trade/admin/?c=true">
-        <input type="hidden" name="NOPAYMENT_URL"
-            value="https://www.financex.trade/admin/deposit">
-        <input type="hidden" name="BAGGAGE_FIELDS"
-            value="ORDER_NUM CUST_NUM">
-        <input type="hidden" name="ORDER_NUM" value="0000125">
-        <input type="hidden" name="CUST_NUM" value="2067609">
-        <input type="submit" class="btn btn-danger ppm" name="PAYMENT_METHOD" value="Pay with PerfectMoney">
-      
-    </form>
-    <br>
-    <form method="POST" action="https://payeer.com/merchant/?m_shop=366349551&m_orderid=1&m_amount={{amount}}&m_curr=USD&m_desc=UGF5IHRvIEZYVFJBREU=&m_sign={{sign}}&lang=en">
-      <input type="hidden" name="FinancexTrade LTD." value="366349551">
-      <input type="hidden" name="m_orderid" value="1">
-      <input type="hidden" name="m_amount" value="{{amount}}">
-      <input type="hidden" name="m_curr" value="USD">
-      <input type="hidden" name="m_desc" value="UGF5IHRvIEZYVFJBREU=">
-      <input type="hidden" name="m_sign"
-      value="{{sign}}">
-     
-      <input type="hidden" name="form[ps]" value="2609">
-      <input type="hidden" name="form[curr[2609]]" value="USD">
-      
-     
-      <input type="submit" name="m_process" class="btn btn-primary payeer" value="Pay with Payeer" />
-    </form> -->
     <br>
     <form action="https://www.coinpayments.net/index.php" method="post">
       <input type="hidden" name="cmd" value="_pay">
       <input type="hidden" name="reset" value="1">
       <input type="hidden" name="merchant" value="4ef726ca64bbad5302031834838ba7b4">
-      <input type="hidden" name="item_name" value="Payment to FinancexTrade">
+      <input type="hidden" name="item_name" value="Payment to RoyalInvest LTD.">
       <input type="hidden" name="currency" value="BTC">
       <input type="hidden" name="amountf" value="{{amount}}">
       <input type="hidden" name="quantity" value="1">
@@ -1554,7 +1520,25 @@ These funds are managed by a team of EPM Investments experts.
   <h1>Make Withdraw</h1>
   <div class="row">
     <div class="col-md-8">
-      <h1>Account Balance: ฿{{balance}}</h1>
+      
+      <ul class="list-group">
+       
+        <li class="list-group-item clearfix">
+          <span class="pull-left">Account Balance: </span>
+          <span class="pull-right"><strong>฿ {{balance}}</strong></span>
+        </li>
+
+        <li class="list-group-item clearfix">
+          <span class="pull-left">Referal Comission:</span>
+          <span class="pull-right"><strong>฿ {{totalEarn}}</strong></span>
+        </li>
+
+        <li class="list-group-item clearfix">
+          <span class="pull-left">Total Available:</span>
+          <span class="pull-right"><strong>฿ {{total}}</strong></span>
+        </li>
+        
+      </ul>
       <input type="number" name="cantidad" class="form-control" placeholder="Quantity">
       <br>
       <button type="button" name="retirar" class="btn btn-danger retir">Withdraw </button>
@@ -1575,15 +1559,34 @@ These funds are managed by a team of EPM Investments experts.
 </template>
 
 <template name="AdminReferals">
-  <h1>Referals - Get 10% of his first deposit</h1>
+  <h1>Referals - Get 5% of the deposits of your referals</h1>
   <h4>Your referal link</h4>
-  <input type="text" disabled value="https://www.financex.trade/?href={{email}}" class="form-control">
+  <input type="text" disabled value="https://www.royalinvest.trade/?href={{email}}" class="form-control">
   <h4>Referals List</h4>
-  {{#each referidos}}
-  <li class="list-group-item clearfix">
-    <span class="pull-left"> {{this.profile.name}}</span>
-  </li>
-  {{/each}}
+   <table class="table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Deposits (฿)</th>
+        <th>Your earn (5%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each referidos}}
+      <tr>
+        <td> {{this.username}}</td>
+        <td>{{depositos}}</td>
+        <td>{{earn}}</td>
+      </tr>
+     {{/each}}
+     <tr>
+        <td> Total Earn (BTC)</td>
+        <td>฿ {{total}}</td>
+        <td>฿ {{totalEarn}}</td>
+      </tr>
+    </tbody>
+  </table>
+ 
 </template>
 
 <template name="AdminSettings">
