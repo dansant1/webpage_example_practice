@@ -668,6 +668,17 @@ Template.AdminInicio.helpers({
           return g
         }
   },
+  totalEarn() {
+    let total = 0;
+    Meteor.users.find({'profile.referId': this._id}).forEach( (e) => {
+      Deposits.find({userId: e._id}).forEach( (d) => {
+        total += parseFloat(d.amount)
+      })
+    }) 
+
+    let earn = total/100*5
+    return earn
+  },
   balancePorUsuario() {
      let retiros = 0
         Withdraws.find({pagado: true}).forEach( w => {
