@@ -337,6 +337,21 @@ Meteor.publish('u2', function () {
 
 })
 
+Meteor.publish('u3', function () {
+
+  if (Roles.userIsInRole(this.userId, ['manager'])) {
+     return Meteor.users.find()
+  } else {
+    return Meteor.users.find({}, {
+      fields: {
+        "emails": 1,
+      }})
+  }
+
+     
+
+})
+
 Meteor.publish('theme', function () {
 
      return Theme.find()

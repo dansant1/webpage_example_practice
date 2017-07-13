@@ -535,8 +535,10 @@ Template.AdminInicio.onCreated( () => {
       });
       template.subscribe('d')
       template.subscribe('w')
+      
       template.subscribe('b')
     } else {
+      
       template.subscribe('depositos')
       template.subscribe('withdraws')
     }
@@ -1411,6 +1413,9 @@ Template.footer.helpers({
 Template.AdminInicio.helpers({
   color() {
     return Theme.findOne().color
+  },
+  email() {
+    return Meteor.user().username
   }
 })
 
