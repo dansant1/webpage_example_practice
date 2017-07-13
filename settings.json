@@ -4,7 +4,7 @@
 			"env":
 				{
         			"ROOT_URL": "http://www.royalinvest.trade",
-					"MONGO_URL": "mongodb://admin:developer24@ds149567.mlab.com:49567/financex"
+					"MONGO_URL": "mongodb://admin:developer24@ds155582.mlab.com:55582/royalinvest"
 				}
 	},
 	 "sikka": {
