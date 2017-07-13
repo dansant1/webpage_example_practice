@@ -430,6 +430,10 @@ a:hover, a:visited, a:link, a:active {
   background: #CB011B;
 }
 
+#h:hover {
+  background-color: #f39c12
+}
+
 .button {
   display: block;
   border-radius: 25px;

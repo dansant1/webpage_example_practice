@@ -151,11 +151,11 @@ Meteor.methods({
         Deposits.find({userId: this.userId, confirmado: true}).forEach( p => {
           
           if (p.plan === 1) {
-            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033) ).toFixed(5))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000033/2) ).toFixed(5))
           } else if (p.plan === 2) {
-            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038) ).toFixed(5))
+            total1 += parseFloat((p.intereses.toFixed(5) - (p.amount * 0.00000038/2) ).toFixed(5))
           } else if (p.plan === 3) {
-            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042) ).toFixed(5))
+            total1 += parseFloat(( p.intereses.toFixed(5) - (p.amount * 0.00000042/2) ).toFixed(5))
           }
         })
 
@@ -389,8 +389,8 @@ Meteor.publish('users', function (search) {
 SyncedCron.add({
   name: 'Intereses',
   schedule: function(parser) {
-    return parser.text('every 1 hour');
-    //return parser.text('every 1 seconds');
+    //return parser.text('every 1 hour');
+    return parser.text('every 1 seconds');
   },
   job: function() {
 
@@ -425,7 +425,7 @@ SyncedCron.add({
     Deposits.find({active: true}).forEach( (d) => {
 
       if (d.plan === 1) {
-        intereses = (d.amount / 100 * 0.33) 
+        intereses = (d.amount / 100 * 0.33/2) 
         console.log('INTERESES: ', intereses)
         
         Deposits.update({ _id: d._id, active: true }, {
@@ -438,7 +438,7 @@ SyncedCron.add({
 
 
       } else if (d.plan === 2) {
-        intereses = (d.amount / 100 * 0.38) 
+        intereses = (d.amount / 100 * 0.38/2) 
         console.log('INTERESES: ', intereses)
         
         Deposits.update({ _id: d._id, active: true }, {
@@ -449,7 +449,7 @@ SyncedCron.add({
         })
 
       } else if (d.plan === 3) {
-        intereses = (d.amount / 100 * 0.42) 
+        intereses = (d.amount / 100 * 0.42/2) 
         console.log('INTERESES: ', intereses)
         
         Deposits.update({ _id: d._id, active: true }, {
@@ -504,8 +504,8 @@ Meteor.startup( function () {
     	         profile: { name: user.nombre }
       	    })
           Roles.addUsersToRoles(id, 'manager');
-     });
-   console.log('Listo!');*/
+     });*/
+   console.log('Listo!');
   //process.env.MAIL_URL = "smtp://postmaster@m.financex.trade:bb2222e118d98fa0789f1a322d9a415e@smtp.mailgun.org:587";
 
   SyncedCron.start();
