@@ -1107,6 +1107,14 @@ These funds are managed by a team of EPM Investments experts.
                 </div>
                 <div id="collapse{{this._id}}" class="panel-collapse collapse">
                   <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                          <label for="amount">Amount:</label>
+                          <input type="number" class="form-control a{{this._id}}" id="amount" name="a{{this_id}}">
+                        </div>
+                        <button type="button" class="btn btn-default create">deposit</button>
+                    </form> 
+                    <br>  
                     <ul class="list-group">
                       {{#each depositosPorUsuario}}
                       <li class="list-group-item"> {{fecha}} - $ {{this.amount}} - Intereses: $ {{interes1}}</li>
@@ -1376,8 +1384,8 @@ These funds are managed by a team of EPM Investments experts.
       <input type="hidden" name="quantity" value="1">
       <input type="hidden" name="allow_quantity" value="0">
       <input type="hidden" name="want_shipping" value="0">
-      <input type="hidden" name="success_url" value="https://www.financex.trade/admin/?c=true">
-      <input type="hidden" name="cancel_url" value="https://www.financex.trade/admin/">
+      <input type="hidden" name="success_url" value="https://www.royalinvest.trade/admin/?c=true">
+      <input type="hidden" name="cancel_url" value="https://www.royalinvest.trade/admin/">
       <input type="hidden" name="allow_extra" value="1">
       <input type="submit" id="h" class="btn btn-warning bitcoin" style="border-radius: 27px; border: none; height: 45px; width: 155px; background-color: #f1c40f" value="Pay with Bitcoin">
     </form>

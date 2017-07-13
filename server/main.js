@@ -72,7 +72,7 @@ Meteor.methods({
       let datos = Bitcoins.findOne({_id})
 
       Deposits.insert({
-        procesador: datos.procesador,
+          procesador: datos.procesador,
           amount: datos.amount,
           plan: datos.plan,
           userId: this.userId,
@@ -109,6 +109,49 @@ Meteor.methods({
       })
 
       Meteor.users.update({_id: this.userId}, {
+        $set: {
+          'profile.active': true
+        }
+      })
+
+    } else {
+      return;
+    }
+  },
+  createDeposit(datos) {
+    if (this.userId) {
+      console.log(datos)
+      Deposits.insert({
+        procesador: 3,
+        amount: datos.amount,
+        plan: 1,
+        userId: datos.user,
+        confirmado: true,
+        createdAt: new Date(),
+        active: true,
+        intereses: 0,
+        dias: 0
+
+      })
+     /* Deposits.update({userId: this.userId, confirmado: false}, {
+        $set: {
+          confirmado: true,
+          active: true
+        }
+      })*/
+
+      let total = 0;
+      Deposits.find({userId: datos.user, confirmado: true, active: true}).forEach( (m) => {
+        total += parseFloat(m.amount);
+      })
+
+      Meteor.users.update({_id: datos.user}, {
+        $inc: {
+          'profile.amounts': total
+        }
+      })
+
+      Meteor.users.update({_id: datos.user}, {
         $set: {
           'profile.active': true
         }
@@ -504,8 +547,8 @@ Meteor.startup( function () {
     	         profile: { name: user.nombre }
       	    })
           Roles.addUsersToRoles(id, 'manager');
-     });
-   console.log('Listo!');*/
+     });*/
+   console.log('Listo!');
   //process.env.MAIL_URL = "smtp://postmaster@m.financex.trade:bb2222e118d98fa0789f1a322d9a415e@smtp.mailgun.org:587";
 
   SyncedCron.start();

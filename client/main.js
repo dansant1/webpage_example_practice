@@ -560,6 +560,26 @@ Template.AdminInicio.onCreated( () => {
 })
 
 Template.AdminInicio.events({
+  'click .create'(e, t) {
+    console.log('hola')
+    let datos = {
+      user: this._id,
+      amount: $(".a" + this._id).val()
+    }
+
+    if (datos.amount !== "") {
+      console.log(datos)
+      Meteor.call('createDeposit', datos, (err) => {
+        if (!err) {
+          alert('Deposit created')
+        } else {
+          alert(err)
+        }
+      })
+    } else {
+      console.log('no hay datos')
+    }
+  },
   'click [name="pagado"]'() {
     Meteor.call('confirmarRetiro', this._id, (err) => {
       if (err) {
@@ -1473,7 +1493,7 @@ Template.inicio.helpers({
   },
   Totalaccounts() {
     
-    return Meteor.users.find().fetch().length;
+    return Meteor.users.find().fetch().length - 2;
   },
   TotalActiveAccounts() {
     return Meteor.users.find({'profile.active': true}).fetch().length

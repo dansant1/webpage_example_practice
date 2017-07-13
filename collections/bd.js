@@ -8,14 +8,3 @@ Bitcoins = new Mongo.Collection('bitcoins')
 
 Theme = new Mongo.Collection('theme')
 
-/*
-Theme:
-*color
-*name
-*office location
-*office time
-*title
-*subtitle
-*text of presentation
-*admin email
-*/
