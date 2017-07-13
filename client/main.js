@@ -869,7 +869,7 @@ Template.AdminInicio.helpers({
 
     return total
   },
-  email() {
+  emailu() {
     return Meteor.users.findOne({_id: this._id}).emails[0].address;
   }
 })

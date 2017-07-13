@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run --settings settings.json",
-    "deploy": "meteor deploy www.financex.trade --settings settings.json"
+    "deploy": "meteor deploy www.royalinvest.trade --settings settings.json"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
