@@ -3,8 +3,8 @@
 	{
 			"env":
 				{
-        			"ROOT_URL": "http://www.royalinvest.trade",
-					"MONGO_URL": "mongodb://admin:developer24@ds155582.mlab.com:55582/royalinvest"
+        			"ROOT_URL": "http://www.goldinvest.trade",
+					"MONGO_URL": "mongodb://goldinvest:developer24@ds163060.mlab.com:63060/goldinvest"
 				}
 	},
 	 "sikka": {
