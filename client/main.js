@@ -478,8 +478,21 @@ Template.menu.events({
     if( $('.main__menu').hasClass('open') ){
       $('.main__menu').removeClass('open')
     }
+  },
+  'click .scrollTop'(){
+    $(window).scrollTop(0)
   }
 })
+
+Template.menu.onRendered( () => {
+  $( window ).scroll(function(e) {
+    if( $(window).scrollTop() > 0 ){
+      $('.scrollTop').addClass('scroll')
+    }else{
+      $('.scrollTop').removeClass('scroll')
+    }
+  });
+}) 
 
 Template.Login.events({
   'click .login-button'(e, t) {

@@ -551,12 +551,37 @@ a:hover, a:visited, a:link, a:active {
 }
 video{
   background-size: cover;
-    bottom: 0;
-    height: auto;
-    min-height: 100%;
-    min-width: 100%;
-    position: absolute;
-    right: 0;
-    width: auto;
-    z-index: -100;
+  bottom: 0;
+  height: auto;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  right: 0;
+  width: auto;
+  z-index: -100;
+}
+.scrollTop{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 10px;
+  bottom: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: #ea1632;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: all linear 0.2s;
+}
+.scrollTop.scroll{
+  transform: scaleY(1);
+}
+.scrollTop .fa{
+  font-size: 25px;
+  line-height: 25px;
+  height: 15px;
 }
