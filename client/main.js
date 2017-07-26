@@ -470,6 +470,14 @@ Template.menu.events({
     analytics.track( 'Logout', {
       title: 'Usuario se deslogeo'
     });
+  },
+  'click .main__menu__openClose'(){
+    $('.main__menu').toggleClass('open')
+  },
+  'click .main__menu ul li a'(){
+    if( $('.main__menu').hasClass('open') ){
+      $('.main__menu').removeClass('open')
+    }
   }
 })
 
