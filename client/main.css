@@ -516,3 +516,35 @@ a:hover, a:visited, a:link, a:active {
 .box__red h3 {
   font-size: 21.5px;
 }
+.work{
+  display: flex;
+  flex-direction: column;
+  padding: 20px 50px;
+}
+.work__top{
+  display: flex;
+  justify-content: center;
+  
+}
+.work__top__title{
+  font-size: 30px;
+  font-weight: 600;
+}
+.work__bottom{
+  display: flex;
+  flex-wrap: wrap;
+}
+.work__bottom__sec{
+  min-width: 250px;
+  flex: 1;
+  padding: 0px 10px;
+}
+.work__bottom__sec__num{
+  font-size: 60px;
+  font-weight: 600;
+  color: #ea1632;
+}
+.work__bottom__sec__title{
+  font-size: 20px;
+  font-weight: 600;
+}
