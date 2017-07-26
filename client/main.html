@@ -137,7 +137,11 @@
 
 <template name="inicio">
   <div class="big__image">
-    <div class="wrap__image"></div>
+    <div class="wrap__image">
+      <video id="video-background" width="560" height="315" autoplay preload muted>
+        <source src="/movie.mp4" type='video/mp4;'/>
+      </video>
+    </div>
     <div class="data">
       <p class="seamless">{{title}} </p>
       <p class="sub">{{subtitle}}</p>
