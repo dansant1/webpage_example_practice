@@ -361,6 +361,12 @@ Template.Signup.helpers({
   }
 })
 
+Template.how.helpers({
+  color() {
+    return Theme.findOne().color;
+  }
+})
+
 Template.Login.helpers({
   color() {
     return Theme.findOne().color;

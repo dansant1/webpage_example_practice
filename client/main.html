@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-md-4">
  <div class="col left">
-        <h1><span class="circle_red" style="background-color: {{color}}"></span>GOLD<span style="color: {{color}}; font-weight: bold;">INVEST</span></h1>
+        <h1><span class="circle_red" style="background-color: {{color}}; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3)"></span>GOLD<span style="color: {{color}}; font-weight: bold;">INVEST</span></h1>
       </div>
       </div>
       <div class="col-md-4">
@@ -204,42 +204,30 @@
    
    
   </div>
-  <h1 class="red center" style="color: {{color}}">Investment Plans</h1>
- <div class="row">
-   <div class="col-md-12">
-     <div class="plans" style="border-color: {{color}}; margin: 5px auto;">
-        <div class="column" style="border-color: {{color}}">
-        <p style="height: 90px; color: {{color}}; font-weight: bold; font-size: 43px; border-color: {{color}}">3% daily</p>
-        <span style="border-color: {{color}}">LIFETIME</span>
-        <span style="border-color: {{color}}">min  $ 25.00</span>
-        <a href="/signup{{ref}}" style="background-color: {{color}}">SELECT PLAN</a>
-    </div>
-     </div>
+ 
+ <br><br> 
+ <h2 class="section_title_1" style="font-weight: bold">Investment Plan</h2>
+ <div class="container">
+  <div class="row">
+   <div class="col-md-6">
+     <h1 class="big__letter">3<span>%</span> </h1>
    </div>
-   <!--<div class="col-md-4">
-      <div class="plans" style="border-color: {{color}}">
-        <div class="column" style="border-color: {{color}}">
-      <p style="height: 90px; color: {{color}}; font-weight: bold; font-size: 43px; border-color: {{color}}">4.5% daily</p>
-      <span style="border-color: {{color}}">PER 30 DAYS</span>
-      <span style="border-color: {{color}}">min  ฿ 1.00</span>
-      <a href="/signup{{ref}}" style="background-color: {{color}}">SELECT PLAN</a>
-    </div>
-      </div>
-   </div> -->
-   <!--<div class="col-md-4">
-<div class="plans" style="border-color: {{color}}">
-   <div class="column" style="border-color: {{color}}">
-      <p style="height: 90px; color: {{color}}; font-weight: bold; font-size: 43px; border-color: {{color}}">5% daily</p>
-      <span style="border-color: {{color}}">PER 30 DAYS</span>
-      <span style="border-color: {{color}}">min  ฿ 5.00</span>
-      <a href="/signup{{ref}}" style="background-color: {{color}}">SELECT PLAN</a>
-    </div>
-</div>
-   </div> -->
+
+   <div class="col-md-6">
+     <h3 style="margin-top: 43px; font-weight: bold;">LIFETIME</h3>
+     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi doloribus facere, laboriosam aperiam veritatis, harum aliquid, accusantium repudiandae consequatur fugit quas voluptates asperiores deleniti soluta laborum, nobis exercitationem facilis tenetur.</p>
+     <p>
+       <br>
+      <a id="but" href="/signup{{ref}}" style="background-color: {{color}}">REGISTER</a>
+     </p>
+   </div>
+  
  </div>
+ </div>
+ 
     
-   
-   
+   <br>
+   {{>how}}
  
 
   <h3 style="width: 80%; margin: 10px auto; text-align: center">Referal Comission <span style="color: {{color}}">12%</span></h3>
@@ -247,15 +235,19 @@
   <div class="container">
     <div class="row" id="about">
       <div class="col-md-6 s" style="text-align: center;">
-          <img src="/slide1.jpg" alt="About" class="about__image">
+          <img src="/slide1.jpg" alt="About" style="margin-top: 45px;" class="about__image">
       </div>
       <div class="col-md-6">
         <h2 class="red" style="color: {{color}}">About Us</h2>
-        <p style="text-align: justify">
-          {{texto}} 
-        </p>
+      
         <p style="text-align: justify">
           {{name}} LTD. spends a lot of time studying the phenomenon of cryptocurrency and looking for different ways to get Bitcoin and other virtual currencies. In addition, we are ready to share our knowledge and experience, use our skills for earnings and to promote the idea of switching to cryptocurrency in all sectors of the financial life of people. 
+        </p>
+        <p> 
+          <br>
+          <img src="/sign.png" alt="sign">
+          <h3>Phillip Morris</h3>
+          <h5>Chief Executive Officer</h5>
         </p>
       </div>  
     </div>
@@ -284,7 +276,7 @@
         </p>
       </div>
       <div class="col-md-6 s">
-        <img src="/why.jpg" alt="About" class="about__image">
+        <img src="/why.jpg" style="margin-top: 68px;" alt="About" class="about__image">
       </div>  
     </div>
   </div>
@@ -374,8 +366,8 @@
     </div>
     <div id="collapse6" class="panel-collapse collapse">
       <div class="panel-body">
-       <!-- <p>You can open a free PerfectMoney account here: www.perfectmoney.is</p>
-        <p>You can open a free Payeer account here: www.payeer.com</p> -->
+      <p>You can open a free PerfectMoney account here: www.perfectmoney.is</p>
+        <p>You can open a free Payeer account here: www.payeer.com</p> 
         <p>You can open a free BitCoin account here: www.blockchain.info</p>
       </div>
     </div>
@@ -582,36 +574,41 @@
 	</div>
   </div>
 
-  <div class="work">
-    <div class="work__top">
-      <h2 class="work__top__title">Lorem ipsum dolor.</h2>
-    </div>
-    <div class="work__bottom">
-      <div class="work__bottom__sec">
-        <h2 class="work__bottom__sec__num">1</h2>
-        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
-        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
-      </div>
-      <div class="work__bottom__sec">
-        <h2 class="work__bottom__sec__num">2</h2>
-        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
-        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
-      </div>
-      <div class="work__bottom__sec">
-        <h2 class="work__bottom__sec__num">3</h2>
-        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
-        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
-      </div>
-      <div class="work__bottom__sec">
-        <h2 class="work__bottom__sec__num">4</h2>
-        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
-        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
-      </div>
-    </div>
-  </div>
+  
+  
 
   <div class="partners" style="background-color: {{color}}">
     <img src="/partners.png" alt="Partners">
+  </div>
+</template>
+
+<template name="how"> 
+  <div class="work">
+    <div class="work__top">
+      <h2 class="work__top__title" style="color: {{color}}">How it Works.</h2>
+    </div>
+    <div class="work__bottom">
+      <div class="work__bottom__sec">
+        <h2 class="work__bottom__sec__num" style="color: {{color}}">1.</h2>
+        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
+        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
+      </div>
+      <div class="work__bottom__sec">
+        <h2 class="work__bottom__sec__num" style="color: {{color}}">2.</h2>
+        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
+        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
+      </div>
+      <div class="work__bottom__sec">
+        <h2 class="work__bottom__sec__num" style="color: {{color}}">3.</h2>
+        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
+        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
+      </div>
+      <div class="work__bottom__sec">
+        <h2 class="work__bottom__sec__num" style="color: {{color}}">4.</h2>
+        <h4 class="work__bottom__sec__title">Lorem ipsum.</h4>
+        <p class="work__bottom__sec__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, natus.</p>
+      </div>
+    </div>
   </div>
 </template>
 
