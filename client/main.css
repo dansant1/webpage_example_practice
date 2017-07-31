@@ -526,7 +526,10 @@ a:hover, a:visited, a:link, a:active {
     border-bottom: 1px solid #000;
     width: 100%;
 }
-
+.get_quote input::placeholder,
+.get_quote textarea::placeholder{
+    color: #fff;
+}
 
 .copy h3 {
   width: 80%;
