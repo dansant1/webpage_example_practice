@@ -88,7 +88,15 @@
     {{>footer}}
 
   {{else}}
-    <h1 style="margin: 10px auto; text-align: center; width: 80%; margin-top: 40px;">Loading...</h1>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br> 
+   <br>
+   <br>
+   <br>
+    <div class="loader"></div>
   {{/if}}
 
 </template>
@@ -214,7 +222,7 @@
    </div>
 
    <div class="col-md-6">
-     <h3 style="margin-top: 43px; font-weight: bold;">LIFETIME</h3>
+     <h3 style="margin-top: 43px; font-weight: bold; letter-spacing: 5px;">LIFETIME</h3>
      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi doloribus facere, laboriosam aperiam veritatis, harum aliquid, accusantium repudiandae consequatur fugit quas voluptates asperiores deleniti soluta laborum, nobis exercitationem facilis tenetur.</p>
      <p>
        <br>
@@ -574,12 +582,67 @@
 	</div>
   </div>
 
-  
+  {{>contact}}
   
 
   <div class="partners" style="background-color: {{color}}">
     <img src="/partners.png" alt="Partners">
   </div>
+</template>
+
+<template name="contact">
+  <section id="quote_testmonial" style="background: #ebebeb;">
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8 col-md-7">
+            <div class="row">
+              <div class="quote">
+				<div class="row">
+					<div class="col-md-8 col-sm-8">
+					  <h3 class="down_line_black">Get A Quote</h3>
+					  <p>Et tellus mattis. Habitasse varius aliquam. Sociosqu tellus aptent enim vulputate interdum proin ut integer mauris. Bibendum aliquet convallis tempus.</p>
+					  <form class="get_quote" method="post" action="#">
+						<div class="row">
+							<div class="form-group col-md-6 col-sm-6">
+								<input type="text" class="form-control" name="name" placeholder="Your Name">
+							</div>
+							<div class="form-group col-md-6 col-sm-6">
+								<input type="text" class="form-control" name="email" placeholder="Email Address">
+							</div>
+							<div class="form-group col-md-6 col-sm-6">
+								<input type="text" class="form-control" name="phone" placeholder="Phone Number">
+							</div>
+							<div class="form-group col-md-6 col-sm-6">
+								<input type="text" class="form-control" name="address" placeholder="Location / Address">
+							</div>
+							
+							<div class="form-group col-md-12">
+								<textarea class="form-control" name="message" placeholder="Message"></textarea>
+							</div>
+              <br><br>
+							<div class="form-group col-md-12">
+								<input class="btn btn-secondary" style="width: 145px;
+    height: 43px;
+    padding: 6px;
+    background: white; border-radius: 20px;" type="submit" value="send">
+							</div>
+						</div>
+					  </form>
+					</div>
+				</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5">
+            <div class="row">
+              <div class="testimonials">
+                <h3 class="down_line_yellow" style="text-align: center;">Testimonial</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
 </template>
 
 <template name="how"> 

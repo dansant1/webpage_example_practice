@@ -466,7 +466,7 @@ a:hover, a:visited, a:link, a:active {
   background: #ea1632;
   text-align: center;
   padding: 25px;
-  margin: 20px auto;
+  margin: 0px auto;
   margin-bottom: 0;
 }
 
@@ -490,6 +490,43 @@ a:hover, a:visited, a:link, a:active {
   height: 75px;
   width: 100%;
 }
+
+.quote {
+    background: #bf9b30;
+    padding: 60px 35px;
+    background-size: 35%;
+    background-position: right 100%;
+    display: table;
+    position: relative;
+}
+
+.quote h3 {
+    color: #1a1a1a;
+}
+
+.down_line_yellow, .down_line_black {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.get_quote {
+    padding: 15px 0;
+}
+
+.get_quote input[placeholder="Your Name"], .get_quote input[placeholder="Email Address"], .get_quote input[placeholder="Phone Number"], .get_quote input[placeholder="Location / Address"], .get_quote textarea[placeholder="Message"], .get_quote select {
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+}
+
+.get_quote input[type="text"], .get_quote textarea, .get_quote input.form-control {
+    background: none;
+    padding: 12px 3px;
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 100%;
+}
+
 
 .copy h3 {
   width: 80%;
@@ -653,7 +690,7 @@ video{
   bottom: 10px;
   width: 30px;
   height: 30px;
-  background-color: #ea1632;
+  background-color: #bf9b30;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
@@ -668,4 +705,19 @@ video{
   font-size: 25px;
   line-height: 25px;
   height: 15px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #bf9b30; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    margin: 20px auto;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
