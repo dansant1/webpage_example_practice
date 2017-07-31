@@ -537,6 +537,21 @@ a:hover, a:visited, a:link, a:active {
 .get_quote textarea:focus{
     border-color: #000;
 }
+.testimonials__img img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+.testimonials__testimonial__message{
+    padding-left: 10px;
+}
+.testimonials__title{
+    font-size: 18px;
+}
+.testimonials__testimonial{
+    display: flex;
+    margin-bottom: 15px;
+}
 .copy h3 {
   width: 80%;
   color: #d9d9d9;
