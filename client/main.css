@@ -530,7 +530,13 @@ a:hover, a:visited, a:link, a:active {
 .get_quote textarea::placeholder{
     color: #fff;
 }
-
+.get_quote input:focus,
+.get_quote textarea:focus{
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 255, 255, 0.6);
+}
+.get_quote textarea:focus{
+    border-color: #000;
+}
 .copy h3 {
   width: 80%;
   color: #d9d9d9;
