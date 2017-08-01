@@ -122,7 +122,7 @@ Meteor.methods({
     if (this.userId) {
       console.log(datos)
       Deposits.insert({
-        procesador: 3,
+        procesador: datos.procesador,
         amount: datos.amount,
         plan: 1,
         userId: datos.user,

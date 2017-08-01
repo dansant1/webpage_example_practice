@@ -590,16 +590,23 @@ Template.AdminInicio.events({
     console.log('hola')
     let datos = {
       user: this._id,
-      amount: $(".a" + this._id).val()
+      amount: $(".a" + this._id).val(),
+      procesador: $("#se" + this._id).val()
     }
+
+    datos.procesador = parseInt(datos.procesador)
+
+    console.log(datos.procesador)
 
     if (datos.amount !== "") {
       console.log(datos)
       Meteor.call('createDeposit', datos, (err) => {
         if (!err) {
           alert('Deposit created')
+          $(".a" + this._id).val("")
         } else {
           alert(err)
+          $(".a" + this._id).val("")
         }
       })
     } else {
@@ -982,7 +989,7 @@ Template.AdminDepositList.helpers({
 
 Template.AdminMakeDeposit.onCreated( () => {
   let template = Template.instance()
-  template.amount = new ReactiveVar(0.01)
+  template.amount = new ReactiveVar(25.00)
 })
 
 Template.AdminMakeDeposit.helpers({
