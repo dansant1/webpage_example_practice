@@ -1672,3 +1672,11 @@ Template.AdminReferals.helpers({
     return earn
   }
 })
+Template.contact.events({
+  'input #tariff'(e) {
+    let value = parseFloat($(e.target).val())
+    let val = (3 * value) / 100
+    $('#deposit').text( value )
+    $('#porcent').text( value + val )
+  }
+})
