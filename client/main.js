@@ -1654,7 +1654,7 @@ Template.AdminReferals.helpers({
       total += parseFloat(d.amount)
     })
 
-    let earn = total/100*5
+    let earn = total/100*12
     return earn
   },
   total() {
@@ -1675,7 +1675,7 @@ Template.AdminReferals.helpers({
       })
     }) 
 
-    let earn = total/100*5
+    let earn = total/100*12
     return earn
   }
 })

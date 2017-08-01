@@ -113,6 +113,7 @@ a {
   top: 0px;
   width: 100%;
   margin: 0 auto;
+  box-shadow: 0 0 8px rgba(0,0,0,0.12), 0 8px 8px rgba(0,0,0,0.24);
 }
 
 .main__menu {
@@ -493,7 +494,7 @@ a:hover, a:visited, a:link, a:active {
 
 .quote {
     background: #bf9b30;
-    padding: 60px 35px;
+    padding: 90px 35px;
     background-size: 35%;
     background-position: right 100%;
     display: table;
@@ -538,8 +539,8 @@ a:hover, a:visited, a:link, a:active {
     border-color: #000;
 }
 .testimonials__img img{
-    width: 120px;
-    height: 120px;
+    width: 98px;
+    height: 98px;
     border-radius: 50%;
 }
 .testimonials__testimonial__message{
