@@ -166,7 +166,7 @@
         <i class="fa fa-calendar" aria-hidden="true"></i>
       </p>
       <p>
-        <span>August 2th</span>
+        <span>August 3th</span>
       </p>
       <p>Date Started</p>
     </div>
@@ -1290,6 +1290,8 @@ These funds are managed by a team of EPM Investments experts.
       </div>
       <div id="menu1" class="tab-pane fade">
         <h3>Deposits</h3>
+        <h5>Total Deposits: {{totalDepositsAdmin}}</h5>
+        <h5>25% Total Deposits: {{revenue}}</h5>
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#dep">Depositos</a></li>
           <li><a data-toggle="tab" href="#depusers">Depositos por Usuario</a></li>
@@ -1594,7 +1596,7 @@ These funds are managed by a team of EPM Investments experts.
 
     <div class="form-group">
       <h3 for="amount">Amount to Spend in $ (USD)</h3>
-      <input type="number" class="form-control" min="25" id="amount" name="amount" value="25.00">
+      <input type="number" class="form-control" min="25" id="amount" name="amount" value="0.00">
     </div>
 
     <form action="https://perfectmoney.is/api/step1.asp" method="POST">

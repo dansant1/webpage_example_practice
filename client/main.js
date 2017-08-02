@@ -989,7 +989,7 @@ Template.AdminDepositList.helpers({
 
 Template.AdminMakeDeposit.onCreated( () => {
   let template = Template.instance()
-  template.amount = new ReactiveVar(25.00)
+  template.amount = new ReactiveVar(0.00)
 })
 
 Template.AdminMakeDeposit.helpers({
@@ -1469,6 +1469,28 @@ Template.AdminInicio.helpers({
   },
   email() {
     return Meteor.user().username
+  },
+  totalDepositsAdmin() {
+    let t = 0;
+
+   
+    Deposits.find({confirmado: true}).forEach( (d) => {
+      t += parseFloat(d.amount)
+    })
+
+    return "$" + t 
+  },
+  revenue() {
+    let t = 0;
+
+   
+    Deposits.find({confirmado: true}).forEach( (d) => {
+      t += parseFloat(d.amount)
+    })
+
+    t = t/100*25 
+
+    return "$" + t 
   }
 })
 
