@@ -1021,7 +1021,7 @@ Template.AdminMakeDeposit.onCreated( () => {
 Template.AdminMakeDeposit.events({
   'keyup #amount'(e, t) {
     t.amount.set(e.target.value)
-    let m_shop = "366349551";
+    let m_shop = "381572040";
     let m_orderid = "1";
     let m_amount = e.target.value
     m_amount = parseFloat(m_amount).toFixed(2)
@@ -1034,8 +1034,6 @@ Template.AdminMakeDeposit.events({
     let words;
 
     let l = str.join(":")
-
-   
     
     let sign = SHA256(l).toUpperCase();
 
@@ -1061,18 +1059,18 @@ Template.AdminMakeDeposit.events({
       bitcoin: false
     }
 
-    if (datos.amount > 0 ) {
+    if (datos.amount >= 25 ) {
       Meteor.call('deposit', datos, (err) => {
         if (err) {
           alert(err)
         } else {
            analytics.track( 'Deposito', {
-              title: 'Usuario inicio el proceso de deposito port ' + t.amount.get(),
+              title: 'Usuario inicio el proceso de deposito PERFECTMONEY por ' + t.amount.get(),
             });
         }
       })
     } else {
-      alert('Amount denied')
+      alert('Amount denied, must be more than USD$ 25.00 dolars')
     }
   },
   'click .payeer'(e, t) {
@@ -1095,19 +1093,19 @@ Template.AdminMakeDeposit.events({
       bitcoin: false
     }
 
-    if (datos.amount > 0 ) {
+    if (datos.amount >= 25 ) {
       Meteor.call('deposit', datos, (err) => {
         if (err) {
           alert(err)
         } else {
            analytics.track( 'Deposito', {
-              title: 'Usuario inicio el proceso de deposito por ' + t.amount.get(),
+              title: 'Usuario inicio el proceso de deposito PAYEER por ' + t.amount.get(),
             
             });
         }
       })
     } else {
-      alert('Amount denied')
+      alert('Amount denied, must be more than USD$ 25.00 dolars')
     }
   },
   'click .bitcoin'(e, t) {
@@ -1130,14 +1128,14 @@ Template.AdminMakeDeposit.events({
       amount: t.amount.get()
     }
 
-    if (datos.amount >= 0.01 ) {
+    if (datos.amount >= 25 ) {
 
       Meteor.call('deposit', datos, (err) => {
           if (err) {
             alert(err)
           } else {
            analytics.track( 'Deposito', {
-              title: 'Usuario inicio el proceso de deposito por ' + t.amount.get(),
+              title: 'Usuario inicio el proceso de deposito BTC por ' + t.amount.get(),
               
             });
           }
@@ -1145,7 +1143,7 @@ Template.AdminMakeDeposit.events({
 
       
     } else {
-      alert('Amount denied')
+      alert('Amount denied, must be more than USD$ 25.00 dolars ')
     }
     
   }
