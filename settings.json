@@ -18,6 +18,7 @@
 			"Google Analytics": { "trackingId": "UA-101497924-1"},
       		"Mixpanel": { "token": "532cf88bea43c93f8152f358ccc06bfb", "people": true }
     	},
-		"payeer": "BetterShopFxTrade236"
+		"payeer": "BetterShopFxTrade236",
+		"adv": "BetterShopFxTrade236"
 	}
 }

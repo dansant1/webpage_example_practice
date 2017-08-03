@@ -1470,6 +1470,11 @@ These funds are managed by a team of EPM Investments experts.
           <span class="pull-right"><strong>$ {{totalPayeer}}</strong></span>
         </li> 
 
+        <!--<li class="list-group-item clearfix">
+          <span class="pull-left">ADVCASH</span>
+          <span class="pull-right"><strong>$ {{totalADV}}</strong></span>
+        </li>  -->
+
         <li class="list-group-item clearfix">
           <span class="pull-left">BITCOIN</span>
           <span class="pull-right"><strong>$ {{totalBitcoin}}</strong></span>
@@ -1588,7 +1593,7 @@ These funds are managed by a team of EPM Investments experts.
   <div class="col-md-12">
 
       <h3>Select Plan</h3>
-      <label class="radio-inline"><input class="p1" type="radio" checked name="optradio">PLAN 1</label>
+      <label class="radio-inline"><input class="p1" type="radio" checked name="optradio">PLAN 3% LIFETIME</label>
       <!--<label class="radio-inline"><input class="p2" type="radio" name="optradio">PLAN 2</label>
       <label class="radio-inline"><input class="p3" type="radio" name="optradio">PLAN 3</label> -->
      
@@ -1619,9 +1624,10 @@ These funds are managed by a team of EPM Investments experts.
     border: none;
     height: 44px;
     margin-top: 20px;
-    width: 362px;" class="btn btn-danger ppm" name="PAYMENT_METHOD" value="Deposit $ {{amount}} to ROYALINVEST LTD. with PerfectMoney">
+    width: 362px;" class="btn btn-danger ppm" name="PAYMENT_METHOD" value="Deposit $ {{amount}} to GOLDINVEST LTD. with PerfectMoney">
       
     </form>
+
     <br>
     <form method="POST" action="https://payeer.com/merchant/?m_shop=381572040&m_orderid=1&m_amount={{amount}}&m_curr=USD&m_desc=UGF5IHRvIEZYVFJBREU=&m_sign={{sign}}&lang=en">
       <input type="hidden" name="GOLDINVEST LTD." value="381572040">
@@ -1640,8 +1646,10 @@ These funds are managed by a team of EPM Investments experts.
     border: none;
     height: 44px;
     margin-top: -5px;
-    width: 362px;" name="m_process" class="btn btn-primary payeer" value="Deposit $ {{amount}} to ROYALINVEST LTD. with Payeer" />
+    width: 362px;" name="m_process" class="btn btn-primary payeer" value="Deposit $ {{amount}} to GOLDINVEST LTD. with Payeer" />
     </form>
+
+   
    
    
     <form action="https://www.coinpayments.net/index.php" method="post">
@@ -1657,7 +1665,7 @@ These funds are managed by a team of EPM Investments experts.
       <input type="hidden" name="success_url" value="https://www.goldinvest.trade/admin/?c=true">
       <input type="hidden" name="cancel_url" value="https://www.goldinvest.trade/admin/">
       <input type="hidden" name="allow_extra" value="1">
-      <input type="submit" id="h" class="btn btn-warning bitcoin" style="margin-top: 15px; border-radius: 27px; border: none; height: 45px; width: 362px; background-color: #f1c40f" value="Deposit $ {{amount}} to ROYALINVEST LTD. with Bitcoin">
+      <input type="submit" id="h" class="btn btn-warning bitcoin" style="margin-top: 15px; border-radius: 27px; border: none; height: 45px; width: 362px; background-color: #f1c40f" value="Deposit $ {{amount}} to GOLDINVEST LTD. with Bitcoin">
     </form>
     <br><br>
   </div>
