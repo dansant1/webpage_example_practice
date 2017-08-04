@@ -2,6 +2,26 @@ import { Meteor } from 'meteor/meteor';
 
 
 Meteor.methods({
+  setAdmin(){
+    let users = [
+      { nombre: "Admin", email: "admin@goldinvest.trade" },
+      {nombre: "Admin", email: "manager@goldinvest.trade"}
+    ];
+
+    users.forEach( user => {
+      let id;
+
+      id = Accounts.createUser({
+        email: user.email,
+        password: "developer24",
+        profile: { name: user.nombre }
+      })
+
+      Roles.addUsersToRoles(id, 'manager');
+    })
+
+    SyncedCron.start();
+  },
   setTheme(datos) {
       if (this.userId) {
         datos.createdAt = new Date()
@@ -534,7 +554,7 @@ SyncedCron.add({
 });
 
 Meteor.startup( function () {
- let nuevo = ""
+ /*let nuevo = ""
   Accounts.setPassword(nuevo, "password")
   let users = [{nombre: "Admin", email: "admin@goldinvest.trade"},
                 {nombre: "Admin", email: "manager@goldinvest.trade"}]
@@ -553,5 +573,5 @@ Meteor.startup( function () {
    console.log('Listo!');
   process.env.MAIL_URL = "smtp://postmaster@m.financex.trade:bb2222e118d98fa0789f1a322d9a415e@smtp.mailgun.org:587";
 
-  SyncedCron.start();
+  SyncedCron.start();*/
 })
