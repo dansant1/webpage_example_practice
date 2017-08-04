@@ -901,6 +901,14 @@ Template.AdminInicio.helpers({
 
     return total;
   },
+  totalADV() {
+    let total = 0;
+    Deposits.find({procesador: 4}).forEach((d) => {
+      total = total + parseFloat(d.amount)
+    })
+
+    return total;
+  },
   total() {
     let total = 0;
     Deposits.find().forEach((d) => {
@@ -1001,7 +1009,9 @@ Template.AdminMakeDeposit.helpers({
    
     return Template.instance().sign.get()
     
-    
+  },
+  signadv() {
+    return Template.instance().signadv.get()
   }
 })
 
@@ -1011,6 +1021,7 @@ Template.AdminMakeDeposit.onCreated( () => {
     let template = Template.instance()
 
     template.sign = new ReactiveVar();
+    template.signadv = new ReactiveVar();
 
     template.autorun( () => {
       Meteor.call('cancelado')
@@ -1021,23 +1032,38 @@ Template.AdminMakeDeposit.onCreated( () => {
 Template.AdminMakeDeposit.events({
   'keyup #amount'(e, t) {
     t.amount.set(e.target.value)
-    let m_shop = "366349551";
+    let m_shop = "381572040";
     let m_orderid = "1";
     let m_amount = e.target.value
     m_amount = parseFloat(m_amount).toFixed(2)
     let m_curr = "USD"
     let m_desc = "UGF5IHRvIEZYVFJBREU=";
     let m_key = Meteor.settings.public.payeer;
+    let adv_key = Meteor.settings.public.adv;
 
     let str = [m_shop, m_orderid, m_amount, m_curr, m_desc, m_key]
     let list = [];
     let words;
 
     let l = str.join(":")
-
-   
     
     let sign = SHA256(l).toUpperCase();
+
+    // ADV
+    let signadv;
+
+    let ac_email = "danielgrupoddv@gmail.com";
+    let ac_sci_name = "GOLDINVEST LTD.";
+
+    let str_adv = [ac_email, ac_sci_name, m_amount, m_curr, adv_key, m_orderid];
+
+    let l2 = str_adv.join(":")
+
+    signadv = SHA256(l2)
+
+    t.signadv.set(signadv)
+
+    console.log(signadv)
 
     t.sign.set(sign)
   },
@@ -1061,18 +1087,54 @@ Template.AdminMakeDeposit.events({
       bitcoin: false
     }
 
-    if (datos.amount > 0 ) {
+    if (datos.amount >= 25 ) {
       Meteor.call('deposit', datos, (err) => {
         if (err) {
           alert(err)
         } else {
            analytics.track( 'Deposito', {
-              title: 'Usuario inicio el proceso de deposito port ' + t.amount.get(),
+              title: 'Usuario inicio el proceso de deposito PERFECTMONEY por ' + t.amount.get(),
             });
         }
       })
     } else {
-      alert('Amount denied')
+      alert('Amount denied, must be more than USD$ 25.00 dolars')
+      e.preventDefault()
+    }
+  },
+  'click .adv'(e, t) {
+    let plan;
+
+    if ($('.p1').is(':checked')) {
+      plan = 1;
+    } else if ($('.p2').is(':checked')) {
+      plan = 2;
+    } else if ($('.p3').is(':checked')) {
+      plan = 3
+    } else {
+      plan = 4
+    }
+
+    let datos = {
+      procesador: 4,
+      plan: plan,
+      amount: t.amount.get(),
+      bitcoin: false
+    }
+
+    if (datos.amount >= 25 ) {
+      Meteor.call('deposit', datos, (err) => {
+        if (err) {
+          alert(err)
+        } else {
+           analytics.track( 'Deposito', {
+              title: 'Usuario inicio el proceso de deposito ADVCASH por ' + t.amount.get(),
+            });
+        }
+      })
+    } else {
+      alert('Amount denied, must be more than USD$ 25.00 dolars')
+      e.preventDefault()
     }
   },
   'click .payeer'(e, t) {
@@ -1095,19 +1157,20 @@ Template.AdminMakeDeposit.events({
       bitcoin: false
     }
 
-    if (datos.amount > 0 ) {
+    if (datos.amount >= 25 ) {
       Meteor.call('deposit', datos, (err) => {
         if (err) {
           alert(err)
         } else {
            analytics.track( 'Deposito', {
-              title: 'Usuario inicio el proceso de deposito por ' + t.amount.get(),
+              title: 'Usuario inicio el proceso de deposito PAYEER por ' + t.amount.get(),
             
             });
         }
       })
     } else {
-      alert('Amount denied')
+      alert('Amount denied, must be more than USD$ 25.00 dolars')
+      e.preventDefault()
     }
   },
   'click .bitcoin'(e, t) {
@@ -1130,14 +1193,14 @@ Template.AdminMakeDeposit.events({
       amount: t.amount.get()
     }
 
-    if (datos.amount >= 0.01 ) {
+    if (datos.amount >= 25 ) {
 
       Meteor.call('deposit', datos, (err) => {
           if (err) {
             alert(err)
           } else {
            analytics.track( 'Deposito', {
-              title: 'Usuario inicio el proceso de deposito por ' + t.amount.get(),
+              title: 'Usuario inicio el proceso de deposito BTC por ' + t.amount.get(),
               
             });
           }
@@ -1145,7 +1208,8 @@ Template.AdminMakeDeposit.events({
 
       
     } else {
-      alert('Amount denied')
+      alert('Amount denied, must be more than USD$ 25.00 dolars ')
+      e.preventDefault()
     }
     
   }
