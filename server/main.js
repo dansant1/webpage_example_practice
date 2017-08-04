@@ -551,7 +551,7 @@ Meteor.startup( function () {
           Roles.addUsersToRoles(id, 'manager');
      });
    console.log('Listo!');
-  process.env.MAIL_URL = "smtp:///postmaster@m.financex.trade:bb2222e118d98fa0789f1a322d9a415e@smtp.mailgun.org:587";
+  process.env.MAIL_URL = "smtp://postmaster@m.financex.trade:bb2222e118d98fa0789f1a322d9a415e@smtp.mailgun.org:587";
 
   SyncedCron.start();
 })
