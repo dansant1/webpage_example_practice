@@ -52,3 +52,6 @@
     width: 362px; background: #2ecc71; border-color:#2ecc71" class="btn btn-danger adv" name="PAYMENT_METHOD" value="Deposit $ {{amount}} to GOLDINVEST LTD. with ADVCASH">
       
     </form>
+
+    https://payeer.com/merchant/?m_shop=381572040&m_orderid=1&m_amount=25&m_curr=USD&m_desc=UGF5IHRvIEZYVFJBREU=&m_sign=A0A02F987A63ECBD8F0AE69E7FD6BF2E11F066400E3EC533FFE99BF03810AA0C&lang=en
+    https://payeer.com/merchant/?m_shop=381572040&m_orderid=1&m_amount=25.00&m_curr=USD&m_desc=UGF5IHRvIEZYVFJBREU%3D&m_sign=D5F26CDBCA28C73D8976FD46287FA3C4CA817F20F97B567B93839FA32087B018&lang=en
