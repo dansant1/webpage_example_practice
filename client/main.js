@@ -1032,6 +1032,7 @@ Template.AdminMakeDeposit.onCreated( () => {
 Template.AdminMakeDeposit.events({
   'keyup #amount'(e, t) {
     
+    
     let m_shop = "381572040";
     let m_orderid = "1";
     let m_amount = e.target.value
@@ -1040,8 +1041,8 @@ Template.AdminMakeDeposit.events({
     
     let m_curr = "USD"
     let m_desc = "UGF5IHRvIEZYVFJBREU=";
-    let m_key = Meteor.settings.public.payeer;
-    let adv_key = Meteor.settings.public.adv;
+    let m_key = "BetterShopFxTrade236";
+    
 
     let str = [m_shop, m_orderid, m_amount, m_curr, m_desc, m_key]
     let list = [];
@@ -1050,22 +1051,6 @@ Template.AdminMakeDeposit.events({
     let l = str.join(":")
     
     let sign = SHA256(l).toUpperCase();
-
-    // ADV
-    /*let signadv;
-
-    let ac_email = "danielgrupoddv@gmail.com";
-    let ac_sci_name = "GOLDINVEST LTD.";
-
-    let str_adv = [ac_email, ac_sci_name, m_amount, m_curr, adv_key, m_orderid];
-
-    let l2 = str_adv.join(":")
-
-    signadv = SHA256(l2)
-
-    t.signadv.set(signadv)
-*/
-   
 
     t.sign.set(sign)
   },
