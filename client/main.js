@@ -1053,6 +1053,21 @@ Template.AdminMakeDeposit.events({
     let sign = SHA256(l).toUpperCase();
 
     t.sign.set(sign)
+
+    // ADV
+    let adv_key = "BetterShopFxTrade236";
+    let signadv;
+
+    let ac_email = "danielgrupoddv@gmail.com";
+    let ac_sci_name = "Gold Invest LTD.";
+
+    let str_adv = [ac_email, ac_sci_name, m_amount, m_curr, adv_key, m_orderid];
+
+    let l2 = str_adv.join(":")
+
+    signadv = SHA256(l2)
+
+    t.signadv.set(signadv)
   },
   'click .ppm'(e, t) {
     let plan;

@@ -166,7 +166,7 @@
         <i class="fa fa-calendar" aria-hidden="true"></i>
       </p>
       <p>
-        <span>August 8th</span>
+        <span>August 10th</span>
       </p>
       <p>Date Started</p>
     </div>
@@ -1647,6 +1647,24 @@ These funds are managed by a team of EPM Investments experts.
     height: 44px;
     margin-top: -5px;
     width: 362px;" name="m_process" class="btn btn-primary payeer" value="Deposit $ {{amount}} to GOLDINVEST LTD. with Payeer" />
+    </form>
+
+     <form method="GET" action="https://wallet.advcash.com/sci/">
+      <input type="hidden" name="ac_account_email" value="danielgrupoddv@gmail.com">
+      <input type="hidden" name="ac_sci_name" value="Gold Invest LTD.">
+      <input type="hidden" name="ac_amount" value="{{amount}}">
+      <input type="hidden" name="ac_currency" value="USD">
+      <input type="hidden" name="ac_order_id" value="1">
+      <input type="hidden" name="ac_sign" value="{{signadv}}">
+      <input type="hidden" name="ac_comments" value="Deposit $ {{amount}} to GOLDINVEST LTD. with ADVCASH">
+      <input type="hidden" name="operation_id" value="1">
+      <input type="hidden" name="login" value="denis">
+      <input type="submit" style="border-radius: 27px;
+    border: none;
+    height: 44px;
+    margin-top: 20px;
+    width: 362px; background: #2ecc71; border-color:#2ecc71" class="btn btn-danger adv" name="PAYMENT_METHOD" value="Deposit $ {{amount}} to GOLDINVEST LTD. with ADVCASH">
+      
     </form>
 
    
