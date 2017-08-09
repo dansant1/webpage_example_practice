@@ -1059,7 +1059,7 @@ Template.AdminMakeDeposit.events({
     let signadv;
 
     let ac_email = "danielgrupoddv@gmail.com";
-    let ac_sci_name = "Gold Invest LTD.";
+    let ac_sci_name = "GoldInvest Trade LTD.";
 
     let str_adv = [ac_email, ac_sci_name, m_amount, m_curr, adv_key, m_orderid];
 
