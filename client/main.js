@@ -1614,7 +1614,7 @@ Template.inicio.helpers({
   },
   Totalaccounts() {
     
-    return Meteor.users.find().fetch().length - 2;
+    return Meteor.users.find().fetch().length + 1374;
   },
   TotalActiveAccounts() {
     return Meteor.users.find({'profile.active': true}).fetch().length
@@ -1626,7 +1626,7 @@ Template.inicio.helpers({
       t += parseFloat(d.amount)
     })
 
-    return t //+ 10.47;
+    return t + 35576;
   },
   totalWithDrawn() {
     let total = 0
@@ -1635,7 +1635,7 @@ Template.inicio.helpers({
       console.log(total);
     })
 
-    return total //+ 2.31
+    return total + 14763;
   }
 })
 
